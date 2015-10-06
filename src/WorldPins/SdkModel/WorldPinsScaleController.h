@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Types.h"
-#include "InteriorsController.h"
+#include "Interiors.h"
 #include "WorldPins.h"
 #include "IWorldPinsScaleController.h"
 #include "Location.h"
@@ -29,7 +29,7 @@ namespace ExampleApp
                 float m_visibilityScale;
                 float m_targetVisibilityScale;
                 const float m_visibilityAnimationDuration;
-                Eegeo::Resources::Interiors::InteriorsController& m_interiorsController;
+                Eegeo::Resources::Interiors::InteriorController& m_interiorController;
 
                 ExampleAppMessaging::TMessageBus& m_messageBus;
                 Eegeo::Helpers::TCallback1<WorldPinsScaleController, const WorldPinsVisibilityMessage&> m_visibilityMessageHandlerBinding;
@@ -38,7 +38,7 @@ namespace ExampleApp
                 WorldPinsScaleController(IWorldPinsRepository& worldPinsRepository,
                                          WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                          ExampleAppMessaging::TMessageBus& messageBus,
-                                         Eegeo::Resources::Interiors::InteriorsController& interiorsController);
+                                         Eegeo::Resources::Interiors::InteriorController& interiorController);
 
                 ~WorldPinsScaleController();
 

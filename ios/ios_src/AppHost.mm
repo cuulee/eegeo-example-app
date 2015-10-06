@@ -120,6 +120,8 @@ AppHost::AppHost(
 
     Eegeo::Config::PlatformConfig platformConfig = Eegeo::iOS::iOSPlatformConfigBuilder(App::GetDevice(), App::IsDeviceMultiCore(), App::GetMajorSystemVersion()).Build();
     platformConfig.OptionsConfig.StartMapModuleAutomatically = false;
+    platformConfig.OptionsConfig.EnableInteriors = true;
+    platformConfig.OptionsConfig.InteriorsControlledByApp = true;
 
     m_pInitialExperienceModule = Eegeo_NEW(ExampleApp::InitialExperience::iOSInitialExperienceModule)(m_iOSPersistentSettingsModel, m_messageBus);
     
@@ -363,7 +365,7 @@ void AppHost::CreateApplicationViewModules(const Eegeo::Rendering::ScreenPropert
     m_pInitialExperienceIntroViewModule = Eegeo_NEW(ExampleApp::InitialExperience::View::InitialExperienceIntroViewModule)(m_messageBus);
     
     
-    m_pInteriorsExplorerViewModule = Eegeo_NEW(ExampleApp::InteriorsExplorer::View::InteriorsExplorerViewModule)(app.InteriorsExplorerModule().GetInteriorsExplorerViewModel(),
+    /*m_pInteriorsExplorerViewModule = Eegeo_NEW(ExampleApp::InteriorsExplorer::View::InteriorsExplorerViewModule)(app.InteriorsExplorerModule().GetInteriorsExplorerViewModel(),
                                                                                              m_messageBus,
                                                                                              app.MyPinCreationModule().GetMyPinCreationInitiationViewModel(),
                                                                                              app.SecondaryMenuModule().GetSecondaryMenuViewModel(),
@@ -371,7 +373,7 @@ void AppHost::CreateApplicationViewModules(const Eegeo::Rendering::ScreenPropert
                                                                                              app.FlattenButtonModule().GetScreenControlViewModel(),
                                                                                              app.CompassModule().GetScreenControlViewModel(),
                                                                                              screenProperties,
-                                                                                             app.GetIdentityProvider());
+                                                                                             app.GetIdentityProvider());*/
 
     // 3d map view layer.
     [m_pView addSubview: &m_pWorldPinOnMapViewModule->GetWorldPinOnMapView()];
@@ -394,7 +396,7 @@ void AppHost::CreateApplicationViewModules(const Eegeo::Rendering::ScreenPropert
         [m_pView addSubview: &m_pTourFullScreenImageViewModule->GetTourFullScreenImageView()];
         [m_pView addSubview: &m_pTourExplorerViewModule->GetTourExplorerView()];
     }
-    [m_pView addSubview: &m_pInteriorsExplorerViewModule->GetView()];
+    //[m_pView addSubview: &m_pInteriorsExplorerViewModule->GetView()];
 
     // Modal background layer.
     [m_pView addSubview: &m_pModalBackgroundViewModule->GetModalBackgroundView()];
@@ -442,7 +444,7 @@ void AppHost::DestroyApplicationViewModules()
         [&m_pTourFullScreenImageViewModule->GetTourFullScreenImageView() removeFromSuperview];
         [&m_pTourExplorerViewModule->GetTourExplorerView() removeFromSuperview];
     }
-    [&m_pInteriorsExplorerViewModule->GetView() removeFromSuperview];
+    //[&m_pInteriorsExplorerViewModule->GetView() removeFromSuperview];
 
     // Modal background layer.
     [&m_pModalBackgroundViewModule->GetModalBackgroundView() removeFromSuperview];

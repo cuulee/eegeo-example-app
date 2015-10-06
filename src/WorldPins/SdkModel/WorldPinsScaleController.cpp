@@ -10,6 +10,7 @@
 #include "RenderCamera.h"
 #include "IWorldPinsRepository.h"
 #include "WorldPinsVisibilityMessage.h"
+#include "InteriorController.h"
 
 namespace ExampleApp
 {
@@ -20,7 +21,7 @@ namespace ExampleApp
             WorldPinsScaleController::WorldPinsScaleController(IWorldPinsRepository& worldPinsRepository,
                                                                IWorldPinsService& worldPinsService,
                                                                ExampleAppMessaging::TMessageBus& messageBus,
-                                                               Eegeo::Resources::Interiors::InteriorsController& interiorsController)
+                                                               Eegeo::Resources::Interiors::InteriorController& interiorController)
                 : m_worldPinsRepository(worldPinsRepository)
                 , m_worldPinsService(worldPinsService)
                 , m_messageBus(messageBus)
@@ -29,7 +30,7 @@ namespace ExampleApp
                 , m_visibilityScale(0.f)
                 , m_targetVisibilityScale(1.f)
                 , m_visibilityAnimationDuration(0.2f)
-                , m_interiorsController(interiorsController)
+                , m_interiorController(interiorController)
             {
                 m_messageBus.SubscribeNative(m_visibilityMessageHandlerBinding);
             }
@@ -70,7 +71,7 @@ namespace ExampleApp
             bool WorldPinsScaleController::ShouldHidePin(WorldPins::SdkModel::WorldPinItemModel& worldPinItemModel,
                                                          const Eegeo::Camera::RenderCamera& renderCamera)
             {
-                const bool showingInterior = m_interiorsController.InteriorIsVisible();
+                const bool showingInterior = m_interiorController.InteriorIsVisible();
                 
                 if(showingInterior && !worldPinItemModel.IsInterior())
                 {
@@ -87,8 +88,8 @@ namespace ExampleApp
                 {
                     //hide if building and floor of pin not showing
                     const Eegeo::Resources::Interiors::InteriorsModel* pInteriorModel = NULL;
-                    return !(worldPinItemModel.GetInteriorData().floor == m_interiorsController.GetCurrentFloorIndex() &&
-                             m_interiorsController.TryGetCurrentModel(pInteriorModel) &&
+                    return !(worldPinItemModel.GetInteriorData().floor == m_interiorController.GetCurrentFloorIndex() &&
+                             m_interiorController.TryGetCurrentModel(pInteriorModel) &&
                              worldPinItemModel.GetInteriorData().building == pInteriorModel->GetId());
                 }
                 

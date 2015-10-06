@@ -6,16 +6,7 @@
 #include "Interiors.h"
 #include "Types.h"
 #include "IInteriorsExplorerModule.h"
-#include "ScreenControlViewModelIncludes.h"
-#include "IIdentity.h"
-#include "BidirectionalBus.h"
-#include "MapMode.h"
-#include "GlobeCamera.h"
-#include "Metrics.h"
-#include "NativeUIFactories.h"
-#include "Streaming.h"
-#include "AppModes.h"
-#include "SdkModelDomainEventBus.h"
+#include "WorldPins.h"
 
 namespace ExampleApp
 {
@@ -26,20 +17,9 @@ namespace ExampleApp
             class InteriorsExplorerModule : public IInteriorsExplorerModule, private Eegeo::NonCopyable
             {
             public:
-                InteriorsExplorerModule(Eegeo::Resources::Interiors::InteriorsController& interiorsController,
-                                        Eegeo::Resources::Interiors::Camera::InteriorsCameraController& interiorsCameraController,
-                                        Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
-                                        Eegeo::Resources::Interiors::InteriorSelectionController& interiorSelectionController,
-                                        Eegeo::Resources::Interiors::InteriorsPinsController& interiorsPinsController,
-                                        Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& globeCameraController,
-                                        Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
-                                        Eegeo::UI::NativeUIFactories& nativeUIFactories,
-                                        Eegeo::Helpers::IIdentityProvider& identityProvider,
-                                        MapMode::SdkModel::IMapModeModel& mapModeModel,
-                                        AppModes::SdkModel::IAppModeModel& appModeModel,
-                                        ExampleAppMessaging::TMessageBus& messageBus,
-                                        ExampleApp::Metrics::IMetricsService& metricsService,
-                                        ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
+                InteriorsExplorerModule(Eegeo::Resources::Interiors::InteriorController& interiorController,
+                                        Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
+                                        WorldPins::SdkModel::IWorldPinsService& worldPinsService);
 
                 ~InteriorsExplorerModule();
                 
@@ -57,6 +37,8 @@ namespace ExampleApp
                 IInteriorsExplorerInputDelegate* m_pInteriorsExplorerInputDelegate;
                 InteriorsStreamingController* m_pInteriorsStreamingController;
                 InteriorPinScaleController* m_pInteriorPinScaleController;
+                
+                InteriorWorldPinController* m_pWorldPinController;
             };
         }
     }

@@ -26,7 +26,7 @@ namespace ExampleApp
                                                                                    Camera::IToursCameraController& toursCameraController,
                                                                                    WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                                                    bool interiorsEnabled,
-                                                                                   Eegeo::Resources::Interiors::InteriorsController& interiorController
+                                                                                   Eegeo::Resources::Interiors::InteriorController& interiorController
                                                                              )
                     : m_toursCameraController(toursCameraController)
                     , m_toursCameraTransitionController(toursCameraTransitionController)

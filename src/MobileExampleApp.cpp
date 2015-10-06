@@ -56,6 +56,7 @@
 #include "ImagePathHelpers.h"
 #include "WatermarkModule.h"
 #include "InteriorsPresentationModule.h"
+#include "InteriorsModelModule.h"
 #include "InteriorsCameraController.h"
 #include "InteriorsTouchController.h"
 #include "InteriorsPinsController.h"
@@ -196,7 +197,7 @@ namespace ExampleApp
                                                 Eegeo::EnvironmentCharacterSet::Latin,
                                                 platformConfig,
                                                 NULL,
-                                                "http://cdn1.eegeo.com/coverage-trees/vglobal/v742/manifest.txt.gz",
+                                                "http://cdn1.eegeo.com/coverage-trees/vinteriors/v70/manifest.txt.gz",
                                                 "http://d2xvsc8j92rfya.cloudfront.net/mobile-themes-new/v366/manifest.txt.gz",
                                                 &errorHandler
                                                 );
@@ -426,21 +427,11 @@ namespace ExampleApp
                                                                                                   m_pSearchResultPoiModule->GetSearchResultPoiViewModel(),
                                                                                                   m_messageBus);
 
+        Eegeo::Modules::Map::Layers::InteriorsModelModule& interiorsModelModule = mapModule.GetInteriorsModelModule();
         Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsPresentationModule = mapModule.GetInteriorsPresentationModule();
-        m_pInteriorsExplorerModule = Eegeo_NEW(InteriorsExplorer::SdkModel::InteriorsExplorerModule)(interiorsPresentationModule.GetLegacyInteriorsController(),
-                                                                                                     interiorsPresentationModule.GetCameraController(),
-                                                                                                     interiorsPresentationModule.GetInteriorSelectionModel(),
-                                                                                                     interiorsPresentationModule.GetInteriorSelectionController(),
-                                                                                                     world.GetMapModule().GetInteriorsPresentationModule().GetPinsController(),
-                                                                                                     *m_pGlobeCameraController,
-                                                                                                     *m_pStreamingVolume,
-                                                                                                     world.GetNativeUIFactories(),
-                                                                                                     m_identityProvider,
-                                                                                                     m_pMapModeModule->GetMapModeModel(),
-                                                                                                     *m_pAppModeModel,
-                                                                                                     m_messageBus,
-                                                                                                     m_metricsService,
-                                                                                                     m_sdkDomainEventBus);
+        m_pInteriorsExplorerModule = Eegeo_NEW(InteriorsExplorer::SdkModel::InteriorsExplorerModule)(interiorsPresentationModule.GetAppLevelController(),
+                                                                                                     interiorsModelModule.GetInteriorMarkerModelRepository(),
+                                                                                                     m_pWorldPinsModule->GetWorldPinsService());
         
         if(ToursEnabled())
         {
@@ -627,8 +618,9 @@ namespace ExampleApp
                                  mapModule.GetEnvironmentFlatteningService(),
                                  m_identityProvider,
                                  m_messageBus,
-                                 interiorsPresentationModule.GetLegacyInteriorsController());
+                                 interiorsPresentationModule.GetAppLevelController());
     }
+    
     void MobileExampleApp::InitialiseToursModules(Eegeo::Modules::Map::MapModule& mapModule, Eegeo::EegeoWorld& world)
     {
         m_pToursPinsModule = CreatePlatformPinsModuleInstance(mapModule, world, "Tours/tour_markers", m_toursPinDiameter, 4);
@@ -640,7 +632,7 @@ namespace ExampleApp
                                                                                               mapModule.GetEnvironmentFlatteningService(),
                                                                                               m_identityProvider,
                                                                                               m_toursMessageBus,
-                                                                                              interiorsPresentationModule.GetLegacyInteriorsController());
+                                                                                              interiorsPresentationModule.GetAppLevelController());
         
         m_pToursModule = Eegeo_NEW(ExampleApp::Tours::ToursModule)(m_identityProvider,
                                                        m_messageBus,
@@ -656,7 +648,6 @@ namespace ExampleApp
                                                        m_screenProperties,
                                                        *m_pGlobeCameraController,
                                                        world.GetTerrainModelModule().GetTerrainHeightProvider(),
-                                                       interiorsPresentationModule.GetLegacyInteriorsController(),
                                                        m_sdkDomainEventBus,
                                                        *m_pAppModeModel);
         
@@ -700,7 +691,7 @@ namespace ExampleApp
                                                                                         ToursModule().GetCameraController(),
                                                                                         m_pToursWorldPinsModule->GetWorldPinsService(),
                                                                                         m_interiorsEnabled,
-                                                                                        interiorsPresentationModule.GetLegacyInteriorsController()
+                                                                                        interiorsPresentationModule.GetAppLevelController()
                                                                                         );
         
         ToursModule().GetTourService().AddTour(tourModel, *factory.CreateTourStateMachine(tourModel));
@@ -722,12 +713,13 @@ namespace ExampleApp
     {
         Eegeo::EegeoWorld& eegeoWorld(World());
         
-        Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsModule = eegeoWorld.GetMapModule().GetInteriorsPresentationModule();
-        Eegeo::Resources::Interiors::Camera::InteriorsCameraController& interiorsCameraController = interiorsModule.GetCameraController();
+        //Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsModule = eegeoWorld.GetMapModule().GetInteriorsPresentationModule();
+        //Eegeo::Resources::Interiors::Camera::InteriorsCameraController& interiorsCameraController = interiorsModule.GetCameraController();
         
-        m_pCurrentTouchController = interiorsModule.GetCameraController().IsEnabled()
-            ? &interiorsModule.GetTouchController()
-            : m_pCameraTouchController;
+        //m_pCurrentTouchController = interiorsModule.GetCameraController().IsEnabled()
+         //   ? &interiorsModule.GetTouchController()
+         //   : m_pCameraTouchController;
+        m_pCurrentTouchController = m_pCameraTouchController;
 
         eegeoWorld.EarlyUpdate(dt);
 
@@ -746,20 +738,20 @@ namespace ExampleApp
                 ToursModule().GetCameraTransitionController().Update(dt);
             }
         }
-        if(interiorsCameraController.IsEnabled())
+        /*if(interiorsCameraController.IsEnabled())
         {
             interiorsCameraController.Update(dt);
-        }
+        }*/
         
         // MB: Currently three competing camera systems.
         Eegeo::Camera::CameraState cameraState = m_pGlobeCameraController->GetCameraState();
         Eegeo::Camera::RenderCamera renderCamera = m_pGlobeCameraController->GetRenderCamera();
-        if(interiorsCameraController.IsEnabled())
+        /*if(interiorsCameraController.IsEnabled())
         {
             cameraState = interiorsCameraController.GetCameraState();
             renderCamera = interiorsCameraController.GetRenderCamera();
         }
-        else if(IsTourCameraActive())
+        else*/ if(IsTourCameraActive())
         {
             cameraState = ToursModule().GetCameraController().GetCameraState();
             renderCamera = ToursModule().GetCameraController().GetRenderCamera();
@@ -842,17 +834,17 @@ namespace ExampleApp
     {
         Eegeo::EegeoWorld& eegeoWorld = World();
 
-        Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsModule = eegeoWorld.GetMapModule().GetInteriorsPresentationModule();
-        Eegeo::Resources::Interiors::Camera::InteriorsCameraController& interiorsCameraController = interiorsModule.GetCameraController();
+        //Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsModule = eegeoWorld.GetMapModule().GetInteriorsPresentationModule();
+        //Eegeo::Resources::Interiors::Camera::InteriorsCameraController& interiorsCameraController = interiorsModule.GetCameraController();
         
         Eegeo::Camera::CameraState cameraState = m_pGlobeCameraController->GetCameraState();
         Eegeo::Camera::RenderCamera renderCamera = m_pGlobeCameraController->GetRenderCamera();
-        if(interiorsCameraController.IsEnabled())
+        /*if(interiorsCameraController.IsEnabled())
         {
             cameraState = interiorsCameraController.GetCameraState();
             renderCamera = interiorsCameraController.GetRenderCamera();
         }
-        else if(IsTourCameraActive())
+        else*/ if(IsTourCameraActive())
         {
             cameraState = ToursModule().GetCameraController().GetCameraState();
             renderCamera = ToursModule().GetCameraController().GetRenderCamera();
@@ -1132,11 +1124,11 @@ namespace ExampleApp
 
         if (!m_pModalityModule->GetModalityModel().IsModalEnabled())
         {
-            InteriorsExplorer::SdkModel::IInteriorsExplorerInputDelegate& interiorsExplorerInputDelegate = m_pInteriorsExplorerModule->GetInputDelegate();
+            /*InteriorsExplorer::SdkModel::IInteriorsExplorerInputDelegate& interiorsExplorerInputDelegate = m_pInteriorsExplorerModule->GetInputDelegate();
             if (interiorsExplorerInputDelegate.HandleTouchTap(data))
             {
                 return;
-            }
+            }*/
         }
         
         if(m_pWorldPinsModule->GetWorldPinsService().HandleTouchTap(data.point) || (ToursEnabled() && m_pToursWorldPinsModule->GetWorldPinsService().HandleTouchTap(data.point)))

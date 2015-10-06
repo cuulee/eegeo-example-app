@@ -18,6 +18,7 @@
 #include "TerrainHeightProvider.h"
 #include "TransformHelpers.h"
 #include "VectorMath.h"
+#include "InteriorController.h"
 
 namespace ExampleApp
 {
@@ -73,7 +74,7 @@ namespace ExampleApp
                                                      PoiRingView& poiRingView,
                                                      Eegeo::Rendering::EnvironmentFlatteningService& environmentFlatteningService,
                                                      Eegeo::Resources::Terrain::Heights::TerrainHeightProvider& terrainHeightProvider,
-                                                     Eegeo::Resources::Interiors::InteriorsController& interiorsController)
+                                                     Eegeo::Resources::Interiors::InteriorController& interiorController)
                     : m_myPinCreationModel(myPinCreationModel)
                     , m_poiRingView(poiRingView)
                     , m_scaleInterpolationParam(0.f)
@@ -83,7 +84,7 @@ namespace ExampleApp
                     , m_iconPosition(Eegeo::dv3::Zero())
                     , m_iconSize(0.0f)
                     , m_ringRadius(0.0f)
-                    , m_interiorsController(interiorsController)
+                    , m_interiorController(interiorController)
                 {
 
                 }
@@ -121,20 +122,21 @@ namespace ExampleApp
                     
                     if(m_myPinCreationModel.GetCreationStage() == Ring)
                     {
-                        bool showingInterior = m_interiorsController.InteriorIsVisible();
+                        bool showingInterior = m_interiorController.InteriorIsVisible();
                         m_myPinCreationModel.SetInterior(showingInterior);
                         if(showingInterior)
                         {
                             const Eegeo::Resources::Interiors::InteriorsModel *pModel = NULL;
-                            bool success = m_interiorsController.TryGetCurrentModel(pModel);
+                            bool success = m_interiorController.TryGetCurrentModel(pModel);
                             if(success)
                             {
                                 const Eegeo::Resources::Interiors::InteriorId& buildingId = pModel->GetId();
                                 m_myPinCreationModel.SetBuildingId(buildingId);
                             }
-                            m_myPinCreationModel.SetFloor(m_interiorsController.GetCurrentFloorIndex());
+                            
+                            m_myPinCreationModel.SetFloor(m_interiorController.GetCurrentFloorIndex());
                             const Eegeo::Resources::Interiors::InteriorsFloorModel* pFloorModel = NULL;
-                            Eegeo_ASSERT(m_interiorsController.TryGetCurrentFloorModel(pFloorModel), "Failed to fetch current interior floor");
+                            Eegeo_ASSERT(m_interiorController.TryGetCurrentFloorModel(pFloorModel), "Failed to fetch current interior floor");
                             float floorHeightAboveSeaLevel = static_cast<float>(pFloorModel->GetTangentSpaceBounds().GetMin().y);
                             const float floorHeightAboveTerrain = floorHeightAboveSeaLevel - m_myPinCreationModel.GetTerrainHeight();
                             m_myPinCreationModel.SetHeightAboveTerrain(floorHeightAboveTerrain);

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "IWorldPinsModule.h"
-#include "InteriorsController.h"
 #include "WorldPins.h"
 #include "Pins.h"
 #include "PinController.h"
@@ -14,6 +13,7 @@
 #include "IIdentity.h"
 #include "IScreenControlViewModel.h"
 #include "WorldPinsModalityObserver.h"
+#include "Interiors.h"
 
 namespace ExampleApp
 {
@@ -31,7 +31,6 @@ namespace ExampleApp
                 IWorldPinsInFocusController* m_pWorldPinsInFocusController;
                 View::WorldPinInFocusObserver* m_pWorldPinInFocusObserver;
                 WorldPinsModalityObserver* m_pWorldPinsModalityObserver;
-                Eegeo::Resources::Interiors::InteriorsController& m_interiorsController;
 
             public:
                 WorldPinsModule(Eegeo::Pins::PinRepository& pinRepository,
@@ -39,7 +38,7 @@ namespace ExampleApp
                                 const Eegeo::Rendering::EnvironmentFlatteningService& environmentFlatteningService,
                                 Eegeo::Helpers::IIdentityProvider& identityProvider,
                                 ExampleAppMessaging::TMessageBus& messageBus,
-                                Eegeo::Resources::Interiors::InteriorsController& interiorsController);
+                                Eegeo::Resources::Interiors::InteriorController& interiorsController);
 
                 ~WorldPinsModule();
 

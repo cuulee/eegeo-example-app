@@ -34,7 +34,7 @@ namespace ExampleApp
                                          Camera::IToursCameraTransitionController& toursCameraTransitionController,
                                          WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                          WorldPins::SdkModel::WorldPinInteriorData& worldPinInteriorData,
-                                         Eegeo::Resources::Interiors::InteriorsController& interiorsController,
+                                         Eegeo::Resources::Interiors::InteriorController& interiorController,
                                          const Eegeo::Camera::RenderCamera& tourRenderCamera);
                         ~ExampleTourState();
                         
@@ -56,7 +56,7 @@ namespace ExampleApp
                         
                         bool m_interior;
                         WorldPins::SdkModel::WorldPinInteriorData m_worldPinInteriorData;
-                        Eegeo::Resources::Interiors::InteriorsController& m_interiorsController;
+                        Eegeo::Resources::Interiors::InteriorController& m_interiorController;
                         const Eegeo::Camera::RenderCamera& m_tourRenderCamera;
                     };
                 }

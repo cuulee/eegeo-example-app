@@ -6,7 +6,7 @@
 #include "IWorldPinsService.h"
 #include "WorldPinFocusData.h"
 #include "ExampleTourPinSelectionHandler.h"
-#include "InteriorsController.h"
+#include "InteriorController.h"
 
 namespace ExampleApp
 {
@@ -24,7 +24,7 @@ namespace ExampleApp
                                                        Camera::IToursCameraTransitionController& toursCameraTransitionController,
                                                        WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                        WorldPins::SdkModel::WorldPinInteriorData& worldPinInteriorData,
-                                                       Eegeo::Resources::Interiors::InteriorsController& interiorsController,
+                                                       Eegeo::Resources::Interiors::InteriorController& interiorController,
                                                        const Eegeo::Camera::RenderCamera& tourRenderCamera)
                     : m_stateModel(stateModel)
                     , m_toursCameraTransitionController(toursCameraTransitionController)
@@ -34,7 +34,7 @@ namespace ExampleApp
                     , m_pPinItemModel(NULL)
                     , m_interior(isInterior)
                     , m_worldPinInteriorData(worldPinInteriorData)
-                    , m_interiorsController(interiorsController)
+                    , m_interiorController(interiorController)
                     , m_tourRenderCamera(tourRenderCamera)
                     {
                         
@@ -54,14 +54,11 @@ namespace ExampleApp
                         
                         if(m_interior)
                         {
-                            const Eegeo::Resources::Interiors::Camera::InteriorsCameraState& initialInteriorsCameraState = Eegeo::Resources::Interiors::Camera::InteriorsCameraState::MakeFromRenderCamera(m_tourRenderCamera);
-                            
-                            m_interiorsController.TryEnterInterior(m_worldPinInteriorData.building,
-                                                                   initialInteriorsCameraState);
+                            m_interiorController.SetSelectedInterior(m_worldPinInteriorData.building);
                         }
-                        else if (m_interiorsController.InteriorIsVisible())
+                        else if (m_interiorController.InteriorIsVisible())
                         {
-                            m_interiorsController.ExitInterior();
+                            m_interiorController.ClearSelectedInterior();
                         }
                     }
                     

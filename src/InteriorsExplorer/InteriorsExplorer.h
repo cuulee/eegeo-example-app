@@ -15,6 +15,8 @@ namespace ExampleApp
             class InteriorsStreamingController;
             class InteriorPinModalityObserver;
             class InteriorPinScaleController;
+            
+            class InteriorWorldPinController;
         }
         
         namespace View
