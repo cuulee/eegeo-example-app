@@ -39,8 +39,7 @@ namespace ExampleApp
             , m_interiorsLabelsController(interiorsLabelsController)
             , m_entitiesAddedCallback(this, &InteriorsEntitiesPinsController::OnEntitiesAdded)
             , m_entitiesRemovedCallback(this, &InteriorsEntitiesPinsController::OnEntitiesRemoved)
-            , m_onExitInteriorCallback(this, &InteriorsEntitiesPinsController::OnInteriorExit)
-            , m_interiorsStateChangedCallback(this, &InteriorsEntitiesPinsController::OnInteriorsStateChanged)
+            , m_interiorVisibilityChangedCallback(this, &InteriorsEntitiesPinsController::OnInteriorVisibilityChanged)
             , m_lastId(0)
             , m_pCurrentInteriorsModel(NULL)
             , m_interiorViewState(NotViewing)
@@ -49,8 +48,7 @@ namespace ExampleApp
                 m_interiorsEntitiesRepository.RegisterEntitiesAddedCallback(m_entitiesAddedCallback);
                 m_interiorsEntitiesRepository.RegisterEntitiesRemovedCallback(m_entitiesRemovedCallback);
                 
-                //m_interiorController.RegisterStateChangedCallback(m_interiorsStateChangedCallback);
-                //m_interiorController.RegisterExitCallback(m_onExitInteriorCallback);
+                m_interiorController.RegisterVisibilityChangedCallback(m_interiorVisibilityChangedCallback);
                 
                 // This is same across all interiors right now. If we want different omissions per interior
                 // then we'll need to do a bit of work.
@@ -73,8 +71,7 @@ namespace ExampleApp
                 m_interiorsEntitiesRepository.UnregisterEntitiesAddedCallback(m_entitiesAddedCallback);
                 m_interiorsEntitiesRepository.UnregisterEntitiesRemovedCallback(m_entitiesRemovedCallback);
                 
-                //m_interiorController.UnregisterInteriorViewChangedCallback(m_interiorsStateChangedCallback);
-                //m_interiorController.UnregisterExitCallback(m_onExitInteriorCallback);
+                m_interiorController.UnregisterVisibilityChangedCallback(m_interiorVisibilityChangedCallback);
                 
                 for (std::map<std::string, int>::const_iterator it = m_labelNameToIconIndex.begin(); it != m_labelNameToIconIndex.end(); ++it)
                 {
@@ -87,7 +84,7 @@ namespace ExampleApp
             {
                 const float TransitionTimeInSeconds = 0.75f;
                 
-                if (IsViewingInterior(m_interiorViewState) && !m_interiorController.InteriorIsVisible())
+                if (IsViewingInterior(m_interiorViewState) && m_interiorController.InteriorIsVisible())
                 {
                     UpdateScaleForPins(dt/TransitionTimeInSeconds);
                 }
@@ -230,12 +227,7 @@ namespace ExampleApp
                 }
             }
             
-            void InteriorsEntitiesPinsController::OnInteriorExit()
-            {
-                m_interiorViewState = Exiting;
-            }
-            
-            void InteriorsEntitiesPinsController::OnInteriorsStateChanged()
+            void InteriorsEntitiesPinsController::OnInteriorVisibilityChanged()
             {
                 if (m_interiorController.InteriorIsVisible())
                 {
@@ -244,7 +236,7 @@ namespace ExampleApp
                     {
                         return;
                     }
-
+                    
                     Eegeo_ASSERT(m_pCurrentInteriorsModel != NULL, "Have NULL interior model");
                     m_interiorViewState = Viewing;
                     

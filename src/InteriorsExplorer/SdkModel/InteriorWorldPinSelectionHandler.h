@@ -26,8 +26,7 @@ namespace ExampleApp
                 
                 void SelectPin()
                 {
-                    Eegeo_TTY("Select Interior: %s", m_interiorId.Value().c_str());
-                    //m_interiorController.SetSelectedInterior(m_interiorId);
+                    m_interiorController.SetSelectedInterior(m_interiorId);
                 }
                 
             private:

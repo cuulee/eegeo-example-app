@@ -1,7 +1,7 @@
 // Copyright eeGeo Ltd (2012-2014), All Rights Reserved
 
 #include "InteriorsStreamingController.h"
-#include "InteriorSelectionController.h"
+#include "InteriorController.h"
 #include "CameraFrustumStreamingVolume.h"
 
 
@@ -11,31 +11,32 @@ namespace ExampleApp
     {
         namespace SdkModel
         {
-            InteriorsStreamingController::InteriorsStreamingController(Eegeo::Resources::Interiors::InteriorSelectionController& interiorSelectionController,
+            InteriorsStreamingController::InteriorsStreamingController(Eegeo::Resources::Interiors::InteriorController& interiorController,
                                                                        Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume)
-            : m_interiorSelectionController(interiorSelectionController)
+            : m_interiorController(interiorController)
             , m_cameraFrustumStreamingVolume(cameraFrustumStreamingVolume)
-            , m_interiorStreamingBeginCallback(this, &InteriorsStreamingController::OnInteriorStreamingBegin)
-            , m_interiorStreamingEndCallback(this, &InteriorsStreamingController::OnInteriorStreamingEnd)
+            , m_interiorStateChangedCallback(this, &InteriorsStreamingController::OnInteriorStateChanged)
             {
-                m_interiorSelectionController.RegisterStreamingBeginCallback(m_interiorStreamingBeginCallback);
-                m_interiorSelectionController.RegisterStreamingEndCallback(m_interiorStreamingEndCallback);
+                m_interiorController.RegisterStateChangedCallback(m_interiorStateChangedCallback);
             }
 
             InteriorsStreamingController::~InteriorsStreamingController()
             {
-                m_interiorSelectionController.UnregisterStreamingBeginCallback(m_interiorStreamingBeginCallback);
-                m_interiorSelectionController.UnregisterStreamingEndCallback(m_interiorStreamingEndCallback);
+                m_interiorController.UnregisterStateChangedCallback(m_interiorStateChangedCallback);
+                
+                m_cameraFrustumStreamingVolume.SetForceMaximumRefinement(false);
             }
 
-            void InteriorsStreamingController::OnInteriorStreamingBegin()
+            void InteriorsStreamingController::OnInteriorStateChanged()
             {
-                m_cameraFrustumStreamingVolume.SetForceMaximumRefinement(true);
-            }
-            
-            void InteriorsStreamingController::OnInteriorStreamingEnd()
-            {
-                m_cameraFrustumStreamingVolume.SetForceMaximumRefinement(false);
+                if(m_interiorController.GetCurrentState() == Eegeo::Resources::Interiors::InteriorViewState::NoInteriorSelected)
+                {
+                    m_cameraFrustumStreamingVolume.SetForceMaximumRefinement(false);
+                }
+                else
+                {
+                    m_cameraFrustumStreamingVolume.SetForceMaximumRefinement(true);
+                }
             }
         }
     }

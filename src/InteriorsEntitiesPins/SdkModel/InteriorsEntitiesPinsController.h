@@ -65,11 +65,8 @@ namespace ExampleApp
                 void OnEntitiesAdded(const std::string& interiorName, const Eegeo::Resources::Interiors::Entities::TEntityModelVector& entities);
                 void OnEntitiesRemoved(const std::string& interiorName, const Eegeo::Resources::Interiors::Entities::TEntityModelVector& entities);
                 
-                Eegeo::Helpers::TCallback0<InteriorsEntitiesPinsController> m_onExitInteriorCallback;
-                void OnInteriorExit();
-                
-                Eegeo::Helpers::TCallback0<InteriorsEntitiesPinsController> m_interiorsStateChangedCallback;
-                void OnInteriorsStateChanged();
+                Eegeo::Helpers::TCallback0<InteriorsEntitiesPinsController> m_interiorVisibilityChangedCallback;
+                void OnInteriorVisibilityChanged();
                 
                 const Eegeo::Resources::Interiors::InteriorsModel* m_pCurrentInteriorsModel;
                 

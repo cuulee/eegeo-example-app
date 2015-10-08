@@ -17,20 +17,19 @@ namespace ExampleApp
             class InteriorsStreamingController : private Eegeo::NonCopyable
             {
             public:
-                InteriorsStreamingController(Eegeo::Resources::Interiors::InteriorSelectionController& interiorSelectionController,
+                InteriorsStreamingController(Eegeo::Resources::Interiors::InteriorController& interiorController,
                                              Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume);
                 
                 ~InteriorsStreamingController();
                 
             private:
-                void OnInteriorStreamingBegin();
-                void OnInteriorStreamingEnd();
+                void OnInteriorStateChanged();
             
-                Eegeo::Resources::Interiors::InteriorSelectionController& m_interiorSelectionController;
+                Eegeo::Resources::Interiors::InteriorController& m_interiorController;
                 Eegeo::Streaming::CameraFrustumStreamingVolume& m_cameraFrustumStreamingVolume;
                 
-                Eegeo::Helpers::TCallback0<InteriorsStreamingController> m_interiorStreamingBeginCallback;
-                Eegeo::Helpers::TCallback0<InteriorsStreamingController> m_interiorStreamingEndCallback;
+                Eegeo::Helpers::TCallback0<InteriorsStreamingController> m_interiorStateChangedCallback;
+                
             };
         }
     }
