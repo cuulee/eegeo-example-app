@@ -14,7 +14,6 @@
 #include "AppModes.h"
 #include "SdkModelDomainEventBus.h"
 #include "TourStateChangedMessage.h"
-#include "GlobeCamera.h"
 
 namespace ExampleApp
 {
@@ -28,8 +27,6 @@ namespace ExampleApp
                 
                 InteriorsExplorerModel(Eegeo::Resources::Interiors::InteriorController& controller,
                                        Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
-                                       Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
-                                       Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& globeCameraController,
                                        MapMode::SdkModel::IMapModeModel& mapModeModel,
                                        ExampleAppMessaging::TMessageBus& messageBus,
                                        Metrics::IMetricsService& metricsService,
@@ -37,10 +34,6 @@ namespace ExampleApp
                 ~InteriorsExplorerModel();
                 
                 void SelectFloor(int floor);
-                
-                const bool InteriorCameraEnabled() const { return m_cameraEnabled; }
-                
-                void Update(float dt);
 
             private:
                 
@@ -55,8 +48,6 @@ namespace ExampleApp
 
                 Eegeo::Resources::Interiors::InteriorController& m_controller;
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
-                Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& m_markerRepository;
-                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& m_globeCameraController;
                 MapMode::SdkModel::IMapModeModel& m_mapModeModel;
 
                 ExampleAppMessaging::TMessageBus& m_messageBus;
@@ -71,7 +62,6 @@ namespace ExampleApp
 
                 bool m_previouslyInMapMode;
                 bool m_tourIsActive;
-                bool m_cameraEnabled;
                 
                 ExampleAppMessaging::TSdkModelDomainEventBus& m_sdkDomainEventBus;
                 Eegeo::Helpers::TCallback1<InteriorsExplorerModel, const ExampleApp::Tours::TourStateChangedMessage&> m_tourStateChangedBinding;

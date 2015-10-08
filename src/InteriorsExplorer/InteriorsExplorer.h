@@ -9,9 +9,9 @@ namespace ExampleApp
         namespace SdkModel
         {
             class IInteriorsExplorerModule;
+            class InteriorsExplorerCameraController;
             class InteriorsExplorerModel;
             class InteriorsStreamingController;
-            
             class InteriorWorldPinController;
         }
         

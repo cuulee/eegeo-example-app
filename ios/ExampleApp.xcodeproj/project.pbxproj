@@ -581,6 +581,8 @@
 		222E069B1948B08B0004FFD9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EE4820F168371460006E99B /* MainStoryboard_iPad.storyboard */; };
 		225FFA171A39EE8600C2282A /* SearchResultRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225FFA131A39EE8600C2282A /* SearchResultRepository.cpp */; };
 		225FFA181A39EE8600C2282A /* SearchResultRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225FFA131A39EE8600C2282A /* SearchResultRepository.cpp */; };
+		27C1F99B1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */; };
+		27C1F99C1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */; };
 		27DB89B71BB3FEF00020CDA5 /* CombinedSearchService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DB89B31BB3FEF00020CDA5 /* CombinedSearchService.cpp */; };
 		27DB89B81BB3FEF00020CDA5 /* CombinedSearchService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DB89B31BB3FEF00020CDA5 /* CombinedSearchService.cpp */; };
 		27DB89B91BB3FEF00020CDA5 /* CombinedSearchServiceModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DB89B51BB3FEF00020CDA5 /* CombinedSearchServiceModule.cpp */; };
@@ -1839,6 +1841,8 @@
 		225FFA131A39EE8600C2282A /* SearchResultRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SearchResultRepository.cpp; sourceTree = "<group>"; };
 		225FFA141A39EE8600C2282A /* SearchResultRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultRepository.h; sourceTree = "<group>"; };
 		278A8F651BA6DB00000BBA67 /* WorldPinInteriorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldPinInteriorData.h; sourceTree = "<group>"; };
+		27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteriorsExplorerCameraController.cpp; sourceTree = "<group>"; };
+		27C1F99A1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteriorsExplorerCameraController.h; sourceTree = "<group>"; };
 		27DB89B31BB3FEF00020CDA5 /* CombinedSearchService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CombinedSearchService.cpp; sourceTree = "<group>"; };
 		27DB89B41BB3FEF00020CDA5 /* CombinedSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombinedSearchService.h; sourceTree = "<group>"; };
 		27DB89B51BB3FEF00020CDA5 /* CombinedSearchServiceModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CombinedSearchServiceModule.cpp; sourceTree = "<group>"; };
@@ -5034,6 +5038,8 @@
 				7E6732271BC3D7FB002A31FD /* InteriorWorldPinController.cpp */,
 				7E6732281BC3D7FB002A31FD /* InteriorWorldPinController.h */,
 				7E67322B1BC3DE2A002A31FD /* InteriorWorldPinSelectionHandler.h */,
+				27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */,
+				27C1F99A1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.h */,
 			);
 			path = SdkModel;
 			sourceTree = "<group>";
@@ -6761,6 +6767,7 @@
 				7E3B89011A385A290023C94E /* ModalityChangedMessage.cpp in Sources */,
 				7E3B89A31A385A290023C94E /* SearchResultMenuItemSelectedMessageHandler.cpp in Sources */,
 				7E3B892B1A385A290023C94E /* MyPinCreationConfirmationController.cpp in Sources */,
+				27C1F99C1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp in Sources */,
 				BFD5FCCD1BA7068300F591F1 /* TourWebView.mm in Sources */,
 				7E3B88F51A385A290023C94E /* MenuOptionsModel.cpp in Sources */,
 				7E3B8A091A385A290023C94E /* WorldPinOnMapController.cpp in Sources */,
@@ -7184,6 +7191,7 @@
 				7E3B89001A385A290023C94E /* ModalityChangedMessage.cpp in Sources */,
 				7E3B89A21A385A290023C94E /* SearchResultMenuItemSelectedMessageHandler.cpp in Sources */,
 				7E3B892A1A385A290023C94E /* MyPinCreationConfirmationController.cpp in Sources */,
+				27C1F99B1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp in Sources */,
 				BFD5FCCC1BA7068300F591F1 /* TourWebView.mm in Sources */,
 				7E3B88F41A385A290023C94E /* MenuOptionsModel.cpp in Sources */,
 				7E3B8A081A385A290023C94E /* WorldPinOnMapController.cpp in Sources */,

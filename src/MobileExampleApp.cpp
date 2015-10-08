@@ -61,6 +61,7 @@
 #include "InteriorsTouchController.h"
 #include "InteriorsPinsController.h"
 #include "InteriorsExplorerModule.h"
+#include "InteriorsExplorerCameraController.h"
 #include "InteriorsEntitiesPinsModule.h"
 #include "InteriorsEntitiesPinsController.h"
 #include "PinsModule.h"

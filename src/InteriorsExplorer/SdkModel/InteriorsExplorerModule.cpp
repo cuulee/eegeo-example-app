@@ -1,6 +1,7 @@
 // Copyright eeGeo Ltd (2012-2015), All Rights Reserved
 
 #include "InteriorsExplorerModule.h"
+#include "InteriorsExplorerCameraController.h"
 #include "InteriorsExplorerViewModel.h"
 #include "InteriorsExplorerModel.h"
 #include "InteriorsExitObserver.h"
@@ -41,17 +42,21 @@ namespace ExampleApp
                 globeCameraConfig.zoomAltitudeLow = 100.0f; // Probably too low.
                 globeCameraConfig.maxAltitude = 1000.0f;
                 
-                m_pInteriorsCameraController = gpsGlobeCameraControllerFactory.Create(gpsConfig,
-                                                                                      touchConfig,
-                                                                                      globeCameraConfig,
-                                                                                      screenProperties);
+                m_pGlobeCameraController = gpsGlobeCameraControllerFactory.Create(gpsConfig,
+                                                                                  touchConfig,
+                                                                                  globeCameraConfig,
+                                                                                  screenProperties);
+                
+                m_pInteriorsCameraController = Eegeo_NEW(InteriorsExplorerCameraController)(interiorController,
+                                                                                            interiorSelectionModel,
+                                                                                            markerRepository,
+                                                                                            *m_pGlobeCameraController,
+                                                                                            sdkDomainEventBus);
                 
                 m_pInteriorsStreamingController = Eegeo_NEW(InteriorsStreamingController)(interiorController, cameraFrustumStreamingVolume);
                 
                 m_pModel = Eegeo_NEW(InteriorsExplorerModel)(interiorController,
                                                              interiorSelectionModel,
-                                                             markerRepository,
-                                                             *m_pInteriorsCameraController,
                                                              mapModeModel,
                                                              messageBus,
                                                              metricsService,
@@ -66,6 +71,7 @@ namespace ExampleApp
                 Eegeo_DELETE m_pModel;
                 Eegeo_DELETE m_pInteriorsStreamingController;
                 Eegeo_DELETE m_pInteriorsCameraController;
+                Eegeo_DELETE m_pGlobeCameraController;
                 Eegeo_DELETE m_pWorldPinController;
             }
             
@@ -79,19 +85,19 @@ namespace ExampleApp
                 return *m_pViewModel;
             }
             
-            Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& InteriorsExplorerModule::GetInteriorsCameraController() const
+            InteriorsExplorerCameraController& InteriorsExplorerModule::GetInteriorsCameraController() const
             {
                 return *m_pInteriorsCameraController;
             }
             
             const bool InteriorsExplorerModule::InteriorCameraEnabled() const
             {
-                return m_pModel->InteriorCameraEnabled();
+                return m_pInteriorsCameraController->InteriorCameraEnabled();
             }
             
             void InteriorsExplorerModule::Update(float dt) const
             {
-                m_pModel->Update(dt);
+                m_pInteriorsCameraController->Update(dt);
             }
         }
     }

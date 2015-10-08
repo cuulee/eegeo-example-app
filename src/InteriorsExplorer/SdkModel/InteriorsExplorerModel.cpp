@@ -12,16 +12,9 @@
 #include "IMetricsService.h"
 #include "IAppModeModel.h"
 #include "InteriorsModel.h"
-#include "GpsGlobeCameraController.h"
-#include "InteriorMarkerModelRepository.h"
-#include "InteriorMarkerModel.h"
 #include "InteriorId.h"
-
-#include "CameraHelpers.h"
 #include "InteriorsFloorModel.h"
-#include "VectorMath.h"
-#include "EarthConstants.h"
-#include "CubeMap.h"
+
 
 namespace ExampleApp
 {
@@ -45,16 +38,12 @@ namespace ExampleApp
             
             InteriorsExplorerModel::InteriorsExplorerModel(Eegeo::Resources::Interiors::InteriorController& controller,
                                                            Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
-                                                           Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
-                                                           Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& globeCameraController,
                                                            MapMode::SdkModel::IMapModeModel& mapModeModel,
                                                            ExampleAppMessaging::TMessageBus& messageBus,
                                                            Metrics::IMetricsService& metricsService,
                                                            ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus)
             : m_controller(controller)
             , m_interiorSelectionModel(interiorSelectionModel)
-            , m_markerRepository(markerRepository)
-            , m_globeCameraController(globeCameraController)
             , m_mapModeModel(mapModeModel)
             , m_messageBus(messageBus)
             , m_metricsService(metricsService)
@@ -67,7 +56,6 @@ namespace ExampleApp
             , m_tourIsActive(false)
             , m_sdkDomainEventBus(sdkDomainEventBus)
             , m_tourStateChangedBinding(this, &InteriorsExplorerModel::OnTourStateChanged)
-            , m_cameraEnabled(false)
             {
                 m_controller.RegisterStateChangedCallback(m_controllerStateChangedCallback);
                 m_controller.RegisterVisibilityChangedCallback(m_controllerVisibilityChangedCallback);
@@ -77,9 +65,6 @@ namespace ExampleApp
                 m_messageBus.SubscribeNative(m_selectFloorCallback);
                 
                 m_sdkDomainEventBus.Subscribe(m_tourStateChangedBinding);
-                
-                // Temp manually set initial cam pos.
-                m_globeCameraController.SetView(0, 0, 0, 100);
             }
             
             InteriorsExplorerModel::~InteriorsExplorerModel()
@@ -94,66 +79,6 @@ namespace ExampleApp
                 m_controller.UnregisterFloorChangedCallback(m_controllerFloorChangedCallback);
             }
             
-            void InteriorsExplorerModel::Update(float dt)
-            {
-                // Camera stuff shouldn't be here -> Move it out.
-                if(!m_cameraEnabled)
-                {
-                    return;
-                }
-                
-                Eegeo_ASSERT(m_interiorSelectionModel.IsInteriorSelected());
-                
-                m_globeCameraController.Update(dt);
-                
-                
-                if(m_controller.InteriorInScene())
-                {
-                    Eegeo::dv3 cameraInterestEcef = m_globeCameraController.GetInterestBasis().GetPointEcef();
-                    cameraInterestEcef = cameraInterestEcef.Norm() * Eegeo::Space::EarthConstants::Radius;
-                    
-                    const Eegeo::Resources::Interiors::InteriorsModel* pModel = NULL;
-                    Eegeo_ASSERT(m_controller.TryGetCurrentModel(pModel));
-                    
-                    Eegeo::v3 relativeCameraInterestEcef = (cameraInterestEcef - pModel->GetTangentBasis().GetPointEcef()).ToSingle();
-                    
-                    Eegeo::v3 cameraInterestTangentSpace = Eegeo::v3(Eegeo::v3::Dot(relativeCameraInterestEcef, pModel->GetTangentBasis().GetRight()),
-                                                                     Eegeo::v3::Dot(relativeCameraInterestEcef, pModel->GetTangentBasis().GetUp()),
-                                                                     Eegeo::v3::Dot(relativeCameraInterestEcef, pModel->GetTangentBasis().GetForward()));
-                    
-                    float tangentBoundsHalfWidth = (pModel->GetTangentSpaceBounds().GetMax().x - pModel->GetTangentSpaceBounds().GetMin().x)*0.5f;
-                    float tangentBoundsHalfLength = (pModel->GetTangentSpaceBounds().GetMax().z - pModel->GetTangentSpaceBounds().GetMin().z)*0.5f;
-                    
-                    // TODO: Clamp to floor.
-                    
-                    if(cameraInterestTangentSpace.x < -tangentBoundsHalfWidth ||
-                       cameraInterestTangentSpace.x > tangentBoundsHalfWidth ||
-                       cameraInterestTangentSpace.z < -tangentBoundsHalfLength ||
-                       cameraInterestTangentSpace.z > tangentBoundsHalfLength)
-                    {
-                        float newX = Eegeo::Math::Clamp(cameraInterestTangentSpace.x, -tangentBoundsHalfWidth, tangentBoundsHalfWidth);
-                        float newZ = Eegeo::Math::Clamp(cameraInterestTangentSpace.z, -tangentBoundsHalfLength, tangentBoundsHalfLength);
-                        cameraInterestTangentSpace.Set(newX, 0.0f, newZ);
-                        
-                        Eegeo::m33 tangentBasis;
-                        pModel->GetTangentBasis().GetBasisOrientationAsMatrix(tangentBasis);
-                        relativeCameraInterestEcef = Eegeo::v3::Mul(cameraInterestTangentSpace, tangentBasis);
-                        
-                        m_globeCameraController.SetInterestLocation(pModel->GetTangentBasis().GetPointEcef() + relativeCameraInterestEcef);
-                    }
-                }
-                else
-                {
-                    Eegeo_ASSERT(m_markerRepository.Contains(m_interiorSelectionModel.GetSelectedInteriorId()));
-                    
-                    const Eegeo::Resources::Interiors::Markers::InteriorMarkerModel& marker = m_markerRepository.Get(m_interiorSelectionModel.GetSelectedInteriorId());
-                    
-                    Eegeo::Space::EcefTangentBasis basis;
-                    Eegeo::Camera::CameraHelpers::EcefTangentBasisFromPointAndHeading(marker.GetMarkerLatLongAltitude().ToECEF(), 0.0f, basis);
-                    m_globeCameraController.SetView(basis, 300.0f);
-                }
-            }
-            
             void InteriorsExplorerModel::OnControllerStateChanged()
             {
                 if(m_tourIsActive)
@@ -165,13 +90,9 @@ namespace ExampleApp
                 {
                     m_mapModeModel.SetInMapMode(m_previouslyInMapMode);
                     m_metricsService.EndTimedEvent(MetricEventInteriorsVisible);
-                    
-                    m_cameraEnabled = false;
                 }
                 else
                 {
-                    m_cameraEnabled = true;
-                    
                     m_previouslyInMapMode = m_mapModeModel.IsInMapMode();
                     m_mapModeModel.SetInMapMode(false);
                     m_metricsService.BeginTimedEvent(MetricEventInteriorsVisible);

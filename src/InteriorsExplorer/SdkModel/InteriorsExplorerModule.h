@@ -44,7 +44,7 @@ namespace ExampleApp
                 
                 ScreenControl::View::IScreenControlViewModel& GetScreenControlViewModel() const;
                 
-                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& GetInteriorsCameraController() const;
+                InteriorsExplorerCameraController& GetInteriorsCameraController() const;
                 
                 const bool InteriorCameraEnabled() const;
                 
@@ -58,7 +58,8 @@ namespace ExampleApp
                 InteriorsStreamingController* m_pInteriorsStreamingController;
                 
                 InteriorWorldPinController* m_pWorldPinController;
-                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController* m_pInteriorsCameraController;
+                InteriorsExplorerCameraController* m_pInteriorsCameraController;
+                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController* m_pGlobeCameraController;
             };
         }
     }
