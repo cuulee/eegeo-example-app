@@ -30,7 +30,7 @@ namespace ExampleApp
                                         Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
                                         WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                         ExampleApp::MapMode::SdkModel::IMapModeModel& mapModeModel,
-                                        Eegeo::Camera::GlobeCamera::GpsGlobeCameraControllerFactory& gpsGlobeCameraControllerFactory,
+                                        Eegeo::Camera::GlobeCamera::GlobeCameraControllerFactory& globeCameraControllerFactory,
                                         Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                         const Eegeo::Rendering::ScreenProperties& screenProperties,
                                         Eegeo::Helpers::IIdentityProvider& identityProvider,
@@ -59,7 +59,8 @@ namespace ExampleApp
                 
                 InteriorWorldPinController* m_pWorldPinController;
                 InteriorsExplorerCameraController* m_pInteriorsCameraController;
-                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController* m_pGlobeCameraController;
+                Eegeo::Camera::GlobeCamera::GlobeCameraTouchController* m_pGlobeCameraTouchController;
+                Eegeo::Camera::GlobeCamera::GlobeCameraController* m_pGlobeCameraController;
             };
         }
     }

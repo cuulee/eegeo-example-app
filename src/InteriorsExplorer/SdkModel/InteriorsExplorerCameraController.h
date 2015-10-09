@@ -27,7 +27,8 @@ namespace ExampleApp
                 Eegeo::Resources::Interiors::InteriorController& m_interiorController;
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
                 Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& m_markerRepository;
-                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& m_globeCameraController;
+                Eegeo::Camera::GlobeCamera::GlobeCameraTouchController& m_globeCameraTouchController;
+                Eegeo::Camera::GlobeCamera::GlobeCameraController& m_globeCameraController;
                 ExampleAppMessaging::TSdkModelDomainEventBus& m_sdkDomainEventBus;
                 Eegeo::Helpers::TCallback1<InteriorsExplorerCameraController, const ExampleApp::Tours::TourStateChangedMessage&> m_tourStateChangedBinding;
                 
@@ -35,7 +36,8 @@ namespace ExampleApp
                 InteriorsExplorerCameraController(Eegeo::Resources::Interiors::InteriorController& interiorController,
                                                   Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                                   Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
-                                                  Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& globeCameraController,
+                                                  Eegeo::Camera::GlobeCamera::GlobeCameraTouchController& m_globeCameraTouchController,
+                                                  Eegeo::Camera::GlobeCamera::GlobeCameraController& globeCameraController,
                                                   ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
                 
                 ~InteriorsExplorerCameraController();
@@ -52,6 +54,10 @@ namespace ExampleApp
                 
             private:
                 void OnTourStateChanged(const Tours::TourStateChangedMessage& message);
+                
+                void SetInterestLocation(const Eegeo::dv3& interestPointEcef);
+                
+                float GetFloorOffsetHeight() const;
             };
         }
     }

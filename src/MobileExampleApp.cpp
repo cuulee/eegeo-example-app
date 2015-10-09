@@ -10,6 +10,7 @@
 #include "IWorldPinsService.h"
 #include "ISearchRefreshService.h"
 #include "GpsGlobeCameraControllerFactory.h"
+#include "GlobeCameraControllerFactory.h"
 #include "GlobeCameraTouchSettings.h"
 #include "GlobeCameraController.h"
 #include "GpsGlobeCameraComponentConfiguration.h"
@@ -197,8 +198,8 @@ namespace ExampleApp
                                                 Eegeo::EnvironmentCharacterSet::Latin,
                                                 platformConfig,
                                                 NULL,
-                                                "http://cdn1.eegeo.com/coverage-trees/vinteriors/v80/manifest.txt.gz",
-                                                "http://d2xvsc8j92rfya.cloudfront.net/mobile-themes-new/v409/manifest.txt.gz",
+                                                "http://cdn1.eegeo.com/coverage-trees/vinteriors/v88/manifest.txt.gz",
+                                                "http://d2xvsc8j92rfya.cloudfront.net/mobile-themes-new/v413/manifest.txt.gz",
                                                 &errorHandler
                                                 );
 
@@ -429,10 +430,9 @@ namespace ExampleApp
 
         Eegeo::Modules::Map::Layers::InteriorsModelModule& interiorsModelModule = mapModule.GetInteriorsModelModule();
         Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsPresentationModule = mapModule.GetInteriorsPresentationModule();
-        Eegeo::Camera::GlobeCamera::GpsGlobeCameraControllerFactory cameraControllerFactory(m_pWorld->GetTerrainModelModule().GetTerrainHeightProvider(),
-                                                                                            mapModule.GetEnvironmentFlatteningService(),
-                                                                                            mapModule.GetResourceCeilingProvider(),
-                                                                                            *m_pNavigationService);
+        Eegeo::Camera::GlobeCamera::GlobeCameraControllerFactory cameraControllerFactory(m_pWorld->GetTerrainModelModule().GetTerrainHeightProvider(),
+                                                                                         mapModule.GetEnvironmentFlatteningService(),
+                                                                                         mapModule.GetResourceCeilingProvider());
         
         m_pInteriorsExplorerModule = Eegeo_NEW(InteriorsExplorer::SdkModel::InteriorsExplorerModule)(interiorsPresentationModule.GetAppLevelController(),
                                                                                                      interiorsPresentationModule.GetInteriorSelectionModel(),

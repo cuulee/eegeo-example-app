@@ -7,9 +7,9 @@
 #include "InteriorsExitObserver.h"
 #include "InteriorsStreamingController.h"
 #include "InteriorWorldPinController.h"
-#include "GpsGlobeCameraController.h"
-#include "GpsGlobeCameraControllerFactory.h"
-#include "GpsGlobeCameraComponentConfiguration.h"
+#include "GlobeCameraController.h"
+#include "GlobeCameraControllerFactory.h"
+#include "GlobeCameraTouchController.h"
 #include "GlobeCameraTouchControllerConfiguration.h"
 #include "GlobeCameraControllerConfiguration.h"
 
@@ -24,7 +24,7 @@ namespace ExampleApp
                                                              Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
                                                              WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                              ExampleApp::MapMode::SdkModel::IMapModeModel& mapModeModel,
-                                                             Eegeo::Camera::GlobeCamera::GpsGlobeCameraControllerFactory& gpsGlobeCameraControllerFactory,
+                                                             Eegeo::Camera::GlobeCamera::GlobeCameraControllerFactory& globeCameraControllerFactory,
                                                              Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                                              const Eegeo::Rendering::ScreenProperties& screenProperties,
                                                              Eegeo::Helpers::IIdentityProvider& identityProvider,
@@ -34,22 +34,24 @@ namespace ExampleApp
             {
                 m_pWorldPinController = Eegeo_NEW(InteriorWorldPinController)(interiorController, markerRepository, worldPinsService);
                 
-                Eegeo::Camera::GlobeCamera::GpsGlobeCameraComponentConfiguration gpsConfig = Eegeo::Camera::GlobeCamera::GpsGlobeCameraComponentConfiguration::CreateDefault();
                 Eegeo::Camera::GlobeCamera::GlobeCameraTouchControllerConfiguration touchConfig = Eegeo::Camera::GlobeCamera::GlobeCameraTouchControllerConfiguration::CreateDefault();
                 Eegeo::Camera::GlobeCamera::GlobeCameraControllerConfiguration globeCameraConfig = Eegeo::Camera::GlobeCamera::GlobeCameraControllerConfiguration::CreateDefault(false);
                 
                 globeCameraConfig.terrainFollowingEnabled = false;
                 globeCameraConfig.zoomAltitudeLow = 100.0f; // Probably too low.
+                globeCameraConfig.fovZoomedInCity = 10.0f;
                 globeCameraConfig.maxAltitude = 1000.0f;
                 
-                m_pGlobeCameraController = gpsGlobeCameraControllerFactory.Create(gpsConfig,
-                                                                                  touchConfig,
-                                                                                  globeCameraConfig,
-                                                                                  screenProperties);
+                m_pGlobeCameraTouchController = globeCameraControllerFactory.CreateTouchController(touchConfig);
+                
+                m_pGlobeCameraController = globeCameraControllerFactory.CreateCameraController(globeCameraConfig,
+                                                                                               *m_pGlobeCameraTouchController,
+                                                                                               screenProperties);
                 
                 m_pInteriorsCameraController = Eegeo_NEW(InteriorsExplorerCameraController)(interiorController,
                                                                                             interiorSelectionModel,
                                                                                             markerRepository,
+                                                                                            *m_pGlobeCameraTouchController,
                                                                                             *m_pGlobeCameraController,
                                                                                             sdkDomainEventBus);
                 
@@ -71,6 +73,7 @@ namespace ExampleApp
                 Eegeo_DELETE m_pModel;
                 Eegeo_DELETE m_pInteriorsStreamingController;
                 Eegeo_DELETE m_pInteriorsCameraController;
+                Eegeo_DELETE m_pGlobeCameraTouchController;
                 Eegeo_DELETE m_pGlobeCameraController;
                 Eegeo_DELETE m_pWorldPinController;
             }
