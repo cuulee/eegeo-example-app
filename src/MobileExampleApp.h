@@ -76,6 +76,7 @@
 #include "MapMode.h"
 #include "AppModes.h"
 #include "IToursModule.h"
+#include "IAppCameraController.h"
 
 namespace ExampleApp
 {
@@ -149,6 +150,8 @@ namespace ExampleApp
         Tours::IToursModule* m_pToursModule;
         Eegeo::Modules::FireworksModule* m_pFireworksModule;
         float m_toursPinDiameter;
+        
+        AppCamera::SdkModel::IAppCameraController* m_pAppCameraController;
         
         const bool m_interiorsEnabled;
 
@@ -372,6 +375,11 @@ namespace ExampleApp
         AppModes::SdkModel::IAppModeModel& GetAppModeModel() const
         {
             return *m_pAppModeModel;
+        }
+        
+        const ExampleApp::AppCamera::SdkModel::IAppCameraController& AppCameraController() const
+        {
+            return *m_pAppCameraController;
         }
 
         void OnPause();

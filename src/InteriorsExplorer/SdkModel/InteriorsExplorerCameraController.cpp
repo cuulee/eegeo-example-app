@@ -175,6 +175,11 @@ namespace ExampleApp
                 return floorOffset;
                 
             }
+            
+            Eegeo::Camera::GlobeCamera::GlobeCameraController& InteriorsExplorerCameraController::GetGlobeCameraController()
+            {
+                return m_globeCameraController;
+            }
         }
     }
 }

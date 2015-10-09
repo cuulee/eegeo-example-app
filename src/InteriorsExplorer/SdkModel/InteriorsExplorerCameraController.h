@@ -50,6 +50,8 @@ namespace ExampleApp
                 
                 Eegeo::ITouchController& GetTouchController();
                 
+                Eegeo::Camera::GlobeCamera::GlobeCameraController& GetGlobeCameraController();
+                
                 void Update(float dt);
                 
             private:

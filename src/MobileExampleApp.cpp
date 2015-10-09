@@ -77,6 +77,7 @@
 #include "CombinedSearchServiceModule.h"
 #include "GeoNamesSearchServiceModule.h"
 #include "SearchVendorNames.h"
+#include "AppCameraController.h"
 
 namespace ExampleApp
 {
@@ -180,7 +181,7 @@ namespace ExampleApp
         , m_pToursModule(NULL)
         , m_pToursWorldPinsModule(NULL)
         , m_pToursPinsModule(NULL)
-        , m_toursPinDiameter(80)
+        , m_toursPinDiameter(48.f)
         , m_enableTours(false)
     {
         m_metricsService.BeginSession(ExampleApp::FlurryApiKey, EEGEO_PLATFORM_VERSION_NUMBER);
@@ -481,12 +482,20 @@ namespace ExampleApp
         m_pSecondaryMenuModule->AddMenuSection("Locations", m_pPlaceJumpsModule->GetPlaceJumpsMenuModel(), true);
         m_pSecondaryMenuModule->AddMenuSection("My Pins", m_pMyPinsModule->GetMyPinsMenuModel(), true);
         m_pSecondaryMenuModule->AddMenuSection("Settings", m_pSecondaryMenuModule->GetSettingsMenuModel(), true);
+        
+        std::vector<Eegeo::Camera::GlobeCamera::GlobeCameraController*> cameras;
+        
+        cameras.push_back(&m_pGlobeCameraController->GetGlobeCameraController());
+        cameras.push_back(&m_pInteriorsExplorerModule->GetInteriorsCameraController().GetGlobeCameraController());
+        
+        m_pAppCameraController = Eegeo_NEW(AppCamera::SdkModel::AppCameraController)(cameras);
     }
 
     void MobileExampleApp::DestroyApplicationModelModules()
     {
         m_initialExperienceModule.TearDown();
         
+        Eegeo_DELETE m_pAppCameraController;
         
         Eegeo_DELETE m_pToursModule;
         Eegeo_DELETE m_pToursWorldPinsModule;
@@ -735,6 +744,7 @@ namespace ExampleApp
 
         m_pGlobeCameraController->Update(dt);
         m_pCameraTransitionController->Update(dt);
+        m_pAppCameraController->Update(dt);
         
         if(ToursEnabled())
         {
@@ -754,6 +764,12 @@ namespace ExampleApp
         // MB: Currently three competing camera systems.
         Eegeo::Camera::CameraState cameraState = m_pGlobeCameraController->GetCameraState();
         Eegeo::Camera::RenderCamera renderCamera = m_pGlobeCameraController->GetRenderCamera();
+        
+        // TH: TODO: wire up the AppCameraController and use these 2 lines instead of the ones above when it's done and remove the
+        // if(m_pInteriorsExplorerModule->InteriorCameraEnabled()) {...} block below
+        //Eegeo::Camera::RenderCamera renderCamera = m_pAppCameraController->GetRenderCamera();
+        //Eegeo::Camera::CameraState cameraState = m_pAppCameraController->GetCameraState();
+        
         if(m_pInteriorsExplorerModule->InteriorCameraEnabled())
         {
             cameraState = m_pInteriorsExplorerModule->GetInteriorsCameraController().GetCameraState();
@@ -844,6 +860,13 @@ namespace ExampleApp
 
         Eegeo::Camera::CameraState cameraState = m_pGlobeCameraController->GetCameraState();
         Eegeo::Camera::RenderCamera renderCamera = m_pGlobeCameraController->GetRenderCamera();
+        
+        // TH: TODO: wire up the AppCameraController and use these 2 lines instead of the ones above when it's done and remove the
+        // if(m_pInteriorsExplorerModule->InteriorCameraEnabled()) {...} block below
+        
+        //Eegeo::Camera::RenderCamera renderCamera = m_pAppCameraController->GetRenderCamera();
+        //Eegeo::Camera::CameraState cameraState = m_pAppCameraController->GetCameraState();
+        
         if(m_pInteriorsExplorerModule->InteriorCameraEnabled())
         {
             cameraState = m_pInteriorsExplorerModule->GetInteriorsCameraController().GetCameraState();

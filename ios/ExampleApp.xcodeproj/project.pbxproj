@@ -1249,6 +1249,10 @@
 		7EE48256168477A80006E99B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE48255168477A80006E99B /* MobileCoreServices.framework */; };
 		7EE48258168477CB0006E99B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE48257168477CB0006E99B /* libz.dylib */; };
 		7EF5D8651737F9A40049D787 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF5D8641737F9A40049D787 /* CoreLocation.framework */; };
+		BF0E350C1BC673EA005B30E8 /* AppCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E350A1BC673EA005B30E8 /* AppCameraController.cpp */; };
+		BF0E350D1BC673EA005B30E8 /* AppCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E350A1BC673EA005B30E8 /* AppCameraController.cpp */; };
+		BF0E35141BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */; };
+		BF0E35151BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */; };
 		BFD4C7231BA9BB1F006F4E0B /* TourStateChangedMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD4C7211BA9BB1F006F4E0B /* TourStateChangedMessage.cpp */; };
 		BFD4C7241BA9BB1F006F4E0B /* TourStateChangedMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD4C7211BA9BB1F006F4E0B /* TourStateChangedMessage.cpp */; };
 		BFD5FCB41BA7068300F591F1 /* TourDefines.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFD5FC8D1BA7068300F591F1 /* TourDefines.mm */; };
@@ -2652,6 +2656,12 @@
 		7EE48255168477A80006E99B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		7EE48257168477CB0006E99B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7EF5D8641737F9A40049D787 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BF0E350A1BC673EA005B30E8 /* AppCameraController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraController.cpp; path = AppCamera/SdkModel/AppCameraController.cpp; sourceTree = "<group>"; };
+		BF0E350B1BC673EA005B30E8 /* AppCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraController.h; path = AppCamera/SdkModel/AppCameraController.h; sourceTree = "<group>"; };
+		BF0E350F1BC678AA005B30E8 /* AppCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppCamera.h; path = AppCamera/AppCamera.h; sourceTree = "<group>"; };
+		BF0E35101BC67A50005B30E8 /* IAppCameraController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IAppCameraController.h; path = AppCamera/SdkModel/IAppCameraController.h; sourceTree = "<group>"; };
+		BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraHelpers.cpp; path = AppCamera/Helpers/AppCameraHelpers.cpp; sourceTree = "<group>"; };
+		BF0E35131BC6A2A1005B30E8 /* AppCameraHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraHelpers.h; path = AppCamera/Helpers/AppCameraHelpers.h; sourceTree = "<group>"; };
 		BFD4C7211BA9BB1F006F4E0B /* TourStateChangedMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TourStateChangedMessage.cpp; sourceTree = "<group>"; };
 		BFD4C7221BA9BB1F006F4E0B /* TourStateChangedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourStateChangedMessage.h; sourceTree = "<group>"; };
 		BFD5FC8C1BA7068300F591F1 /* TourDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourDefines.h; sourceTree = "<group>"; };
@@ -2925,6 +2935,7 @@
 		18143846192B6E4500BCDF2E /* src */ = {
 			isa = PBXGroup;
 			children = (
+				BF0E35081BC67313005B30E8 /* AppCamera */,
 				7E3B86631A385A280023C94E /* AboutPage */,
 				18B22B181A7A901D00DDBFA2 /* ApiKey.h */,
 				186B473D1AB333150084E80B /* ApplicationConfig */,
@@ -5410,6 +5421,35 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		BF0E35081BC67313005B30E8 /* AppCamera */ = {
+			isa = PBXGroup;
+			children = (
+				BF0E35111BC6A250005B30E8 /* Helpers */,
+				BF0E350F1BC678AA005B30E8 /* AppCamera.h */,
+				BF0E35091BC67322005B30E8 /* SdkModel */,
+			);
+			name = AppCamera;
+			sourceTree = "<group>";
+		};
+		BF0E35091BC67322005B30E8 /* SdkModel */ = {
+			isa = PBXGroup;
+			children = (
+				BF0E35101BC67A50005B30E8 /* IAppCameraController.h */,
+				BF0E350A1BC673EA005B30E8 /* AppCameraController.cpp */,
+				BF0E350B1BC673EA005B30E8 /* AppCameraController.h */,
+			);
+			name = SdkModel;
+			sourceTree = "<group>";
+		};
+		BF0E35111BC6A250005B30E8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */,
+				BF0E35131BC6A2A1005B30E8 /* AppCameraHelpers.h */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		BFD5FC8A1BA7068300F591F1 /* Tours */ = {
 			isa = PBXGroup;
 			children = (
@@ -6432,6 +6472,7 @@
 				BFD5FD451BA706AD00F591F1 /* ToursCameraFadeTransitionMode.cpp in Sources */,
 				7E3B89531A385A290023C94E /* MyPinSelectedMessage.cpp in Sources */,
 				7E3B8A051A385A290023C94E /* WorldPinInFocusScreenControl.cpp in Sources */,
+				BF0E35151BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */,
 				7E3B893F1A385A290023C94E /* UserCreatedMyPinDetailsModelSelectedMessage.cpp in Sources */,
 				BFD5FD8E1BA708E100F591F1 /* iCarousel.m in Sources */,
 				7E3B89DB1A385A290023C94E /* SecondaryMenuController.cpp in Sources */,
@@ -6568,6 +6609,7 @@
 				18FE3BD31A9CA561002D61C4 /* SortedMenuComparisonFunctions.cpp in Sources */,
 				7E3B8AEC1A385F110023C94E /* iOSInitialExperiencePreLoadModel.mm in Sources */,
 				7E5811CE1B1F3248007AD67F /* InteriorsExplorerViewInterop.mm in Sources */,
+				BF0E350D1BC673EA005B30E8 /* AppCameraController.cpp in Sources */,
 				7E3B89131A385A290023C94E /* MyPinCreationViewStateChangedMessage.cpp in Sources */,
 				BFD5FD6F1BA706AD00F591F1 /* TourExplorerCompositeViewController.cpp in Sources */,
 				7E3B890D1A385A290023C94E /* ModalityObserver.cpp in Sources */,
@@ -6856,6 +6898,7 @@
 				18FB64661A9240FC005A9411 /* OAMutableURLRequest.m in Sources */,
 				BFD5FD441BA706AD00F591F1 /* ToursCameraFadeTransitionMode.cpp in Sources */,
 				7E3B89521A385A290023C94E /* MyPinSelectedMessage.cpp in Sources */,
+				BF0E35141BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */,
 				7E3B8A041A385A290023C94E /* WorldPinInFocusScreenControl.cpp in Sources */,
 				7E3B893E1A385A290023C94E /* UserCreatedMyPinDetailsModelSelectedMessage.cpp in Sources */,
 				7E3B89DA1A385A290023C94E /* SecondaryMenuController.cpp in Sources */,
@@ -6992,6 +7035,7 @@
 				18FE3BD21A9CA561002D61C4 /* SortedMenuComparisonFunctions.cpp in Sources */,
 				7E3B8AEB1A385F110023C94E /* iOSInitialExperiencePreLoadModel.mm in Sources */,
 				7E5811CD1B1F3248007AD67F /* InteriorsExplorerViewInterop.mm in Sources */,
+				BF0E350C1BC673EA005B30E8 /* AppCameraController.cpp in Sources */,
 				7E3B89121A385A290023C94E /* MyPinCreationViewStateChangedMessage.cpp in Sources */,
 				BFD5FD6E1BA706AD00F591F1 /* TourExplorerCompositeViewController.cpp in Sources */,
 				7E3B890C1A385A290023C94E /* ModalityObserver.cpp in Sources */,
