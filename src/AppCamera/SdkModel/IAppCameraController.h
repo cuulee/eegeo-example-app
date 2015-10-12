@@ -5,6 +5,7 @@
 #include "Types.h"
 #include "AppCamera.h"
 #include "Camera.h"
+#include "GlobeCamera.h"
 
 namespace ExampleApp
 {
@@ -18,7 +19,11 @@ namespace ExampleApp
                 
                 virtual ~IAppCameraController() {}
                 
-                virtual void TransitionToNextCamera() = 0;
+                virtual int CreateCameraHandleFromController(Eegeo::Camera::GlobeCamera::GlobeCameraController* cameraController) = 0;
+                
+                virtual void RemoveCameraHandle(int cameraHandle) = 0;
+                
+                virtual void TransitionToCameraWithHandle(int cameraHandle) = 0;
                 
                 virtual const bool IsTransitionInFlight() const = 0;
                 

@@ -1253,6 +1253,10 @@
 		BF0E350D1BC673EA005B30E8 /* AppCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E350A1BC673EA005B30E8 /* AppCameraController.cpp */; };
 		BF0E35141BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */; };
 		BF0E35151BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */; };
+		BF34FE9E1BCBF78600E7094F /* AppCameraModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */; };
+		BF34FE9F1BCBF78600E7094F /* AppCameraModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */; };
+		BF34FEA21BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */; };
+		BF34FEA31BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */; };
 		BFD4C7231BA9BB1F006F4E0B /* TourStateChangedMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD4C7211BA9BB1F006F4E0B /* TourStateChangedMessage.cpp */; };
 		BFD4C7241BA9BB1F006F4E0B /* TourStateChangedMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFD4C7211BA9BB1F006F4E0B /* TourStateChangedMessage.cpp */; };
 		BFD5FCB41BA7068300F591F1 /* TourDefines.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFD5FC8D1BA7068300F591F1 /* TourDefines.mm */; };
@@ -2662,6 +2666,11 @@
 		BF0E35101BC67A50005B30E8 /* IAppCameraController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IAppCameraController.h; path = AppCamera/SdkModel/IAppCameraController.h; sourceTree = "<group>"; };
 		BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraHelpers.cpp; path = AppCamera/Helpers/AppCameraHelpers.cpp; sourceTree = "<group>"; };
 		BF0E35131BC6A2A1005B30E8 /* AppCameraHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraHelpers.h; path = AppCamera/Helpers/AppCameraHelpers.h; sourceTree = "<group>"; };
+		BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraModule.cpp; path = AppCamera/SdkModel/AppCameraModule.cpp; sourceTree = "<group>"; };
+		BF34FE9D1BCBF78600E7094F /* AppCameraModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraModule.h; path = AppCamera/SdkModel/AppCameraModule.h; sourceTree = "<group>"; };
+		BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraInteriorStateObserver.cpp; path = AppCamera/AppCameraInteriorStateObserver.cpp; sourceTree = "<group>"; };
+		BF34FEA11BCBF9A300E7094F /* AppCameraInteriorStateObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraInteriorStateObserver.h; path = AppCamera/AppCameraInteriorStateObserver.h; sourceTree = "<group>"; };
+		BF6E49A51BCBF67E00354F0E /* IAppCameraModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IAppCameraModule.h; path = AppCamera/SdkModel/IAppCameraModule.h; sourceTree = "<group>"; };
 		BFD4C7211BA9BB1F006F4E0B /* TourStateChangedMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TourStateChangedMessage.cpp; sourceTree = "<group>"; };
 		BFD4C7221BA9BB1F006F4E0B /* TourStateChangedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourStateChangedMessage.h; sourceTree = "<group>"; };
 		BFD5FC8C1BA7068300F591F1 /* TourDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourDefines.h; sourceTree = "<group>"; };
@@ -5427,6 +5436,8 @@
 				BF0E35111BC6A250005B30E8 /* Helpers */,
 				BF0E350F1BC678AA005B30E8 /* AppCamera.h */,
 				BF0E35091BC67322005B30E8 /* SdkModel */,
+				BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */,
+				BF34FEA11BCBF9A300E7094F /* AppCameraInteriorStateObserver.h */,
 			);
 			name = AppCamera;
 			sourceTree = "<group>";
@@ -5437,6 +5448,9 @@
 				BF0E35101BC67A50005B30E8 /* IAppCameraController.h */,
 				BF0E350A1BC673EA005B30E8 /* AppCameraController.cpp */,
 				BF0E350B1BC673EA005B30E8 /* AppCameraController.h */,
+				BF6E49A51BCBF67E00354F0E /* IAppCameraModule.h */,
+				BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */,
+				BF34FE9D1BCBF78600E7094F /* AppCameraModule.h */,
 			);
 			name = SdkModel;
 			sourceTree = "<group>";
@@ -6414,6 +6428,7 @@
 				7E3B8A071A385A290023C94E /* WorldPinInFocusViewModel.cpp in Sources */,
 				7E3B89231A385A290023C94E /* MyPinCreationModule.cpp in Sources */,
 				7E3B88A71A385A290023C94E /* AboutPageController.cpp in Sources */,
+				BF34FE9F1BCBF78600E7094F /* AppCameraModule.cpp in Sources */,
 				18096F4E1A7B7F39006A6438 /* StreamOverWifiOnlyChangedMessage.cpp in Sources */,
 				7E3B8AD21A385F110023C94E /* AppRunner.mm in Sources */,
 				183E54881ACEB1FB00AD6B3E /* InitialExperienceSearchResultAttractModeModel.cpp in Sources */,
@@ -6543,6 +6558,7 @@
 				7E3B89CD1A385A290023C94E /* SearchResultPoiController.cpp in Sources */,
 				7E67322A1BC3D7FB002A31FD /* InteriorWorldPinController.cpp in Sources */,
 				7E3B8B1E1A385F110023C94E /* SearchResultMenuView.mm in Sources */,
+				BF34FEA31BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */,
 				7E3B899B1A385A290023C94E /* SearchQueryRemovedMessage.cpp in Sources */,
 				18B44CF11A88D4B400FDFD8A /* CacheClearBackgroundTask.cpp in Sources */,
 				7E3B8B081A385F110023C94E /* MyPinCreationDetailsViewModule.mm in Sources */,
@@ -6840,6 +6856,7 @@
 				BFD5FD8D1BA708E100F591F1 /* iCarousel.m in Sources */,
 				7E3B8A061A385A290023C94E /* WorldPinInFocusViewModel.cpp in Sources */,
 				7E3B89221A385A290023C94E /* MyPinCreationModule.cpp in Sources */,
+				BF34FE9E1BCBF78600E7094F /* AppCameraModule.cpp in Sources */,
 				7E3B88A61A385A290023C94E /* AboutPageController.cpp in Sources */,
 				18096F4D1A7B7F39006A6438 /* StreamOverWifiOnlyChangedMessage.cpp in Sources */,
 				7E3B8AD11A385F110023C94E /* AppRunner.mm in Sources */,
@@ -6969,6 +6986,7 @@
 				7E3B89CC1A385A290023C94E /* SearchResultPoiController.cpp in Sources */,
 				7E6732291BC3D7FB002A31FD /* InteriorWorldPinController.cpp in Sources */,
 				7E3B8B1D1A385F110023C94E /* SearchResultMenuView.mm in Sources */,
+				BF34FEA21BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */,
 				7E3B899A1A385A290023C94E /* SearchQueryRemovedMessage.cpp in Sources */,
 				18B44CF01A88D4B400FDFD8A /* CacheClearBackgroundTask.cpp in Sources */,
 				7E3B8B071A385F110023C94E /* MyPinCreationDetailsViewModule.mm in Sources */,

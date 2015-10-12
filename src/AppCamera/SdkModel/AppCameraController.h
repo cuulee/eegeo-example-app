@@ -4,7 +4,7 @@
 
 #include "IAppCameraController.h"
 #include "Camera.h"
-#include <vector>
+#include <map>
 #include "GlobeCameraController.h"
 #include "VectorMathDecl.h"
 
@@ -18,7 +18,7 @@ namespace ExampleApp
             {
             private:
                 
-                std::vector<Eegeo::Camera::GlobeCamera::GlobeCameraController*> m_cameras;
+                std::map<int, Eegeo::Camera::GlobeCamera::GlobeCameraController*> m_cameras;
                 
                 Eegeo::Camera::RenderCamera m_renderCamera;
                 
@@ -32,10 +32,14 @@ namespace ExampleApp
                 
             public:
                 
-                AppCameraController(const std::vector<Eegeo::Camera::GlobeCamera::GlobeCameraController*>& cameras);
+                AppCameraController();
                 ~AppCameraController();
                 
-                void TransitionToNextCamera();
+                int CreateCameraHandleFromController(Eegeo::Camera::GlobeCamera::GlobeCameraController* cameraController);
+                
+                void RemoveCameraHandle(int cameraHandle);
+                
+                void TransitionToCameraWithHandle(int cameraHandle);
                 
                 const bool IsTransitionInFlight() const;
                 

@@ -7,6 +7,8 @@
 #include "CameraState.h"
 #include "Quaternion.h"
 #include "AppCameraHelpers.h"
+#include "CameraHelpers.h"
+#include "EcefTangentBasis.h"
 
 namespace ExampleApp
 {
@@ -14,12 +16,16 @@ namespace ExampleApp
     {
         namespace SdkModel
         {
-            AppCameraController::AppCameraController(const std::vector<Eegeo::Camera::GlobeCamera::GlobeCameraController*>& cameras)
-            : m_cameras(cameras)
-            , m_currentCameraIndex(0)
+            namespace
+            {
+                static int nextHandleId = -1;
+            }
+            
+            AppCameraController::AppCameraController()
+            : m_currentCameraIndex(0)
             , m_previousCameraIndex(0)
             {
-                Eegeo_ASSERT(m_cameras.size() > 0, "No cameras passed to the camera controller");
+                nextHandleId = -1;
             }
             
             AppCameraController::~AppCameraController()
@@ -27,26 +33,29 @@ namespace ExampleApp
                 
             }
             
-            void AppCameraController::TransitionToNextCamera()
+            int AppCameraController::CreateCameraHandleFromController(Eegeo::Camera::GlobeCamera::GlobeCameraController* cameraController)
             {
-                if(m_cameras.size() > 1)
-                {
-                    Eegeo_TTY("Warning: trying to transition to another camera when there's only one");
-                    return;
-                }
+                m_cameras.insert(std::make_pair(++nextHandleId, cameraController));
+                
+                return nextHandleId;
+            }
+            
+            void AppCameraController::RemoveCameraHandle(int cameraHandle)
+            {
+                m_cameras.erase(cameraHandle);
+            }
+            
+            void AppCameraController::TransitionToCameraWithHandle(int cameraHandle)
+            {
+                Eegeo_ASSERT(cameraHandle < static_cast<int>(m_cameras.size()), "Invalid camera Id");
                 
                 m_transitionTimer = 0.0f;
                 m_isTransitionInFlight = true;
                 
                 m_previousCameraIndex = m_currentCameraIndex;
-                
-                if(++m_currentCameraIndex >= m_cameras.size())
-                {
-                    m_currentCameraIndex = 0;
-                }
-                
+                m_currentCameraIndex = cameraHandle;
             }
-            
+
             const bool AppCameraController::IsTransitionInFlight() const
             {
                 return m_isTransitionInFlight;
@@ -79,8 +88,8 @@ namespace ExampleApp
                     
                     m_cameras[m_previousCameraIndex]->Update(dt);
                     
-                    const Eegeo::Camera::RenderCamera startCamera = m_cameras[m_currentCameraIndex]->GetRenderCamera();
-                    const Eegeo::Camera::RenderCamera endCamera = m_cameras[m_previousCameraIndex]->GetRenderCamera();
+                    const Eegeo::Camera::RenderCamera startCamera = m_cameras[m_previousCameraIndex]->GetRenderCamera();
+                    const Eegeo::Camera::RenderCamera endCamera = m_cameras[m_currentCameraIndex]->GetRenderCamera();
                     
                     const Eegeo::dv3 startPos = startCamera.GetEcefLocation();
                     const Eegeo::dv3 endPos = endCamera.GetEcefLocation();
