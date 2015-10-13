@@ -2718,10 +2718,6 @@
 		BF4FEE381BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExampleTourPinSelectionHandler.cpp; sourceTree = "<group>"; };
 		BF4FEE3C1BC2BF8400932C17 /* ExampleTourSearchResultPoiView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExampleTourSearchResultPoiView.mm; sourceTree = "<group>"; };
 		BF4FEE3F1BC2BFD000932C17 /* ExampleTourSearchResultPoiView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleTourSearchResultPoiView.h; sourceTree = "<group>"; };
-		BF4FEE421BC2C0E600932C17 /* ExampleSearchJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSearchJsonParser.h; path = Example/SdkModel/ExampleSearchJsonParser.h; sourceTree = "<group>"; };
-		BF4FEE431BC2C0E600932C17 /* ExampleSearchJsonParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExampleSearchJsonParser.cpp; path = Example/SdkModel/ExampleSearchJsonParser.cpp; sourceTree = "<group>"; };
-		BF4FEE461BC2C1AC00932C17 /* ExampleSearchResultModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExampleSearchResultModel.cpp; path = Example/SdkModel/ExampleSearchResultModel.cpp; sourceTree = "<group>"; };
-		BF4FEE471BC2C1AC00932C17 /* ExampleSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleSearchResultModel.h; path = Example/SdkModel/ExampleSearchResultModel.h; sourceTree = "<group>"; };
 		BF681D951BC4183500100BFF /* CurrentTourCardTappedMessage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CurrentTourCardTappedMessage.cpp; sourceTree = "<group>"; };
 		BF681D961BC4183500100BFF /* CurrentTourCardTappedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentTourCardTappedMessage.h; sourceTree = "<group>"; };
 		BF681D991BC41B4200100BFF /* ExampleCurrentTourCardTappedHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExampleCurrentTourCardTappedHandler.cpp; sourceTree = "<group>"; };
@@ -5546,10 +5542,6 @@
 				BF6E49A51BCBF67E00354F0E /* IAppCameraModule.h */,
 				BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */,
 				BF34FE9D1BCBF78600E7094F /* AppCameraModule.h */,
-				BF4FEE421BC2C0E600932C17 /* ExampleSearchJsonParser.h */,
-				BF4FEE431BC2C0E600932C17 /* ExampleSearchJsonParser.cpp */,
-				BF4FEE461BC2C1AC00932C17 /* ExampleSearchResultModel.cpp */,
-				BF4FEE471BC2C1AC00932C17 /* ExampleSearchResultModel.h */,
 			);
 			name = SdkModel;
 			sourceTree = "<group>";
