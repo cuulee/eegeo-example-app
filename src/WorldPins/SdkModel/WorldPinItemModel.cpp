@@ -20,7 +20,8 @@ namespace ExampleApp
                                                  IWorldPinVisibilityStateChangedHandler* pVisibilityStateChangedHandler,
                                                  const WorldPinFocusData& worldPinFocusData,
                                                  bool interior,
-                                                 const WorldPinInteriorData& worldPinInteriorData)
+                                                 const WorldPinInteriorData& worldPinInteriorData,
+                                                 int visibilityMask)
                 : m_id(id)
                 , m_pSelectionHandler(pSelectionHandler)
                 , m_pVisibilityStateChangedHandler(pVisibilityStateChangedHandler)
@@ -29,6 +30,9 @@ namespace ExampleApp
                 , m_transitionStateValue(0.f)
                 , m_interior(interior)
                 , m_worldPinInteriorData(worldPinInteriorData)
+                , m_floorHeight(0.0f)
+                , m_hasFloorHeight(false)
+                , m_visibilityMask(visibilityMask)
             {
                 Eegeo_ASSERT(m_pSelectionHandler != NULL, "WorldPinItemModel must be provided with a non-null selection handler.")
             }
@@ -83,6 +87,17 @@ namespace ExampleApp
                 return m_transitionStateValue;
             }
             
+            bool WorldPinItemModel::NeedsFloorHeight() const
+            {
+                return m_interior && (!m_hasFloorHeight);
+            }
+            
+            void WorldPinItemModel::SetFloorHeight(float floorHeight)
+            {
+                m_floorHeight = floorHeight;
+                m_hasFloorHeight = true;
+            }
+            
             void WorldPinItemModel::Refresh(const std::string& title, const std::string& description, const std::string& ratingsImage, const int reviewCount)
             {
                 m_focusModel.Refresh(title, description, ratingsImage, reviewCount);
@@ -135,6 +150,16 @@ namespace ExampleApp
             const WorldPinInteriorData& WorldPinItemModel::GetInteriorData() const
             {
                 return m_worldPinInteriorData;
+            }
+            
+            int WorldPinItemModel::VisibilityMask() const
+            {
+                return m_visibilityMask;
+            }
+            
+            void WorldPinItemModel::SetVisibilityMask(int visibilityMask)
+            {
+                m_visibilityMask = visibilityMask;
             }
         }
     }

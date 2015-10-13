@@ -102,10 +102,10 @@ namespace ExampleApp
                 m_searchView.SetAttractMode(m_searchResultMenuViewModel.AttractModeEnabled());
             }
             
-            void SearchResultMenuController::OnAppModelChanged()
+            void SearchResultMenuController::OnAppModeChanged(const AppModes::AppModeChangedMessage& message)
             {
-                const AppModes::SdkModel::AppMode appMode = m_appModelModel.GetAppMode();
-                if (appMode != AppModes::SdkModel::WorldMode)
+                m_appModeAllowsOpen = message.GetAppMode() == AppModes::SdkModel::WorldMode;
+                if (!m_appModeAllowsOpen)
                 {
                     OnSearchClosed();
                 }
@@ -120,7 +120,6 @@ namespace ExampleApp
                 ISearchResultMenuOrder& order,
                 CategorySearch::View::ICategorySearchRepository& categorySearchRepository,
                 ISearchResultMenuViewModel& searchResultMenuViewModel,
-                AppModes::SdkModel::IAppModeModel& appModelModel,
                 ExampleAppMessaging::TMessageBus& messageBus
             )
                 : MenuController(menuModel, menuViewModel, menuView, messageBus)
@@ -129,28 +128,28 @@ namespace ExampleApp
                 , m_order(order)
                 , m_categorySearchRepository(categorySearchRepository)
                 , m_searchResultMenuViewModel(searchResultMenuViewModel)
-                , m_appModelModel(appModelModel)
                 , m_messageBus(messageBus)
                 , m_onSearchCloseTappedCallback(this, &SearchResultMenuController::OnSearchClosed)
                 , m_searchQueryIssuedHandler(this, &SearchResultMenuController::OnSearchQueryPerformedMessage)
                 , m_searchResultReceivedHandler(this, &SearchResultMenuController::OnSearchQueryResponseReceivedMessage)
                 , m_attractModeChangedCallback(this, &SearchResultMenuController::OnAttractModeChanged)
-                , m_appModeChangedCallback(this, &SearchResultMenuController::OnAppModelChanged)
+                , m_appModeChangedHandler(this, &SearchResultMenuController::OnAppModeChanged)
+                , m_appModeAllowsOpen(true)
             {
                 m_searchView.InsertSearchClosed(m_onSearchCloseTappedCallback);
                 m_messageBus.SubscribeUi(m_searchQueryIssuedHandler);
                 m_messageBus.SubscribeUi(m_searchResultReceivedHandler);
                 m_searchResultMenuViewModel.InsertAttractModeChangedCallback(m_attractModeChangedCallback);
-                m_appModelModel.RegisterAppModeChangedCallback(m_appModeChangedCallback);
+                m_messageBus.SubscribeUi(m_appModeChangedHandler);
             }
 
             SearchResultMenuController::~SearchResultMenuController()
             {
+                m_messageBus.UnsubscribeUi(m_appModeChangedHandler);
                 m_searchResultMenuViewModel.RemoveAttractModeChangedCallback(m_attractModeChangedCallback);
                 m_messageBus.UnsubscribeUi(m_searchResultReceivedHandler);
                 m_messageBus.UnsubscribeUi(m_searchQueryIssuedHandler);
                 m_searchView.RemoveSearchClosed(m_onSearchCloseTappedCallback);
-                m_appModelModel.UnregisterAppModeChangedCallback(m_appModeChangedCallback);
             }
         }
     }

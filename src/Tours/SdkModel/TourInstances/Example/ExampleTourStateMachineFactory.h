@@ -7,6 +7,7 @@
 #include "WorldPins.h"
 #include <string>
 #include "Interiors.h"
+#include "BidirectionalBus.h"
 
 namespace ExampleApp
 {
@@ -26,8 +27,8 @@ namespace ExampleApp
                                                        Camera::IToursCameraController& toursCameraController,
                                                        WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                        bool interiorsEnabled,
-                                                       Eegeo::Resources::Interiors::InteriorController& interiorController
-                                                    );
+                                                       Eegeo::Resources::Interiors::InteriorController& interiorController,
+                                                       ExampleAppMessaging::TMessageBus& messageBus);
                         ~ExampleTourStateMachineFactory();
                         
                         States::ITourStateMachine* CreateTourStateMachine(const TourModel& tourModel);
@@ -40,6 +41,7 @@ namespace ExampleApp
                         
                         bool m_interiorsEnabled;
                         Eegeo::Resources::Interiors::InteriorController& m_interiorController;
+                        ExampleAppMessaging::TMessageBus& m_messageBus;
                     };
                 }
             }

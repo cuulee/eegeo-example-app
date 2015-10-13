@@ -14,6 +14,7 @@
 #include "IScreenControlViewModel.h"
 #include "WorldPinsModalityObserver.h"
 #include "Interiors.h"
+#include "SdkModelDomainEventBus.h"
 
 namespace ExampleApp
 {
@@ -27,6 +28,7 @@ namespace ExampleApp
                 IWorldPinsService* m_pWorldPinsService;
                 IWorldPinsRepository* m_pWorldPinsRepository;
                 IWorldPinsScaleController* m_pWorldPinsScaleController;
+                IWorldPinsFloorHeightController* m_pWorldPinsFloorHeightController;
                 View::WorldPinInFocusViewModel* m_pWorldPinsInFocusViewModel;
                 IWorldPinsInFocusController* m_pWorldPinsInFocusController;
                 View::WorldPinInFocusObserver* m_pWorldPinInFocusObserver;
@@ -38,7 +40,8 @@ namespace ExampleApp
                                 const Eegeo::Rendering::EnvironmentFlatteningService& environmentFlatteningService,
                                 Eegeo::Helpers::IIdentityProvider& identityProvider,
                                 ExampleAppMessaging::TMessageBus& messageBus,
-                                Eegeo::Resources::Interiors::InteriorController& interiorsController);
+                                Eegeo::Resources::Interiors::InteriorController& interiorsController,
+                                ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
 
                 ~WorldPinsModule();
 
@@ -47,6 +50,8 @@ namespace ExampleApp
                 IWorldPinsFactory& GetWorldPinsFactory() const;
 
                 IWorldPinsScaleController& GetWorldPinsScaleController() const;
+                
+                IWorldPinsFloorHeightController& GetWorldPinsFloorHeightController() const;
 
                 View::IWorldPinInFocusViewModel& GetWorldPinInFocusViewModel() const;
 

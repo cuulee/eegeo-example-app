@@ -8,6 +8,7 @@
 #include "WorldPinFocusData.h"
 #include "InteriorId.h"
 #include "InteriorWorldPinSelectionHandler.h"
+#include "WorldPinVisibility.h"
 
 namespace ExampleApp
 {
@@ -51,7 +52,7 @@ namespace ExampleApp
                 
                 const float heightOffsetMetres = 0.0f;
                 const bool isInterior = false;
-                const int iconIndex = 10;
+                const int iconIndex = 11;
                 WorldPins::SdkModel::WorldPinInteriorData worldPinInteriorData;
                 
                 // Don't have a human readable 'Name' for Interiors at this point. Can map IDS -> Names per app?
@@ -68,7 +69,8 @@ namespace ExampleApp
                                                                                                worldPinInteriorData,
                                                                                                location,
                                                                                                iconIndex,
-                                                                                               heightOffsetMetres);
+                                                                                               heightOffsetMetres,
+                                                                                               WorldPins::SdkModel::WorldPinVisibility::World);
                 m_interiorIdToWorldPinMap[markerModel.GetInteriorId().Value()] = pItemModel;
             }
             

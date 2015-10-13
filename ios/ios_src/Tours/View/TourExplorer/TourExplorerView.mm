@@ -17,9 +17,8 @@
     ExampleApp::Tours::SdkModel::TourModel m_nextTour;
     bool m_isInterruptingTour;
     bool m_hasActiveTour;
-    bool m_dragging;
+    bool m_exitingTour;
     
-    CGPoint m_dragStartPos;
     CGPoint m_controlStartPos;
 }
 
@@ -39,7 +38,7 @@
         m_screenWidth = width/pixelScale;
         m_screenHeight = height/pixelScale;
         m_hasActiveTour = false;
-        m_dragging = false;
+        m_exitingTour = false;
         
         m_pInterop = new ExampleApp::Tours::View::TourExplorer::TourExplorerViewInterop(self);
         
@@ -49,6 +48,7 @@
                             :m_pixelScale
                             :self
                             :@selector(onSelectionChanged)
+                            :@selector(onCurrentSelectionTapped)
                             :@selector(onCurrentItemChanged)
                             :m_pInterop
                             :pImageStore];
@@ -58,7 +58,7 @@
         
         // MB: TODO: viewImplementation's frame isn't actually a containing size - suspect nonsense with differing card sizes - will resolve when unify card theme sizes.
         // For now, just fix the size.
-        const float carouselHeight = 224.0f;
+        const float carouselHeight = [m_viewController getItemHeight ];
         
         m_pCarouselContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, m_screenWidth, carouselHeight)];
         
@@ -231,7 +231,7 @@
         [self interruptCurrentTour:tour];
         return;
     }
-    const float carouselHeight = 224.0f;
+    const float carouselHeight = [m_viewController getItemHeight];
     
     CGRect f = m_pCarouselContainer.frame;
     f.origin.y = m_screenHeight - carouselHeight;
@@ -239,7 +239,7 @@
     
     m_tour = tour;
     m_hasActiveTour = true;
-    m_dragging = false;
+    m_exitingTour = false;
     m_pTourItemLabel.text = @"";
     self.pTourNameLabel.text = [NSString stringWithUTF8String:m_tour.Name().c_str()];
     
@@ -298,9 +298,19 @@
     // Nothing to do, change states when animation finishes (onCurrentItemChanged).
 }
 
+-(void) onCurrentSelectionTapped
+{
+    // display the POI view.
+    NSLog(@"Tapped carousel thing");
+    m_pInterop->OnCurrentTourCardTapped();
+}
+
 -(void) onCurrentItemChanged
 {
-    [self dispatchStateSelectionChanged];
+    if(m_hasActiveTour)
+    {
+        [self dispatchStateSelectionChanged];
+    }
 }
 
 -(void) dispatchStateSelectionChanged
@@ -393,7 +403,7 @@
      {
          self.hidden = (y == m_yPosInactive);
          
-         if(self.hidden)
+         if(self.hidden && m_exitingTour)
          {
              [self exitTour];
          }
@@ -401,35 +411,9 @@
      ];
 }
 
-- (void) beginDrag:(CGPoint)absolutePosition velocity:(CGPoint)absoluteVelocity
-{
-    m_dragStartPos = absolutePosition;
-    m_controlStartPos = self.frame.origin;
-}
-
-- (void) updateDrag:(CGPoint)absolutePosition velocity:(CGPoint)absoluteVelocity
-{
-    CGRect f = self.frame;
-    f.origin.y = m_controlStartPos.y + (absolutePosition.y - m_dragStartPos.y);
-    
-    const float openY = (m_screenHeight - [self controlHeight]);
-    const float closedY = (m_screenHeight);
-    
-    if(f.origin.y < openY)
-    {
-        f.origin.y = openY;
-    }
-    
-    if(f.origin.y > closedY)
-    {
-        f.origin.y = closedY;
-    }
-    
-    self.frame = f;
-}
-
 - (void)handleExitButtonTap
 {
+    m_exitingTour = true;
     [self animateToY:m_yPosInactive];
 }
 

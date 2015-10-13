@@ -20,6 +20,8 @@
 #include "VectorMath.h"
 #include "InteriorController.h"
 
+#include "InteriorHeightHelpers.h"
+
 namespace ExampleApp
 {
     namespace MyPinCreation
@@ -33,9 +35,9 @@ namespace ExampleApp
                     
                     float CalculateAltitudeBasedSphereOuterScale(float altitude)
                     {
-                        const float minAltitude = 200.f;
-                        const float maxAltitude = 900.f;
-                        const float lowAltitudeScale = 0.2f;
+                        const float minAltitude = 50.f;
+                        const float maxAltitude = 1500.f;
+                        const float lowAltitudeScale = 0.05f;
                         const float highAltitudeScale = 1.0f;
                         float t = Eegeo::Math::Clamp01((altitude - minAltitude)/(maxAltitude-minAltitude));
                         return Eegeo::Math::Lerp(lowAltitudeScale, highAltitudeScale, t);
@@ -133,11 +135,9 @@ namespace ExampleApp
                                 const Eegeo::Resources::Interiors::InteriorId& buildingId = pModel->GetId();
                                 m_myPinCreationModel.SetBuildingId(buildingId);
                             }
-                            
+
                             m_myPinCreationModel.SetFloor(m_interiorController.GetCurrentFloorIndex());
-                            const Eegeo::Resources::Interiors::InteriorsFloorModel* pFloorModel = NULL;
-                            Eegeo_ASSERT(m_interiorController.TryGetCurrentFloorModel(pFloorModel), "Failed to fetch current interior floor");
-                            float floorHeightAboveSeaLevel = static_cast<float>(pFloorModel->GetTangentSpaceBounds().GetMin().y);
+                            float floorHeightAboveSeaLevel = Helpers::InteriorHeightHelpers::GetFloorHeightAboveSeaLevel(*pModel, m_interiorController.GetCurrentFloorIndex());
                             const float floorHeightAboveTerrain = floorHeightAboveSeaLevel - m_myPinCreationModel.GetTerrainHeight();
                             m_myPinCreationModel.SetHeightAboveTerrain(floorHeightAboveTerrain);
                         }

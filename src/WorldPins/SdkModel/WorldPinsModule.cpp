@@ -6,6 +6,7 @@
 #include "WorldPinsRepository.h"
 #include "WorldPinsService.h"
 #include "WorldPinsScaleController.h"
+#include "WorldPinsFloorHeightController.h"
 #include "WorldPinsInFocusController.h"
 #include "WorldPinInFocusViewModel.h"
 
@@ -20,7 +21,8 @@ namespace ExampleApp
                                              const Eegeo::Rendering::EnvironmentFlatteningService& environmentFlatteningService,
                                              Eegeo::Helpers::IIdentityProvider& identityProvider,
                                              ExampleAppMessaging::TMessageBus& messageBus,
-                                             Eegeo::Resources::Interiors::InteriorController& interiorController)
+                                             Eegeo::Resources::Interiors::InteriorController& interiorController,
+                                             ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus)
             {
                 m_pWorldPinsFactory = Eegeo_NEW(WorldPinsFactory);
 
@@ -35,7 +37,13 @@ namespace ExampleApp
                 m_pWorldPinsScaleController = Eegeo_NEW(WorldPinsScaleController)(*m_pWorldPinsRepository,
                                               *m_pWorldPinsService,
                                               messageBus,
-                                              interiorController);
+                                              interiorController,
+                                              sdkDomainEventBus);
+                
+                
+                m_pWorldPinsFloorHeightController = Eegeo_NEW(WorldPinsFloorHeightController)(*m_pWorldPinsRepository,
+                                                                                              pinRepository,
+                                                                                              interiorController);
 
                 m_pWorldPinsInFocusViewModel = Eegeo_NEW(View::WorldPinInFocusViewModel)(identityProvider.GetNextIdentity(),
                                                *m_pWorldPinsService);
@@ -60,6 +68,7 @@ namespace ExampleApp
                 Eegeo_DELETE m_pWorldPinInFocusObserver;
                 Eegeo_DELETE m_pWorldPinsInFocusController;
                 Eegeo_DELETE m_pWorldPinsInFocusViewModel;
+                Eegeo_DELETE m_pWorldPinsFloorHeightController;
                 Eegeo_DELETE m_pWorldPinsScaleController;
                 Eegeo_DELETE m_pWorldPinsService;
                 Eegeo_DELETE m_pWorldPinsRepository;
@@ -79,6 +88,11 @@ namespace ExampleApp
             IWorldPinsScaleController& WorldPinsModule::GetWorldPinsScaleController() const
             {
                 return *m_pWorldPinsScaleController;
+            }
+            
+            IWorldPinsFloorHeightController& WorldPinsModule::GetWorldPinsFloorHeightController() const
+            {
+                return *m_pWorldPinsFloorHeightController;
             }
 
             View::IWorldPinInFocusViewModel& WorldPinsModule::GetWorldPinInFocusViewModel() const

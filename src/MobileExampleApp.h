@@ -77,6 +77,7 @@
 #include "AppModes.h"
 #include "IToursModule.h"
 #include "IAppCameraModule.h"
+#include "IInteriorsCustomMaterialsModule.h"
 
 namespace ExampleApp
 {
@@ -142,6 +143,8 @@ namespace ExampleApp
         Search::SdkModel::ISearchServiceModule* m_pSearchServiceModule;
         InteriorsExplorer::SdkModel::IInteriorsExplorerModule* m_pInteriorsExplorerModule;
         InteriorsEntitiesPins::SdkModel::IInteriorsEntitiesPinsModule* m_pInteriorsEntitiesPinsModule;
+        InteriorsCustomMaterials::SdkModel::IInteriorsCustomMaterialsModule* m_pInteriorsCustomMaterialsModule;
+        
         AppModes::SdkModel::IAppModeModel* m_pAppModeModel;
         
         ExampleAppMessaging::TMessageBus m_toursMessageBus;

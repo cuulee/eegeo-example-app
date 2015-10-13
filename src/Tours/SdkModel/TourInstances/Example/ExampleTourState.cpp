@@ -7,6 +7,9 @@
 #include "WorldPinFocusData.h"
 #include "ExampleTourPinSelectionHandler.h"
 #include "InteriorController.h"
+#include "ExampleCurrentTourCardTappedHandler.h"
+#include "WorldPinItemModel.h"
+#include "WorldPinVisibility.h"
 
 namespace ExampleApp
 {
@@ -25,7 +28,8 @@ namespace ExampleApp
                                                        WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                        WorldPins::SdkModel::WorldPinInteriorData& worldPinInteriorData,
                                                        Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                                       const Eegeo::Camera::RenderCamera& tourRenderCamera)
+                                                       const Eegeo::Camera::RenderCamera& tourRenderCamera,
+                                                       ExampleAppMessaging::TMessageBus& messageBus)
                     : m_stateModel(stateModel)
                     , m_toursCameraTransitionController(toursCameraTransitionController)
                     , m_position(position)
@@ -36,6 +40,8 @@ namespace ExampleApp
                     , m_worldPinInteriorData(worldPinInteriorData)
                     , m_interiorController(interiorController)
                     , m_tourRenderCamera(tourRenderCamera)
+                    , m_messageBus(messageBus)
+                    , m_pTourCardTappedHandler(NULL)
                     {
                         
                     }
@@ -60,6 +66,8 @@ namespace ExampleApp
                         {
                             m_interiorController.ClearSelectedInterior();
                         }
+                        
+                        m_pTourCardTappedHandler = Eegeo_NEW(ExampleCurrentTourCardTappedHandler)(m_messageBus, m_stateModel);
                     }
                     
                     void ExampleTourState::Update(float dt)
@@ -72,21 +80,28 @@ namespace ExampleApp
                             ExampleApp::WorldPins::SdkModel::WorldPinFocusData worldPinFocusData(m_stateModel.Headline(), m_stateModel.Description());
                             
                             const float heightOffsetMetres = 0.0f;
-                            const int iconIndex = 4;
+                            const int iconIndex = 10;
                             
-                            m_pPinItemModel = m_worldPinsService.AddPin(Eegeo_NEW(ExampleTourPinSelectionHandler),
+                            m_pPinItemModel = m_worldPinsService.AddPin(Eegeo_NEW(ExampleTourPinSelectionHandler)(m_messageBus, m_stateModel),
                                                                         NULL,
                                                                         worldPinFocusData,
                                                                         m_interior,
                                                                         m_worldPinInteriorData,
                                                                         m_position,
                                                                         iconIndex,
-                                                                        heightOffsetMetres);
+                                                                        heightOffsetMetres,
+                                                                        WorldPins::SdkModel::WorldPinVisibility::TourPin);
                         }
                     }
                     
                     void ExampleTourState::Exit()
                     {
+                        if(m_pTourCardTappedHandler != NULL)
+                        {
+                            Eegeo_DELETE m_pTourCardTappedHandler;
+                            m_pTourCardTappedHandler = NULL;
+                        }
+                        
                         if(m_pPinItemModel != NULL)
                         {
                             m_worldPinsService.RemovePin(m_pPinItemModel);

@@ -41,6 +41,7 @@
 #include "MyPinsModule.h"
 #include "IWorldPinsInFocusController.h"
 #include "IWorldPinsScaleController.h"
+#include "IWorldPinsFloorHeightController.h"
 #include "MyPinDetailsModule.h"
 #include "QuadTreeCube.h"
 #include "LodRefinementConfig.h"
@@ -79,6 +80,7 @@
 #include "SearchVendorNames.h"
 #include "AppCameraModule.h"
 #include "AppCameraController.h"
+#include "InteriorsCustomMaterialsModule.h"
 
 namespace ExampleApp
 {
@@ -172,6 +174,7 @@ namespace ExampleApp
         , m_pWatermarkModule(NULL)
         , m_pInteriorsExplorerModule(NULL)
         , m_pInteriorsEntitiesPinsModule(NULL)
+        , m_pInteriorsCustomMaterialsModule(NULL)
         , m_screenProperties(screenProperties)
         , m_networkCapabilities(networkCapabilities)
         , m_setMetricsLocation(false)
@@ -200,7 +203,7 @@ namespace ExampleApp
                                                 Eegeo::EnvironmentCharacterSet::Latin,
                                                 platformConfig,
                                                 NULL,
-                                                "http://cdn1.eegeo.com/coverage-trees/vinteriors/v88/manifest.txt.gz",
+                                                "http://cdn1.eegeo.com/coverage-trees/vinteriors/v94/manifest.bin.gz",
                                                 "http://d2xvsc8j92rfya.cloudfront.net/mobile-themes-new/v413/manifest.txt.gz",
                                                 &errorHandler
                                                 );
@@ -398,6 +401,7 @@ namespace ExampleApp
         m_pSearchResultOnMapModule = Eegeo_NEW(SearchResultOnMap::SdkModel::SearchResultOnMapModule)(m_pSearchModule->GetSearchResultRepository(),
                                                                                                      m_pSearchResultPoiModule->GetSearchResultPoiViewModel(),
                                                                                                      m_pWorldPinsModule->GetWorldPinsService(),
+                                                                                                     m_pMyPinsModule->GetMyPinsService(),
                                                                                                      m_pCategorySearchModule->GetSearchResultIconCategoryMapper(),
                                                                                                      m_pSearchModule->GetSearchResultMyPinsService(),
                                                                                                      m_messageBus,
@@ -460,6 +464,10 @@ namespace ExampleApp
                                                                                                                 m_pWorld->GetRenderingModule(),
                                                                                                                 m_pWorld->GetMapModule(),
                                                                                                                 m_screenProperties));
+
+            
+            m_pInteriorsCustomMaterialsModule = Eegeo_NEW(InteriorsCustomMaterials::SdkModel::InteriorsCustomMaterialsModule)(mapModule.GetInteriorsStreamingModule(), m_platformAbstractions.GetFileIO());
+                                                                                                            
         }
         
         std::vector<ScreenControl::View::IScreenControlViewModel*> reactors(GetReactorControls());
@@ -492,8 +500,10 @@ namespace ExampleApp
     void MobileExampleApp::DestroyApplicationModelModules()
     {
         m_initialExperienceModule.TearDown();
-        
+
         Eegeo_DELETE m_pAppCameraModule;
+
+        Eegeo_DELETE m_pInteriorsCustomMaterialsModule;
         
         Eegeo_DELETE m_pToursModule;
         Eegeo_DELETE m_pToursWorldPinsModule;
@@ -584,6 +594,10 @@ namespace ExampleApp
         reactors.push_back(&CompassModule().GetScreenControlViewModel());
         reactors.push_back(&MyPinCreationModule().GetInitiationScreenControlViewModel());
         reactors.push_back(&WatermarkModule().GetScreenControlViewModel());
+        if(m_enableTours)
+        {
+            reactors.push_back(&ToursModule().GetToursExplorerViewModel());
+        }
         return reactors;
     }
     
@@ -639,12 +653,13 @@ namespace ExampleApp
                                  mapModule.GetEnvironmentFlatteningService(),
                                  m_identityProvider,
                                  m_messageBus,
-                                 interiorsPresentationModule.GetAppLevelController());
+                                 interiorsPresentationModule.GetAppLevelController(),
+                                 m_sdkDomainEventBus);
     }
     
     void MobileExampleApp::InitialiseToursModules(Eegeo::Modules::Map::MapModule& mapModule, Eegeo::EegeoWorld& world)
     {
-        m_pToursPinsModule = CreatePlatformPinsModuleInstance(mapModule, world, "Tours/tour_markers", m_toursPinDiameter, 4);
+        m_pToursPinsModule = CreatePlatformPinsModuleInstance(mapModule, world, "SearchResultOnMap/PinIconTexturePage", m_toursPinDiameter, 4);
         
         Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsPresentationModule = mapModule.GetInteriorsPresentationModule();
         
@@ -653,7 +668,8 @@ namespace ExampleApp
                                                                                               mapModule.GetEnvironmentFlatteningService(),
                                                                                               m_identityProvider,
                                                                                               m_toursMessageBus,
-                                                                                              interiorsPresentationModule.GetAppLevelController());
+                                                                                              interiorsPresentationModule.GetAppLevelController(),
+                                                                                              m_sdkDomainEventBus);
         
         m_pToursModule = Eegeo_NEW(ExampleApp::Tours::ToursModule)(m_identityProvider,
                                                        m_messageBus,
@@ -681,15 +697,18 @@ namespace ExampleApp
         std::vector<Tours::SdkModel::TourStateModel> tourStates;
         tourStates.push_back(Tours::SdkModel::TourStateModel("Example place 1",
                                                              "Some example text",
-                                                             "Tours/page"));
+                                                             "Tours/page",
+                                                             "tours"));
         
         tourStates.push_back(Tours::SdkModel::TourStateModel("Example place 2",
                                                              "More example text",
-                                                             "Tours/page"));
+                                                             "Tours/page",
+                                                             "tours"));
         
         tourStates.push_back(Tours::SdkModel::TourStateModel("Example place 3",
                                                              "Some more example text",
-                                                             "Tours/page"));
+                                                             "Tours/page",
+                                                             "tours"));
         
         ExampleApp::Tours::SdkModel::TourModel tourModel("Example",
                                                          "Take the tour",
@@ -712,8 +731,8 @@ namespace ExampleApp
                                                                                         ToursModule().GetCameraController(),
                                                                                         m_pToursWorldPinsModule->GetWorldPinsService(),
                                                                                         m_interiorsEnabled,
-                                                                                        interiorsPresentationModule.GetAppLevelController()
-                                                                                        );
+                                                                                        interiorsPresentationModule.GetAppLevelController(),
+                                                                                        m_messageBus);
         
         ToursModule().GetTourService().AddTour(tourModel, *factory.CreateTourStateMachine(tourModel));
     }
@@ -794,6 +813,7 @@ namespace ExampleApp
         if(!eegeoWorld.Initialising())
         {
             WorldPinsModule().GetWorldPinsScaleController().Update(dt, renderCamera);
+            WorldPinsModule().GetWorldPinsFloorHeightController().Update(dt);
             
             if(ToursEnabled())
             {

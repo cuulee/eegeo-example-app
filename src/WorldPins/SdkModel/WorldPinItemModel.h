@@ -18,6 +18,7 @@ namespace ExampleApp
     {
         namespace SdkModel
         {
+            
             class WorldPinItemModel
             {
                 enum TransitionState
@@ -27,7 +28,7 @@ namespace ExampleApp
                     StableVisible,
                     TransitionToHidden
                 };
-
+                
             public:
                 typedef Eegeo::Pins::TPinId WorldPinItemModelId;
 
@@ -38,9 +39,12 @@ namespace ExampleApp
                 WorldPinsInFocusModel m_focusModel;
                 TransitionState m_transitionState;
                 float m_transitionStateValue;
+                float m_floorHeight;
+                bool m_hasFloorHeight;
                 bool m_focusable;
                 bool m_interior;
                 WorldPinInteriorData m_worldPinInteriorData;
+                int m_visibilityMask;
 
             public:
                 WorldPinItemModel(const WorldPinItemModelId& id,
@@ -48,7 +52,8 @@ namespace ExampleApp
                                   IWorldPinVisibilityStateChangedHandler* pVisibilityStateChangedHandler,
                                   const WorldPinFocusData& worldPinFocusData,
                                   bool interior,
-                                  const WorldPinInteriorData& worldPinInteriorData);
+                                  const WorldPinInteriorData& worldPinInteriorData,
+                                  int visibilityMask);
 
                 ~WorldPinItemModel();
 
@@ -63,6 +68,10 @@ namespace ExampleApp
                 bool IsTransitioning() const;
 
                 float TransitionStateValue() const;
+                
+                bool NeedsFloorHeight() const;
+                
+                void SetFloorHeight(float floorHeight);
 
                 void Hide();
 
@@ -77,6 +86,10 @@ namespace ExampleApp
                 bool IsInterior() const;
                 
                 const WorldPinInteriorData& GetInteriorData() const;
+                
+                int VisibilityMask() const;
+                
+                void SetVisibilityMask(int visibilityMask);
             };
 
             inline bool operator==(const WorldPinItemModel& lhs, const WorldPinItemModel& rhs)
