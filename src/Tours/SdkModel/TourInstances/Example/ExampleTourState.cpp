@@ -10,6 +10,7 @@
 #include "ExampleCurrentTourCardTappedHandler.h"
 #include "WorldPinItemModel.h"
 #include "WorldPinVisibility.h"
+#include "InteriorVisibilityUpdater.h"
 
 namespace ExampleApp
 {
@@ -28,7 +29,7 @@ namespace ExampleApp
                                                        WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                        WorldPins::SdkModel::WorldPinInteriorData& worldPinInteriorData,
                                                        Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                                       const Eegeo::Camera::RenderCamera& tourRenderCamera,
+                                                       InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                                        ExampleAppMessaging::TMessageBus& messageBus)
                     : m_stateModel(stateModel)
                     , m_toursCameraTransitionController(toursCameraTransitionController)
@@ -39,7 +40,7 @@ namespace ExampleApp
                     , m_interior(isInterior)
                     , m_worldPinInteriorData(worldPinInteriorData)
                     , m_interiorController(interiorController)
-                    , m_tourRenderCamera(tourRenderCamera)
+                    , m_interiorVisibilityUpdater(interiorVisibilityUpdater)
                     , m_messageBus(messageBus)
                     , m_pTourCardTappedHandler(NULL)
                     {
@@ -67,6 +68,8 @@ namespace ExampleApp
                             m_interiorController.ClearSelectedInterior();
                         }
                         
+                         m_interiorVisibilityUpdater.SetInteriorShouldDisplay(false);
+                        
                         m_pTourCardTappedHandler = Eegeo_NEW(ExampleCurrentTourCardTappedHandler)(m_messageBus, m_stateModel);
                     }
                     
@@ -75,6 +78,8 @@ namespace ExampleApp
                         if(m_toursCameraTransitionController.IsTransitionComplete() && !m_cameraTransitionComplete)
                         {   
                             m_cameraTransitionComplete = true;
+                            
+                            m_interiorVisibilityUpdater.SetInteriorShouldDisplay(true);
                             
                             // Add pin.
                             ExampleApp::WorldPins::SdkModel::WorldPinFocusData worldPinFocusData(m_stateModel.Headline(), m_stateModel.Description());

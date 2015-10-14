@@ -46,6 +46,8 @@ namespace ExampleApp
                 
                 InteriorsExplorerCameraController& GetInteriorsCameraController() const;
                 
+                InteriorVisibilityUpdater& GetInteriorVisibilityUpdater() const;
+                
                 const bool InteriorCameraEnabled() const;
                 
                 void Update(float dt) const;
@@ -56,6 +58,7 @@ namespace ExampleApp
                 View::InteriorsExplorerViewModel* m_pViewModel;
                 //InteriorsExitObserver* m_pInteriorExitObserver;
                 InteriorsStreamingController* m_pInteriorsStreamingController;
+                InteriorVisibilityUpdater* m_pVisibilityUpdater;
                 
                 InteriorWorldPinController* m_pWorldPinController;
                 InteriorsExplorerCameraController* m_pInteriorsCameraController;

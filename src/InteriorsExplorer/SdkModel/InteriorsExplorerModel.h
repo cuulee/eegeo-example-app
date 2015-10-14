@@ -14,6 +14,7 @@
 #include "AppModes.h"
 #include "SdkModelDomainEventBus.h"
 #include "TourStateChangedMessage.h"
+#include "InteriorsExplorer.h"
 
 namespace ExampleApp
 {
@@ -27,6 +28,7 @@ namespace ExampleApp
                 
                 InteriorsExplorerModel(Eegeo::Resources::Interiors::InteriorController& controller,
                                        Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
+                                       InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                        MapMode::SdkModel::IMapModeModel& mapModeModel,
                                        ExampleAppMessaging::TMessageBus& messageBus,
                                        Metrics::IMetricsService& metricsService,
@@ -48,6 +50,7 @@ namespace ExampleApp
 
                 Eegeo::Resources::Interiors::InteriorController& m_controller;
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
+                InteriorVisibilityUpdater& m_interiorVisibilityUpdater;
                 MapMode::SdkModel::IMapModeModel& m_mapModeModel;
 
                 ExampleAppMessaging::TMessageBus& m_messageBus;

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Types.h"
-
+#include "IAppCamera.h"
 #include "GlobeCamera.h"
 #include "ICallback.h"
 #include "Interiors.h"
@@ -19,7 +19,7 @@ namespace ExampleApp
     {
         namespace SdkModel
         {
-            class InteriorsExplorerCameraController : public  Eegeo::NonCopyable
+            class InteriorsExplorerCameraController : public AppCamera::SdkModel::IAppCamera, private Eegeo::NonCopyable
             {
             private:
                 bool m_cameraEnabled;
@@ -44,11 +44,11 @@ namespace ExampleApp
                 
                 inline bool InteriorCameraEnabled() const { return m_cameraEnabled; }
                 
-                Eegeo::Camera::CameraState GetCameraState() const;
+                const Eegeo::Camera::CameraState GetCameraState() const;
                 
-                Eegeo::Camera::RenderCamera GetRenderCamera() const;
+                const Eegeo::Camera::RenderCamera GetRenderCamera() const;
                 
-                Eegeo::ITouchController& GetTouchController();
+                Eegeo::ITouchController& GetTouchController() const;
                 
                 Eegeo::Camera::GlobeCamera::GlobeCameraController& GetGlobeCameraController();
                 

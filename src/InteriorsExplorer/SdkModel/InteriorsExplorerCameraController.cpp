@@ -66,17 +66,17 @@ namespace ExampleApp
                 m_sdkDomainEventBus.Unsubscribe(m_tourStateChangedBinding);
             }
             
-            Eegeo::Camera::CameraState InteriorsExplorerCameraController::GetCameraState() const
+            const Eegeo::Camera::CameraState InteriorsExplorerCameraController::GetCameraState() const
             {
                 return m_globeCameraController.GetCameraState();
             }
             
-            Eegeo::Camera::RenderCamera InteriorsExplorerCameraController::GetRenderCamera() const
+            const Eegeo::Camera::RenderCamera InteriorsExplorerCameraController::GetRenderCamera() const
             {
                 return m_globeCameraController.GetRenderCamera();
             }
             
-            Eegeo::ITouchController& InteriorsExplorerCameraController::GetTouchController()
+            Eegeo::ITouchController& InteriorsExplorerCameraController::GetTouchController() const
             {
                 return m_globeCameraTouchController;
             }

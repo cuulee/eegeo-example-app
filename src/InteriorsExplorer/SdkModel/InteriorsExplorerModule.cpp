@@ -12,6 +12,7 @@
 #include "GlobeCameraTouchController.h"
 #include "GlobeCameraTouchControllerConfiguration.h"
 #include "GlobeCameraControllerConfiguration.h"
+#include "InteriorVisibilityUpdater.h"
 
 namespace ExampleApp
 {
@@ -33,6 +34,9 @@ namespace ExampleApp
                                                              Metrics::IMetricsService& metricsService)
             {
                 m_pWorldPinController = Eegeo_NEW(InteriorWorldPinController)(interiorController, markerRepository, worldPinsService);
+                
+                const float transitionTime = 0.5f;
+                m_pVisibilityUpdater = Eegeo_NEW(InteriorVisibilityUpdater)(interiorController, transitionTime);
                 
                 Eegeo::Camera::GlobeCamera::GlobeCameraTouchControllerConfiguration touchConfig = Eegeo::Camera::GlobeCamera::GlobeCameraTouchControllerConfiguration::CreateDefault();
                 Eegeo::Camera::GlobeCamera::GlobeCameraControllerConfiguration globeCameraConfig = Eegeo::Camera::GlobeCamera::GlobeCameraControllerConfiguration::CreateDefault(false);
@@ -59,6 +63,7 @@ namespace ExampleApp
                 
                 m_pModel = Eegeo_NEW(InteriorsExplorerModel)(interiorController,
                                                              interiorSelectionModel,
+                                                             *m_pVisibilityUpdater,
                                                              mapModeModel,
                                                              messageBus,
                                                              metricsService,
@@ -75,6 +80,7 @@ namespace ExampleApp
                 Eegeo_DELETE m_pInteriorsCameraController;
                 Eegeo_DELETE m_pGlobeCameraTouchController;
                 Eegeo_DELETE m_pGlobeCameraController;
+                Eegeo_DELETE m_pVisibilityUpdater;
                 Eegeo_DELETE m_pWorldPinController;
             }
             
@@ -86,6 +92,11 @@ namespace ExampleApp
             ScreenControl::View::IScreenControlViewModel& InteriorsExplorerModule::GetScreenControlViewModel() const
             {
                 return *m_pViewModel;
+            }
+            
+            InteriorVisibilityUpdater& InteriorsExplorerModule::GetInteriorVisibilityUpdater() const
+            {
+                return *m_pVisibilityUpdater;
             }
             
             InteriorsExplorerCameraController& InteriorsExplorerModule::GetInteriorsCameraController() const
@@ -100,6 +111,7 @@ namespace ExampleApp
             
             void InteriorsExplorerModule::Update(float dt) const
             {
+                m_pVisibilityUpdater->Update(dt);
                 m_pInteriorsCameraController->Update(dt);
             }
         }

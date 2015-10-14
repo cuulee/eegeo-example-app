@@ -3,6 +3,7 @@
 #pragma once
 
 #include "IAppCameraController.h"
+#include "IAppCamera.h"
 #include "Camera.h"
 #include <map>
 #include "GlobeCameraController.h"
@@ -18,7 +19,7 @@ namespace ExampleApp
             {
             private:
                 
-                std::map<int, Eegeo::Camera::GlobeCamera::GlobeCameraController*> m_cameras;
+                std::map<int, IAppCamera*> m_cameras;
                 
                 Eegeo::Camera::RenderCamera m_renderCamera;
                 
@@ -35,7 +36,7 @@ namespace ExampleApp
                 AppCameraController();
                 ~AppCameraController();
                 
-                int CreateCameraHandleFromController(Eegeo::Camera::GlobeCamera::GlobeCameraController* cameraController);
+                int CreateCameraHandleFromController(IAppCamera& cameraController);
                 
                 void RemoveCameraHandle(int cameraHandle);
                 

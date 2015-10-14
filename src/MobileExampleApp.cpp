@@ -186,7 +186,7 @@ namespace ExampleApp
         , m_pToursWorldPinsModule(NULL)
         , m_pToursPinsModule(NULL)
         , m_toursPinDiameter(48.f)
-        , m_enableTours(false)
+        , m_enableTours(true)
     {
         m_metricsService.BeginSession(ExampleApp::FlurryApiKey, EEGEO_PLATFORM_VERSION_NUMBER);
 
@@ -493,8 +493,10 @@ namespace ExampleApp
         m_pSecondaryMenuModule->AddMenuSection("Settings", m_pSecondaryMenuModule->GetSettingsMenuModel(), true);
        
         m_pAppCameraModule = Eegeo_NEW(AppCamera::SdkModel::AppCameraModule)(interiorsPresentationModule.GetAppLevelController(),
-                                                                             m_pGlobeCameraController->GetGlobeCameraController(),
-                                                                             m_pInteriorsExplorerModule->GetInteriorsCameraController().GetGlobeCameraController());
+                                                                             m_pToursModule->GetTourService(),
+                                                                             *m_pGlobeCameraController,
+                                                                             m_pInteriorsExplorerModule->GetInteriorsCameraController(),
+                                                                             m_pToursModule->GetCameraController());
     }
 
     void MobileExampleApp::DestroyApplicationModelModules()
@@ -732,6 +734,7 @@ namespace ExampleApp
                                                                                         m_pToursWorldPinsModule->GetWorldPinsService(),
                                                                                         m_interiorsEnabled,
                                                                                         interiorsPresentationModule.GetAppLevelController(),
+                                                                                        m_pInteriorsExplorerModule->GetInteriorVisibilityUpdater(),
                                                                                         m_messageBus);
         
         ToursModule().GetTourService().AddTour(tourModel, *factory.CreateTourStateMachine(tourModel));
@@ -753,25 +756,20 @@ namespace ExampleApp
     {
         Eegeo::EegeoWorld& eegeoWorld(World());
         
+        // TODO: Fetch this from appCameraModule guy and rename to CurrentCameraTouchController.
         m_pCurrentTouchController = m_pInteriorsExplorerModule->InteriorCameraEnabled()
             ? &m_pInteriorsExplorerModule->GetInteriorsCameraController().GetTouchController()
             : m_pCameraTouchController;
 
         eegeoWorld.EarlyUpdate(dt);
 
-        m_pGlobeCameraController->Update(dt);
         m_pCameraTransitionController->Update(dt);
         m_pAppCameraModule->GetController().Update(dt);
         
         if(ToursEnabled())
         {
-            ExampleApp::Tours::SdkModel::Camera::ToursCameraState appCameraState =
-            ExampleApp::Tours::SdkModel::Camera::ToursCameraState::CreateFromCameraState(m_pGlobeCameraController->GetCameraState(),
-                                                                                         Eegeo::Math::Rad2Deg(m_pGlobeCameraController->GetRenderCamera().GetFOV()));
-            ToursModule().GetCameraTransitionController().SetAppCameraState(appCameraState);
             if(IsTourCameraActive())
             {
-                ToursModule().GetCameraController().Update(dt);
                 ToursModule().GetCameraTransitionController().Update(dt);
             }
         }
@@ -780,12 +778,6 @@ namespace ExampleApp
         
         Eegeo::Camera::RenderCamera renderCamera = m_pAppCameraModule->GetController().GetRenderCamera();
         Eegeo::Camera::CameraState cameraState = m_pAppCameraModule->GetController().GetCameraState();
-        
-        if(IsTourCameraActive())
-        {
-            cameraState = ToursModule().GetCameraController().GetCameraState();
-            renderCamera = ToursModule().GetCameraController().GetRenderCamera();
-        }
         
         Eegeo::dv3 ecefInterestPoint(cameraState.InterestPointEcef());
 
@@ -867,12 +859,6 @@ namespace ExampleApp
 
         Eegeo::Camera::RenderCamera renderCamera = m_pAppCameraModule->GetController().GetRenderCamera();
         Eegeo::Camera::CameraState cameraState = m_pAppCameraModule->GetController().GetCameraState();
-        
-        if(IsTourCameraActive())
-        {
-            cameraState = ToursModule().GetCameraController().GetCameraState();
-            renderCamera = ToursModule().GetCameraController().GetRenderCamera();
-        }
         
         Eegeo::dv3 ecefInterestPoint(cameraState.InterestPointEcef());
 

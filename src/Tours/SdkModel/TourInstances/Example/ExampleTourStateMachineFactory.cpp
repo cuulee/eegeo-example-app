@@ -12,6 +12,7 @@
 #include "InteriorId.h"
 #include "IToursCameraController.h"
 
+
 namespace ExampleApp
 {
     namespace Tours
@@ -27,11 +28,13 @@ namespace ExampleApp
                                                                                    WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                                                    bool interiorsEnabled,
                                                                                    Eegeo::Resources::Interiors::InteriorController& interiorController,
+                                                                                   InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                                                                    ExampleAppMessaging::TMessageBus& messageBus)
                     : m_toursCameraController(toursCameraController)
                     , m_toursCameraTransitionController(toursCameraTransitionController)
                     , m_worldPinsService(worldPinsService)
                     , m_interiorController(interiorController)
+                    , m_interiorVisibilityUpdater(interiorVisibilityUpdater)
                     , m_interiorsEnabled(interiorsEnabled)
                     , m_messageBus(messageBus)
                     {
@@ -63,7 +66,7 @@ namespace ExampleApp
                                                                                 m_worldPinsService,
                                                                                 blankWorldPinInteriorData,
                                                                                 m_interiorController,
-                                                                                m_toursCameraController.GetRenderCamera(),
+                                                                                m_interiorVisibilityUpdater,
                                                                                 m_messageBus)));
 
                         
@@ -74,7 +77,7 @@ namespace ExampleApp
                                                                                 m_worldPinsService,
                                                                                 hotelPinInteriorData,
                                                                                 m_interiorController,
-                                                                                m_toursCameraController.GetRenderCamera(),
+                                                                                m_interiorVisibilityUpdater,
                                                                                 m_messageBus)));
                         
                         stateMachineStates.push_back(Eegeo_NEW(ExampleTourState(tourModel.States()[tourIndex++],
@@ -84,7 +87,7 @@ namespace ExampleApp
                                                                                 m_worldPinsService,
                                                                                 blankWorldPinInteriorData,
                                                                                 m_interiorController,
-                                                                                m_toursCameraController.GetRenderCamera(),
+                                                                                m_interiorVisibilityUpdater,
                                                                                 m_messageBus)));
                         
                         

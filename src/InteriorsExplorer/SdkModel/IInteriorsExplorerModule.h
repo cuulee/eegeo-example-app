@@ -22,6 +22,8 @@ namespace ExampleApp
 
                 virtual ScreenControl::View::IScreenControlViewModel& GetScreenControlViewModel() const = 0;
                 
+                virtual InteriorVisibilityUpdater& GetInteriorVisibilityUpdater() const = 0;
+                
                 virtual InteriorsExplorerCameraController& GetInteriorsCameraController() const = 0;
                 
                 virtual const bool InteriorCameraEnabled() const = 0;

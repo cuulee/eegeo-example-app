@@ -8,6 +8,8 @@
 #include "AppCameraInteriorStateObserver.h"
 #include "Interiors.h"
 #include "GlobeCamera.h"
+#include "InteriorsExplorer.h"
+#include "Tours.h"
 
 namespace ExampleApp
 {
@@ -20,8 +22,10 @@ namespace ExampleApp
             public:
                 
                 AppCameraModule(Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                Eegeo::Camera::GlobeCamera::GlobeCameraController& worldCameraController,
-                                Eegeo::Camera::GlobeCamera::GlobeCameraController& interiorCameraController);
+                                ExampleApp::Tours::SdkModel::ITourService& tourService,
+                                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& worldCameraController,
+                                InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorCameraController,
+                                ExampleApp::Tours::SdkModel::Camera::IToursCameraController& tourCameraController);
                 ~AppCameraModule();
                 
                 IAppCameraController& GetController();
@@ -29,6 +33,8 @@ namespace ExampleApp
             private:
                 
                 IAppCameraController* m_pAppCameraController;
+                
+                AppGlobeCameraWrapper* m_pAppGlobeCameraWrapper;
                 
                 AppCameraInteriorStateObserver* m_pInteriorStateOberver;
             };

@@ -19,7 +19,7 @@ namespace ExampleApp
                 
                 virtual ~IAppCameraController() {}
                 
-                virtual int CreateCameraHandleFromController(Eegeo::Camera::GlobeCamera::GlobeCameraController* cameraController) = 0;
+                virtual int CreateCameraHandleFromController(IAppCamera& cameraController) = 0;
                 
                 virtual void RemoveCameraHandle(int cameraHandle) = 0;
                 

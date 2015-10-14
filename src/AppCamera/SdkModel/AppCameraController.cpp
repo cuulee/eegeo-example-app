@@ -33,9 +33,9 @@ namespace ExampleApp
                 
             }
             
-            int AppCameraController::CreateCameraHandleFromController(Eegeo::Camera::GlobeCamera::GlobeCameraController* cameraController)
+            int AppCameraController::CreateCameraHandleFromController(IAppCamera& cameraController)
             {
-                m_cameras.insert(std::make_pair(++nextHandleId, cameraController));
+                m_cameras.insert(std::make_pair(++nextHandleId, &cameraController));
                 
                 return nextHandleId;
             }
@@ -87,6 +87,7 @@ namespace ExampleApp
                     }
                     
                     m_cameras[m_previousCameraIndex]->Update(dt);
+                    m_cameras[m_currentCameraIndex]->Update(dt);
                     
                     const Eegeo::Camera::RenderCamera startCamera = m_cameras[m_previousCameraIndex]->GetRenderCamera();
                     const Eegeo::Camera::RenderCamera endCamera = m_cameras[m_currentCameraIndex]->GetRenderCamera();
@@ -115,6 +116,7 @@ namespace ExampleApp
                 }
                 else
                 {
+                    m_cameras[m_currentCameraIndex]->Update(dt);
                     m_renderCamera = m_cameras[m_currentCameraIndex]->GetRenderCamera();
                 }
             }

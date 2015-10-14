@@ -14,7 +14,7 @@
 #include "InteriorsModel.h"
 #include "InteriorId.h"
 #include "InteriorsFloorModel.h"
-
+#include "InteriorVisibilityUpdater.h"
 
 namespace ExampleApp
 {
@@ -38,12 +38,14 @@ namespace ExampleApp
             
             InteriorsExplorerModel::InteriorsExplorerModel(Eegeo::Resources::Interiors::InteriorController& controller,
                                                            Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
+                                                           InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                                            MapMode::SdkModel::IMapModeModel& mapModeModel,
                                                            ExampleAppMessaging::TMessageBus& messageBus,
                                                            Metrics::IMetricsService& metricsService,
                                                            ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus)
             : m_controller(controller)
             , m_interiorSelectionModel(interiorSelectionModel)
+            , m_interiorVisibilityUpdater(interiorVisibilityUpdater)
             , m_mapModeModel(mapModeModel)
             , m_messageBus(messageBus)
             , m_metricsService(metricsService)
@@ -90,6 +92,7 @@ namespace ExampleApp
                 {
                     m_mapModeModel.SetInMapMode(m_previouslyInMapMode);
                     m_metricsService.EndTimedEvent(MetricEventInteriorsVisible);
+                    m_interiorVisibilityUpdater.SetInteriorShouldDisplay(false);
                 }
                 else
                 {
@@ -100,10 +103,7 @@ namespace ExampleApp
                     const Eegeo::Resources::Interiors::InteriorId& interiorId = m_interiorSelectionModel.GetSelectedInteriorId();
                     m_metricsService.SetEvent(MetricEventInteriorSelected, "InteriorId", interiorId.Value());
                     
-                    if(m_controller.InteriorInScene())
-                    {
-                        m_controller.SetExteriorToInteriorParam(1.0f);
-                    }
+                    m_interiorVisibilityUpdater.SetInteriorShouldDisplay(m_controller.InteriorInScene());
                 }
                 
                 PublishInteriorExplorerStateChange();
@@ -122,7 +122,7 @@ namespace ExampleApp
             void InteriorsExplorerModel::OnExit(const InteriorsExplorerExitMessage& message)
             {
                 m_metricsService.SetEvent(MetricEventInteriorExitPressed);
-                m_controller.ClearSelectedInterior(); // How is transition out dealt with?
+                m_controller.ClearSelectedInterior(); // How is transition out dealt with? Handle this in model!
             }
             
             void InteriorsExplorerModel::OnSelectFloor(const InteriorsExplorerSelectFloorMessage &message)
@@ -150,12 +150,12 @@ namespace ExampleApp
             void InteriorsExplorerModel::PublishInteriorExplorerStateChange()
             {
                 
-                int floor = m_controller.InteriorIsVisible() ? m_controller.GetCurrentFloorIndex() : 0;
+                int floor = m_controller.InteriorInScene() ? m_controller.GetCurrentFloorIndex() : 0;
                 
                 std::string floorName;
                 std::vector<std::string> floorShortNames;
                 
-                if (m_controller.InteriorIsVisible())
+                if (m_controller.InteriorInScene())
                 {
                     const Eegeo::Resources::Interiors::InteriorsModel* pModel = NULL;
                     m_controller.TryGetCurrentModel(pModel);
@@ -170,7 +170,7 @@ namespace ExampleApp
                     floorName = pFloorModel->GetFloorName();
                 }
                 
-                m_messageBus.Publish(InteriorsExplorerStateChangedMessage(m_controller.InteriorIsVisible(),
+                m_messageBus.Publish(InteriorsExplorerStateChangedMessage(m_controller.InteriorInScene(),
                                                                           floor,
                                                                           floorName,
                                                                           floorShortNames));

@@ -8,6 +8,8 @@ namespace ExampleApp
         {
             class IAppCameraModule;
             class IAppCameraController;
+            class IAppCamera;
+            class AppGlobeCameraWrapper;
         }
     }
 }
