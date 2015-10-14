@@ -36,6 +36,13 @@ namespace ExampleApp
                 ~InteriorsExplorerModel();
                 
                 void SelectFloor(int floor);
+                
+                void ShowInteriorExplorer();
+                
+                void HideInteriorExplorer();
+                
+                void InsertInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback);
+                void RemoveInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback);
 
             private:
                 
@@ -69,6 +76,9 @@ namespace ExampleApp
                 ExampleAppMessaging::TSdkModelDomainEventBus& m_sdkDomainEventBus;
                 Eegeo::Helpers::TCallback1<InteriorsExplorerModel, const ExampleApp::Tours::TourStateChangedMessage&> m_tourStateChangedBinding;
                 void OnTourStateChanged(const Tours::TourStateChangedMessage& message);
+                
+                bool m_interiorExplorerEnabled;
+                Eegeo::Helpers::CallbackCollection0 m_interiorExplorerExitedCallbacks;
             };
         }
     }

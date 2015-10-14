@@ -81,6 +81,8 @@
 #include "AppCameraModule.h"
 #include "AppCameraController.h"
 #include "InteriorsCustomMaterialsModule.h"
+#include "AppModeStatesFactory.h"
+#include "AppGlobeCameraWrapper.h"
 
 namespace ExampleApp
 {
@@ -187,6 +189,7 @@ namespace ExampleApp
         , m_pToursPinsModule(NULL)
         , m_toursPinDiameter(48.f)
         , m_enableTours(true)
+        , m_pGlobeCameraWrapper(NULL)
     {
         m_metricsService.BeginSession(ExampleApp::FlurryApiKey, EEGEO_PLATFORM_VERSION_NUMBER);
 
@@ -229,6 +232,8 @@ namespace ExampleApp
         Eegeo::Camera::GlobeCamera::GlobeCameraControllerConfiguration globeCameraConfig = Eegeo::Camera::GlobeCamera::GlobeCameraControllerConfiguration::CreateDefault(useLowSpecSettings);
 
         m_pGlobeCameraController = cameraControllerFactory.Create(gpsGlobeCameraConfig, touchControllerConfig, globeCameraConfig, m_screenProperties);
+        
+        m_pGlobeCameraWrapper = Eegeo_NEW(AppCamera::SdkModel::AppGlobeCameraWrapper)(*m_pGlobeCameraController);
 
         m_pCameraTouchController = &m_pGlobeCameraController->GetTouchController();
 
@@ -272,6 +277,7 @@ namespace ExampleApp
 
         Eegeo_DELETE m_pCameraTransitionController;
         Eegeo_DELETE m_pNavigationService;
+        Eegeo_DELETE m_pGlobeCameraWrapper;
         Eegeo_DELETE m_pGlobeCameraController;
         Eegeo_DELETE m_pLoadingScreen;
 
@@ -446,7 +452,6 @@ namespace ExampleApp
                                                                                                      m_pWorldPinsModule->GetWorldPinsService(),
                                                                                                      m_pMapModeModule->GetMapModeModel(),
                                                                                                      cameraControllerFactory,
-                                                                                                     *m_pStreamingVolume,
                                                                                                      m_screenProperties,
                                                                                                      m_identityProvider,
                                                                                                      m_messageBus,
@@ -492,11 +497,19 @@ namespace ExampleApp
         m_pSecondaryMenuModule->AddMenuSection("My Pins", m_pMyPinsModule->GetMyPinsMenuModel(), true);
         m_pSecondaryMenuModule->AddMenuSection("Settings", m_pSecondaryMenuModule->GetSettingsMenuModel(), true);
        
-        m_pAppCameraModule = Eegeo_NEW(AppCamera::SdkModel::AppCameraModule)(interiorsPresentationModule.GetAppLevelController(),
-                                                                             m_pToursModule->GetTourService(),
-                                                                             *m_pGlobeCameraController,
-                                                                             m_pInteriorsExplorerModule->GetInteriorsCameraController(),
-                                                                             m_pToursModule->GetCameraController());
+        // TODO: Check if this module is still relevant 
+        m_pAppCameraModule = Eegeo_NEW(AppCamera::SdkModel::AppCameraModule)();
+        
+        AppModes::States::SdkModel::AppModeStatesFactory appModeStatesFactory(m_pAppCameraModule->GetController(),
+                                                                              interiorsPresentationModule.GetAppLevelController(),
+                                                                              *m_pGlobeCameraWrapper,
+                                                                              m_pInteriorsExplorerModule->GetInteriorsCameraController(),
+                                                                              *m_pStreamingVolume,
+                                                                              m_pInteriorsExplorerModule->GetInteriorVisibilityUpdater(),
+                                                                              m_pInteriorsExplorerModule->GetInteriorsExplorerModel(),
+                                                                              *m_pAppModeModel);
+        
+        m_pAppModeModel->InitialiseStateMachine(appModeStatesFactory.CreateStateMachineStates());
     }
 
     void MobileExampleApp::DestroyApplicationModelModules()
@@ -765,6 +778,8 @@ namespace ExampleApp
 
         m_pCameraTransitionController->Update(dt);
         m_pAppCameraModule->GetController().Update(dt);
+        
+        m_pAppModeModel->Update(dt);
         
         if(ToursEnabled())
         {

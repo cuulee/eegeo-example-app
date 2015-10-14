@@ -4,8 +4,6 @@
 #include "InteriorsExplorerCameraController.h"
 #include "InteriorsExplorerViewModel.h"
 #include "InteriorsExplorerModel.h"
-#include "InteriorsExitObserver.h"
-#include "InteriorsStreamingController.h"
 #include "InteriorWorldPinController.h"
 #include "GlobeCameraController.h"
 #include "GlobeCameraControllerFactory.h"
@@ -26,7 +24,6 @@ namespace ExampleApp
                                                              WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                                              ExampleApp::MapMode::SdkModel::IMapModeModel& mapModeModel,
                                                              Eegeo::Camera::GlobeCamera::GlobeCameraControllerFactory& globeCameraControllerFactory,
-                                                             Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                                              const Eegeo::Rendering::ScreenProperties& screenProperties,
                                                              Eegeo::Helpers::IIdentityProvider& identityProvider,
                                                              ExampleAppMessaging::TMessageBus& messageBus,
@@ -59,8 +56,6 @@ namespace ExampleApp
                                                                                             *m_pGlobeCameraController,
                                                                                             sdkDomainEventBus);
                 
-                m_pInteriorsStreamingController = Eegeo_NEW(InteriorsStreamingController)(interiorController, cameraFrustumStreamingVolume);
-                
                 m_pModel = Eegeo_NEW(InteriorsExplorerModel)(interiorController,
                                                              interiorSelectionModel,
                                                              *m_pVisibilityUpdater,
@@ -76,7 +71,6 @@ namespace ExampleApp
             {
                 Eegeo_DELETE m_pViewModel;
                 Eegeo_DELETE m_pModel;
-                Eegeo_DELETE m_pInteriorsStreamingController;
                 Eegeo_DELETE m_pInteriorsCameraController;
                 Eegeo_DELETE m_pGlobeCameraTouchController;
                 Eegeo_DELETE m_pGlobeCameraController;
@@ -113,6 +107,12 @@ namespace ExampleApp
             {
                 m_pVisibilityUpdater->Update(dt);
                 m_pInteriorsCameraController->Update(dt);
+            }
+            
+            
+            InteriorsExplorerModel& InteriorsExplorerModule::GetInteriorsExplorerModel() const
+            {
+                return *m_pModel;
             }
         }
     }

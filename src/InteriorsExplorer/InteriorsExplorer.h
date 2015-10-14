@@ -11,7 +11,6 @@ namespace ExampleApp
             class IInteriorsExplorerModule;
             class InteriorsExplorerCameraController;
             class InteriorsExplorerModel;
-            class InteriorsStreamingController;
             class InteriorWorldPinController;
             class InteriorVisibilityUpdater;
         }
@@ -22,7 +21,5 @@ namespace ExampleApp
             class IInteriorsExplorerView;
             class InteriorsExplorerController;
         }
-
-        class InteriorsExitObserver;
     }
 }

@@ -13,7 +13,6 @@
 #include "BidirectionalBus.h"
 #include "SdkModelDomainEventBus.h"
 #include "Metrics.h"
-#include "Streaming.h"
 #include "IIdentity.h"
 
 namespace ExampleApp
@@ -31,7 +30,6 @@ namespace ExampleApp
                                         WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                         ExampleApp::MapMode::SdkModel::IMapModeModel& mapModeModel,
                                         Eegeo::Camera::GlobeCamera::GlobeCameraControllerFactory& globeCameraControllerFactory,
-                                        Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                         const Eegeo::Rendering::ScreenProperties& screenProperties,
                                         Eegeo::Helpers::IIdentityProvider& identityProvider,
                                         ExampleAppMessaging::TMessageBus& messageBus,
@@ -52,12 +50,12 @@ namespace ExampleApp
                 
                 void Update(float dt) const;
                 
+                InteriorsExplorerModel& GetInteriorsExplorerModel() const;
+                
             private:
                 
                 InteriorsExplorerModel* m_pModel;
                 View::InteriorsExplorerViewModel* m_pViewModel;
-                //InteriorsExitObserver* m_pInteriorExitObserver;
-                InteriorsStreamingController* m_pInteriorsStreamingController;
                 InteriorVisibilityUpdater* m_pVisibilityUpdater;
                 
                 InteriorWorldPinController* m_pWorldPinController;

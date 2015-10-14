@@ -58,6 +58,7 @@ namespace ExampleApp
             , m_tourIsActive(false)
             , m_sdkDomainEventBus(sdkDomainEventBus)
             , m_tourStateChangedBinding(this, &InteriorsExplorerModel::OnTourStateChanged)
+            , m_interiorExplorerEnabled(false)
             {
                 m_controller.RegisterStateChangedCallback(m_controllerStateChangedCallback);
                 m_controller.RegisterVisibilityChangedCallback(m_controllerVisibilityChangedCallback);
@@ -92,7 +93,6 @@ namespace ExampleApp
                 {
                     m_mapModeModel.SetInMapMode(m_previouslyInMapMode);
                     m_metricsService.EndTimedEvent(MetricEventInteriorsVisible);
-                    m_interiorVisibilityUpdater.SetInteriorShouldDisplay(false);
                 }
                 else
                 {
@@ -102,10 +102,21 @@ namespace ExampleApp
                     
                     const Eegeo::Resources::Interiors::InteriorId& interiorId = m_interiorSelectionModel.GetSelectedInteriorId();
                     m_metricsService.SetEvent(MetricEventInteriorSelected, "InteriorId", interiorId.Value());
-                    
-                    m_interiorVisibilityUpdater.SetInteriorShouldDisplay(m_controller.InteriorInScene());
                 }
                 
+            }
+            
+            void InteriorsExplorerModel::ShowInteriorExplorer()
+            {
+                Eegeo_ASSERT(m_controller.InteriorInScene(), "Can't show interior explorer without a selected and streamed interior");
+                
+                m_interiorExplorerEnabled = true;
+                PublishInteriorExplorerStateChange();
+            }
+            
+            void InteriorsExplorerModel::HideInteriorExplorer()
+            {
+                m_interiorExplorerEnabled = false;
                 PublishInteriorExplorerStateChange();
             }
             
@@ -121,8 +132,9 @@ namespace ExampleApp
         
             void InteriorsExplorerModel::OnExit(const InteriorsExplorerExitMessage& message)
             {
+                HideInteriorExplorer();
                 m_metricsService.SetEvent(MetricEventInteriorExitPressed);
-                m_controller.ClearSelectedInterior(); // How is transition out dealt with? Handle this in model!
+                m_interiorExplorerExitedCallbacks.ExecuteCallbacks();
             }
             
             void InteriorsExplorerModel::OnSelectFloor(const InteriorsExplorerSelectFloorMessage &message)
@@ -170,7 +182,7 @@ namespace ExampleApp
                     floorName = pFloorModel->GetFloorName();
                 }
                 
-                m_messageBus.Publish(InteriorsExplorerStateChangedMessage(m_controller.InteriorInScene(),
+                m_messageBus.Publish(InteriorsExplorerStateChangedMessage(m_interiorExplorerEnabled,
                                                                           floor,
                                                                           floorName,
                                                                           floorShortNames));
@@ -184,6 +196,16 @@ namespace ExampleApp
                 {
                     PublishInteriorExplorerStateChange();
                 }
+            }
+            
+            
+            void InteriorsExplorerModel::InsertInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback)
+            {
+                m_interiorExplorerExitedCallbacks.AddCallback(callback);
+            }
+            void InteriorsExplorerModel::RemoveInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback)
+            {
+                m_interiorExplorerExitedCallbacks.RemoveCallback(callback);
             }
         }
     }

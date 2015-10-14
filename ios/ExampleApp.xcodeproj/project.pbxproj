@@ -1273,8 +1273,6 @@
 		BF0E35151BC6A2A1005B30E8 /* AppCameraHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF0E35121BC6A2A1005B30E8 /* AppCameraHelpers.cpp */; };
 		BF34FE9E1BCBF78600E7094F /* AppCameraModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */; };
 		BF34FE9F1BCBF78600E7094F /* AppCameraModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */; };
-		BF34FEA21BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */; };
-		BF34FEA31BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */; };
 		BF4FEE391BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4FEE381BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp */; };
 		BF4FEE3A1BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF4FEE381BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp */; };
 		BF4FEE3D1BC2BF8400932C17 /* ExampleTourSearchResultPoiView.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF4FEE3C1BC2BF8400932C17 /* ExampleTourSearchResultPoiView.mm */; };
@@ -1401,6 +1399,22 @@
 		BFD5FD971BA7141600F591F1 /* ImageStore.mm in Sources */ = {isa = PBXBuildFile; fileRef = BFD5FD931BA7141600F591F1 /* ImageStore.mm */; };
 		BFD5FD991BA7226A00F591F1 /* Tours in Resources */ = {isa = PBXBuildFile; fileRef = BFD5FD981BA7226A00F591F1 /* Tours */; };
 		BFD5FD9A1BA7226A00F591F1 /* Tours in Resources */ = {isa = PBXBuildFile; fileRef = BFD5FD981BA7226A00F591F1 /* Tours */; };
+		BFDD75E21BCE5BE800335508 /* AppModeStatesFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75E01BCE5BE800335508 /* AppModeStatesFactory.cpp */; };
+		BFDD75E31BCE5BE800335508 /* AppModeStatesFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75E01BCE5BE800335508 /* AppModeStatesFactory.cpp */; };
+		BFDD75E81BCE885000335508 /* InteriorExplorerSetupState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75E61BCE885000335508 /* InteriorExplorerSetupState.cpp */; };
+		BFDD75E91BCE885000335508 /* InteriorExplorerSetupState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75E61BCE885000335508 /* InteriorExplorerSetupState.cpp */; };
+		BFDD75EC1BCE90E200335508 /* InteriorExplorerStreamState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75EA1BCE90E200335508 /* InteriorExplorerStreamState.cpp */; };
+		BFDD75ED1BCE90E200335508 /* InteriorExplorerStreamState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75EA1BCE90E200335508 /* InteriorExplorerStreamState.cpp */; };
+		BFDD75F01BCEA3E200335508 /* InteriorExplorerViewingState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75EE1BCEA3E200335508 /* InteriorExplorerViewingState.cpp */; };
+		BFDD75F11BCEA3E200335508 /* InteriorExplorerViewingState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75EE1BCEA3E200335508 /* InteriorExplorerViewingState.cpp */; };
+		BFDD75F51BCEAF5800335508 /* InteriorExplorerExitingState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75F31BCEAF5800335508 /* InteriorExplorerExitingState.cpp */; };
+		BFDD75F61BCEAF5800335508 /* InteriorExplorerExitingState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDD75F31BCEAF5800335508 /* InteriorExplorerExitingState.cpp */; };
+		BFDEAA7B1BCD3702007CE4D7 /* WorldState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA791BCD3702007CE4D7 /* WorldState.cpp */; };
+		BFDEAA7C1BCD3702007CE4D7 /* WorldState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA791BCD3702007CE4D7 /* WorldState.cpp */; };
+		BFDEAA861BCD5821007CE4D7 /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA841BCD5821007CE4D7 /* StateMachine.cpp */; };
+		BFDEAA871BCD5821007CE4D7 /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA841BCD5821007CE4D7 /* StateMachine.cpp */; };
+		BFDEAA8B1BCD6133007CE4D7 /* InteriorExplorerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */; };
+		BFDEAA8C1BCD6133007CE4D7 /* InteriorExplorerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */; };
 		BFDFC3CF1BB2EF190099BAEC /* SearchResultModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDFC3CE1BB2EF190099BAEC /* SearchResultModel.cpp */; };
 		BFDFC3D01BB2EF190099BAEC /* SearchResultModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDFC3CE1BB2EF190099BAEC /* SearchResultModel.cpp */; };
 		BFDFC3D41BB2F5BA0099BAEC /* menu_list.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D11BB2F5BA0099BAEC /* menu_list.png */; };
@@ -1408,8 +1422,6 @@
 		BFDFC3D61BB2F5BA0099BAEC /* menu_list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D21BB2F5BA0099BAEC /* menu_list@2x.png */; };
 		BFDFC3D81BB2F5BA0099BAEC /* menu_list@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D31BB2F5BA0099BAEC /* menu_list@3x.png */; };
 		E016040E19EEC26E0029A035 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E016040D19EEC26E0029A035 /* Images.xcassets */; };
-		E0632EA01B8331E4000C282E /* InteriorsStreamingController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0632E9E1B8331E4000C282E /* InteriorsStreamingController.cpp */; };
-		E0632EA11B8331E4000C282E /* InteriorsStreamingController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0632E9E1B8331E4000C282E /* InteriorsStreamingController.cpp */; };
 		E06AE59B1B87207B000F85E3 /* AppModeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E06AE5981B87207B000F85E3 /* AppModeModel.cpp */; };
 		E06AE59C1B87207B000F85E3 /* AppModeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E06AE5981B87207B000F85E3 /* AppModeModel.cpp */; };
 		E06AE5BE1B8B3A05000F85E3 /* button_close_place_pin_on.png in Resources */ = {isa = PBXBuildFile; fileRef = E06AE5BB1B8B3A05000F85E3 /* button_close_place_pin_on.png */; };
@@ -1446,9 +1458,7 @@
 		F7F3702A5538EF1098A7B54D /* MapModeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F37DF89F160CEF56F89506 /* MapModeController.cpp */; };
 		F7F3718BE3D42C0AAD8EC7E3 /* MapModeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F376B8EDEEDCD448A9C3D8 /* MapModeModule.cpp */; };
 		F7F373F4043CCF2D73DD1F06 /* MapModeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F378860045756E6BD85445 /* MapModeModel.cpp */; };
-		F7F3741B41A5EE79F725EED4 /* InteriorsExitObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F3795319370D448E707830 /* InteriorsExitObserver.cpp */; };
 		F7F375BE591A1178B2648C93 /* MapMode.h in Resources */ = {isa = PBXBuildFile; fileRef = F7F37D7FD513A2DB502EFD5C /* MapMode.h */; };
-		F7F37763E9082D85ABCF50B6 /* InteriorsExitObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F3795319370D448E707830 /* InteriorsExitObserver.cpp */; };
 		F7F37C72A4A0A11F290E135D /* MapModeModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F376B8EDEEDCD448A9C3D8 /* MapModeModule.cpp */; };
 		F7F37F39F2038F91049410A9 /* MapModeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F378860045756E6BD85445 /* MapModeModel.cpp */; };
 		F7F37F4C1A542A11877345C4 /* MapModeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F37DF89F160CEF56F89506 /* MapModeController.cpp */; };
@@ -2722,8 +2732,6 @@
 		BF0E35131BC6A2A1005B30E8 /* AppCameraHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraHelpers.h; path = AppCamera/Helpers/AppCameraHelpers.h; sourceTree = "<group>"; };
 		BF34FE9C1BCBF78600E7094F /* AppCameraModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraModule.cpp; path = AppCamera/SdkModel/AppCameraModule.cpp; sourceTree = "<group>"; };
 		BF34FE9D1BCBF78600E7094F /* AppCameraModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraModule.h; path = AppCamera/SdkModel/AppCameraModule.h; sourceTree = "<group>"; };
-		BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppCameraInteriorStateObserver.cpp; path = AppCamera/AppCameraInteriorStateObserver.cpp; sourceTree = "<group>"; };
-		BF34FEA11BCBF9A300E7094F /* AppCameraInteriorStateObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppCameraInteriorStateObserver.h; path = AppCamera/AppCameraInteriorStateObserver.h; sourceTree = "<group>"; };
 		BF4FEE381BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExampleTourPinSelectionHandler.cpp; sourceTree = "<group>"; };
 		BF4FEE3C1BC2BF8400932C17 /* ExampleTourSearchResultPoiView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExampleTourSearchResultPoiView.mm; sourceTree = "<group>"; };
 		BF4FEE3F1BC2BFD000932C17 /* ExampleTourSearchResultPoiView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleTourSearchResultPoiView.h; sourceTree = "<group>"; };
@@ -2880,14 +2888,30 @@
 		BFD5FD921BA7141600F591F1 /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
 		BFD5FD931BA7141600F591F1 /* ImageStore.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageStore.mm; sourceTree = "<group>"; };
 		BFD5FD981BA7226A00F591F1 /* Tours */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tours; sourceTree = "<group>"; };
+		BFDD75DF1BCE5B3500335508 /* IAppModeStatesFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IAppModeStatesFactory.h; path = AppModes/SdkModel/IAppModeStatesFactory.h; sourceTree = "<group>"; };
+		BFDD75E01BCE5BE800335508 /* AppModeStatesFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppModeStatesFactory.cpp; path = AppModes/States/SdkModel/AppModeStatesFactory.cpp; sourceTree = "<group>"; };
+		BFDD75E11BCE5BE800335508 /* AppModeStatesFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppModeStatesFactory.h; path = AppModes/States/SdkModel/AppModeStatesFactory.h; sourceTree = "<group>"; };
+		BFDD75E61BCE885000335508 /* InteriorExplorerSetupState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorExplorerSetupState.cpp; path = States/InteriorExplorerSetupState.cpp; sourceTree = "<group>"; };
+		BFDD75E71BCE885000335508 /* InteriorExplorerSetupState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorExplorerSetupState.h; path = States/InteriorExplorerSetupState.h; sourceTree = "<group>"; };
+		BFDD75EA1BCE90E200335508 /* InteriorExplorerStreamState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorExplorerStreamState.cpp; path = States/InteriorExplorerStreamState.cpp; sourceTree = "<group>"; };
+		BFDD75EB1BCE90E200335508 /* InteriorExplorerStreamState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorExplorerStreamState.h; path = States/InteriorExplorerStreamState.h; sourceTree = "<group>"; };
+		BFDD75EE1BCEA3E200335508 /* InteriorExplorerViewingState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorExplorerViewingState.cpp; path = States/InteriorExplorerViewingState.cpp; sourceTree = "<group>"; };
+		BFDD75EF1BCEA3E200335508 /* InteriorExplorerViewingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorExplorerViewingState.h; path = States/InteriorExplorerViewingState.h; sourceTree = "<group>"; };
+		BFDD75F31BCEAF5800335508 /* InteriorExplorerExitingState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorExplorerExitingState.cpp; path = States/InteriorExplorerExitingState.cpp; sourceTree = "<group>"; };
+		BFDD75F41BCEAF5800335508 /* InteriorExplorerExitingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorExplorerExitingState.h; path = States/InteriorExplorerExitingState.h; sourceTree = "<group>"; };
+		BFDEAA791BCD3702007CE4D7 /* WorldState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WorldState.cpp; path = AppModes/States/SdkModel/WorldState.cpp; sourceTree = "<group>"; };
+		BFDEAA7A1BCD3702007CE4D7 /* WorldState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorldState.h; path = AppModes/States/SdkModel/WorldState.h; sourceTree = "<group>"; };
+		BFDEAA841BCD5821007CE4D7 /* StateMachine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachine.cpp; sourceTree = "<group>"; };
+		BFDEAA851BCD5821007CE4D7 /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMachine.h; sourceTree = "<group>"; };
+		BFDEAA881BCD58D8007CE4D7 /* IStateMachineState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IStateMachineState.h; sourceTree = "<group>"; };
+		BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorExplorerState.cpp; path = AppModes/States/SdkModel/InteriorExplorerState.cpp; sourceTree = "<group>"; };
+		BFDEAA8A1BCD6133007CE4D7 /* InteriorExplorerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorExplorerState.h; path = AppModes/States/SdkModel/InteriorExplorerState.h; sourceTree = "<group>"; };
 		BFDFC3CB1BB2D8B90099BAEC /* SearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultModel.h; sourceTree = "<group>"; };
 		BFDFC3CE1BB2EF190099BAEC /* SearchResultModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SearchResultModel.cpp; sourceTree = "<group>"; };
 		BFDFC3D11BB2F5BA0099BAEC /* menu_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_list.png; sourceTree = "<group>"; };
 		BFDFC3D21BB2F5BA0099BAEC /* menu_list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_list@2x.png"; sourceTree = "<group>"; };
 		BFDFC3D31BB2F5BA0099BAEC /* menu_list@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_list@3x.png"; sourceTree = "<group>"; };
 		E016040D19EEC26E0029A035 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E0632E9E1B8331E4000C282E /* InteriorsStreamingController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteriorsStreamingController.cpp; sourceTree = "<group>"; };
-		E0632E9F1B8331E4000C282E /* InteriorsStreamingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteriorsStreamingController.h; sourceTree = "<group>"; };
 		E06AE5981B87207B000F85E3 /* AppModeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppModeModel.cpp; path = AppModes/SdkModel/AppModeModel.cpp; sourceTree = "<group>"; };
 		E06AE5991B87207B000F85E3 /* AppModeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppModeModel.h; path = AppModes/SdkModel/AppModeModel.h; sourceTree = "<group>"; };
 		E06AE59A1B87207B000F85E3 /* IAppModeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAppModeModel.h; path = AppModes/SdkModel/IAppModeModel.h; sourceTree = "<group>"; };
@@ -2918,13 +2942,11 @@
 		EEE021321BB44239001AF4CF /* YelpSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YelpSearchResultModel.h; sourceTree = "<group>"; };
 		F7F371A45CA6451F37A29696 /* IMapModeModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMapModeModule.h; sourceTree = "<group>"; };
 		F7F3721A109C5E6C1E483C60 /* MapModeModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapModeModule.h; sourceTree = "<group>"; };
-		F7F3741D57D4BFE631DEC068 /* InteriorsExitObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteriorsExitObserver.h; sourceTree = "<group>"; };
 		F7F374A2D5A50F3F43D330A7 /* MapModeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapModeModel.h; sourceTree = "<group>"; };
 		F7F3759F38C78D3E118C840E /* MapModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapModeController.h; sourceTree = "<group>"; };
 		F7F375DD3B02008F9BFBEA3D /* IMapModeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMapModeModel.h; sourceTree = "<group>"; };
 		F7F376B8EDEEDCD448A9C3D8 /* MapModeModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapModeModule.cpp; sourceTree = "<group>"; };
 		F7F378860045756E6BD85445 /* MapModeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapModeModel.cpp; sourceTree = "<group>"; };
-		F7F3795319370D448E707830 /* InteriorsExitObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteriorsExitObserver.cpp; sourceTree = "<group>"; };
 		F7F37D7FD513A2DB502EFD5C /* MapMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMode.h; sourceTree = "<group>"; };
 		F7F37DF89F160CEF56F89506 /* MapModeController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapModeController.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3477,6 +3499,9 @@
 				18FE21D01AA9CD3800ACE28A /* ImagePathHelpers.h */,
 				1833B2771BC2C4AB001CB77A /* InteriorHeightHelpers.cpp */,
 				1833B2781BC2C4AB001CB77A /* InteriorHeightHelpers.h */,
+				BFDEAA881BCD58D8007CE4D7 /* IStateMachineState.h */,
+				BFDEAA841BCD5821007CE4D7 /* StateMachine.cpp */,
+				BFDEAA851BCD5821007CE4D7 /* StateMachine.h */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -5136,8 +5161,6 @@
 				7E1D22CC1B205CC2006A8703 /* InteriorsExplorerSelectFloorMessage.h */,
 				7E5811AF1B1F050A007AD67F /* SdkModel */,
 				7E5811B21B1F050A007AD67F /* View */,
-				F7F3795319370D448E707830 /* InteriorsExitObserver.cpp */,
-				F7F3741D57D4BFE631DEC068 /* InteriorsExitObserver.h */,
 			);
 			path = InteriorsExplorer;
 			sourceTree = "<group>";
@@ -5145,13 +5168,12 @@
 		7E5811AF1B1F050A007AD67F /* SdkModel */ = {
 			isa = PBXGroup;
 			children = (
+				BFDD75F21BCEA3F500335508 /* States */,
 				7E5811BD1B1F074C007AD67F /* IInteriorsExplorerModule.h */,
 				7E5811B01B1F050A007AD67F /* InteriorsExplorerModule.cpp */,
 				7E5811B11B1F050A007AD67F /* InteriorsExplorerModule.h */,
 				7E1D22C81B205455006A8703 /* InteriorsExplorerModel.cpp */,
 				7E1D22C91B205455006A8703 /* InteriorsExplorerModel.h */,
-				E0632E9E1B8331E4000C282E /* InteriorsStreamingController.cpp */,
-				E0632E9F1B8331E4000C282E /* InteriorsStreamingController.h */,
 				7E6732271BC3D7FB002A31FD /* InteriorWorldPinController.cpp */,
 				7E6732281BC3D7FB002A31FD /* InteriorWorldPinController.h */,
 				7E67322B1BC3DE2A002A31FD /* InteriorWorldPinSelectionHandler.h */,
@@ -5538,8 +5560,6 @@
 				BF0E35111BC6A250005B30E8 /* Helpers */,
 				BF0E350F1BC678AA005B30E8 /* AppCamera.h */,
 				BF0E35091BC67322005B30E8 /* SdkModel */,
-				BF34FEA01BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp */,
-				BF34FEA11BCBF9A300E7094F /* AppCameraInteriorStateObserver.h */,
 			);
 			name = AppCamera;
 			sourceTree = "<group>";
@@ -5875,9 +5895,46 @@
 			path = ImageStore;
 			sourceTree = "<group>";
 		};
+		BFDD75F21BCEA3F500335508 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD75E61BCE885000335508 /* InteriorExplorerSetupState.cpp */,
+				BFDD75E71BCE885000335508 /* InteriorExplorerSetupState.h */,
+				BFDD75EA1BCE90E200335508 /* InteriorExplorerStreamState.cpp */,
+				BFDD75EB1BCE90E200335508 /* InteriorExplorerStreamState.h */,
+				BFDD75EE1BCEA3E200335508 /* InteriorExplorerViewingState.cpp */,
+				BFDD75EF1BCEA3E200335508 /* InteriorExplorerViewingState.h */,
+				BFDD75F31BCEAF5800335508 /* InteriorExplorerExitingState.cpp */,
+				BFDD75F41BCEAF5800335508 /* InteriorExplorerExitingState.h */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+		BFDEAA771BCD35E3007CE4D7 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				BFDEAA781BCD35EF007CE4D7 /* SdkModel */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+		BFDEAA781BCD35EF007CE4D7 /* SdkModel */ = {
+			isa = PBXGroup;
+			children = (
+				BFDEAA791BCD3702007CE4D7 /* WorldState.cpp */,
+				BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */,
+				BFDEAA8A1BCD6133007CE4D7 /* InteriorExplorerState.h */,
+				BFDEAA7A1BCD3702007CE4D7 /* WorldState.h */,
+				BFDD75E01BCE5BE800335508 /* AppModeStatesFactory.cpp */,
+				BFDD75E11BCE5BE800335508 /* AppModeStatesFactory.h */,
+			);
+			name = SdkModel;
+			sourceTree = "<group>";
+		};
 		E06AE5901B871E6E000F85E3 /* AppModes */ = {
 			isa = PBXGroup;
 			children = (
+				BFDEAA771BCD35E3007CE4D7 /* States */,
 				E06AE59D1B872086000F85E3 /* AppModes.h */,
 				E06AE5911B871E76000F85E3 /* SdkModel */,
 				E06AE5A21B8740A3000F85E3 /* AppModeChangedMessage.h */,
@@ -5891,6 +5948,7 @@
 				E06AE5981B87207B000F85E3 /* AppModeModel.cpp */,
 				E06AE5991B87207B000F85E3 /* AppModeModel.h */,
 				E06AE59A1B87207B000F85E3 /* IAppModeModel.h */,
+				BFDD75DF1BCE5B3500335508 /* IAppModeStatesFactory.h */,
 			);
 			name = SdkModel;
 			sourceTree = "<group>";
@@ -6614,6 +6672,7 @@
 				18FB64711A9240FC005A9411 /* OAToken.m in Sources */,
 				7E3B88C31A385A290023C94E /* CompassModel.cpp in Sources */,
 				7E3B895D1A385A290023C94E /* MyPinsFileIO.cpp in Sources */,
+				BFDD75E31BCE5BE800335508 /* AppModeStatesFactory.cpp in Sources */,
 				7E3B89551A385A290023C94E /* MyPinModel.cpp in Sources */,
 				18A657621A9F6AA800238F33 /* MyPinVisibilityStateChangedHandlerFactory.cpp in Sources */,
 				7E3B8A111A385A290023C94E /* WorldPinsVisibilityMessage.cpp in Sources */,
@@ -6673,6 +6732,7 @@
 				7E3B89E71A385A290023C94E /* WeatherSelectedMessageHandler.cpp in Sources */,
 				7E3B88AF1A385A290023C94E /* CameraTransitionController.cpp in Sources */,
 				7E3B88AD1A385A290023C94E /* AboutPageViewModel.cpp in Sources */,
+				BFDEAA7C1BCD3702007CE4D7 /* WorldState.cpp in Sources */,
 				7E3B88BF1A385A290023C94E /* CompassModeChangedMessage.cpp in Sources */,
 				BFD5FD631BA706AD00F591F1 /* TourActiveStateChangedMessage.cpp in Sources */,
 				7E3B89F11A385A290023C94E /* WorldAreaLoaderModule.cpp in Sources */,
@@ -6712,7 +6772,6 @@
 				7E3B89CD1A385A290023C94E /* SearchResultPoiController.cpp in Sources */,
 				7E67322A1BC3D7FB002A31FD /* InteriorWorldPinController.cpp in Sources */,
 				7E3B8B1E1A385F110023C94E /* SearchResultMenuView.mm in Sources */,
-				BF34FEA31BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */,
 				7E3B899B1A385A290023C94E /* SearchQueryRemovedMessage.cpp in Sources */,
 				18B44CF11A88D4B400FDFD8A /* CacheClearBackgroundTask.cpp in Sources */,
 				7E3B8B081A385F110023C94E /* MyPinCreationDetailsViewModule.mm in Sources */,
@@ -6730,11 +6789,11 @@
 				7E3B89491A385A290023C94E /* MyPinDetailsModelSelectedObserver.cpp in Sources */,
 				E06AE59C1B87207B000F85E3 /* AppModeModel.cpp in Sources */,
 				18FB64571A9240FC005A9411 /* NSURL+Base.m in Sources */,
-				E0632EA11B8331E4000C282E /* InteriorsStreamingController.cpp in Sources */,
 				7E3B8A0B1A385A290023C94E /* WorldPinGainedFocusMessage.cpp in Sources */,
 				7E3B89D31A385A290023C94E /* SearchResultPoiViewModel.cpp in Sources */,
 				7E3B8A0F1A385A290023C94E /* WorldPinLostFocusMessage.cpp in Sources */,
 				BFD5FD591BA706AD00F591F1 /* TourRepository.cpp in Sources */,
+				BFDD75F11BCEA3E200335508 /* InteriorExplorerViewingState.cpp in Sources */,
 				18FB64551A9240FC005A9411 /* NSString+URLEncoding.m in Sources */,
 				7E3B8AD41A385F110023C94E /* CompassView.mm in Sources */,
 				7E3B8B2C1A385F110023C94E /* SecondaryMenuViewModule.mm in Sources */,
@@ -6804,6 +6863,7 @@
 				7E3B88BB1A385A290023C94E /* CategorySearchRepository.cpp in Sources */,
 				BFD5FD7B1BA706AD00F591F1 /* TourFullScreenImageCeremonyEndedObserver.cpp in Sources */,
 				18C0EBFC1A9E0E66008EED21 /* UserCreatedPinBoundObject.cpp in Sources */,
+				BFDEAA8C1BCD6133007CE4D7 /* InteriorExplorerState.cpp in Sources */,
 				7E3B88C71A385A290023C94E /* CompassModule.cpp in Sources */,
 				1833B2761BC2C48B001CB77A /* WorldPinsFloorHeightController.cpp in Sources */,
 				186B474C1AB333150084E80B /* ApplicationConfiguration.cpp in Sources */,
@@ -6953,8 +7013,11 @@
 				7E3B89A51A385A290023C94E /* SearchResultMenuModule.cpp in Sources */,
 				7E3B8B161A385F110023C94E /* iOSPersistentSettingsModel.mm in Sources */,
 				7E8F03D71A822E820056F229 /* GpsMarkerModule.cpp in Sources */,
+				BFDEAA871BCD5821007CE4D7 /* StateMachine.cpp in Sources */,
+				BFDD75ED1BCE90E200335508 /* InteriorExplorerStreamState.cpp in Sources */,
 				7E3B88AB1A385A290023C94E /* AboutPageOpenableControl.cpp in Sources */,
 				7E3B8B2A1A385F110023C94E /* SecondaryMenuView.mm in Sources */,
+				BFDD75E91BCE885000335508 /* InteriorExplorerSetupState.cpp in Sources */,
 				7E3B8B0A1A385F110023C94E /* MyPinCreationInitiationView.mm in Sources */,
 				7E3B8B0C1A385F110023C94E /* MyPinCreationInitiationViewInterop.mm in Sources */,
 				18FB645D1A9240FC005A9411 /* sha1.c in Sources */,
@@ -7004,8 +7067,8 @@
 				7E1B50681ACAD4170060FA4F /* InitialExperienceIntroStep.cpp in Sources */,
 				F7F37F39F2038F91049410A9 /* MapModeModel.cpp in Sources */,
 				BFD5FD4B1BA706AD00F591F1 /* TourActiveStateChangedMessageHandler.cpp in Sources */,
+				BFDD75F61BCEAF5800335508 /* InteriorExplorerExitingState.cpp in Sources */,
 				F7F37C72A4A0A11F290E135D /* MapModeModule.cpp in Sources */,
-				F7F37763E9082D85ABCF50B6 /* InteriorsExitObserver.cpp in Sources */,
 				F7F3702A5538EF1098A7B54D /* MapModeController.cpp in Sources */,
 				BF681DA01BC4210700100BFF /* ExampleTourHelpers.cpp in Sources */,
 				BFD5FD7D1BA706AD00F591F1 /* TourFullScreenImageViewController.cpp in Sources */,
@@ -7057,6 +7120,7 @@
 				7E3B89321A385A290023C94E /* MyPinCreationInitiationViewModel.cpp in Sources */,
 				18FB64701A9240FC005A9411 /* OAToken.m in Sources */,
 				7E3B88C21A385A290023C94E /* CompassModel.cpp in Sources */,
+				BFDD75E21BCE5BE800335508 /* AppModeStatesFactory.cpp in Sources */,
 				7E3B895C1A385A290023C94E /* MyPinsFileIO.cpp in Sources */,
 				7E3B89541A385A290023C94E /* MyPinModel.cpp in Sources */,
 				18A657611A9F6AA800238F33 /* MyPinVisibilityStateChangedHandlerFactory.cpp in Sources */,
@@ -7116,6 +7180,7 @@
 				7E3B89E61A385A290023C94E /* WeatherSelectedMessageHandler.cpp in Sources */,
 				7E3B88AE1A385A290023C94E /* CameraTransitionController.cpp in Sources */,
 				7E3B88AC1A385A290023C94E /* AboutPageViewModel.cpp in Sources */,
+				BFDEAA7B1BCD3702007CE4D7 /* WorldState.cpp in Sources */,
 				7E3B88BE1A385A290023C94E /* CompassModeChangedMessage.cpp in Sources */,
 				BFD5FD621BA706AD00F591F1 /* TourActiveStateChangedMessage.cpp in Sources */,
 				7E3B89F01A385A290023C94E /* WorldAreaLoaderModule.cpp in Sources */,
@@ -7155,7 +7220,6 @@
 				7E3B89CC1A385A290023C94E /* SearchResultPoiController.cpp in Sources */,
 				7E6732291BC3D7FB002A31FD /* InteriorWorldPinController.cpp in Sources */,
 				7E3B8B1D1A385F110023C94E /* SearchResultMenuView.mm in Sources */,
-				BF34FEA21BCBF9A300E7094F /* AppCameraInteriorStateObserver.cpp in Sources */,
 				7E3B899A1A385A290023C94E /* SearchQueryRemovedMessage.cpp in Sources */,
 				18B44CF01A88D4B400FDFD8A /* CacheClearBackgroundTask.cpp in Sources */,
 				7E3B8B071A385F110023C94E /* MyPinCreationDetailsViewModule.mm in Sources */,
@@ -7173,11 +7237,11 @@
 				7E3B89481A385A290023C94E /* MyPinDetailsModelSelectedObserver.cpp in Sources */,
 				E06AE59B1B87207B000F85E3 /* AppModeModel.cpp in Sources */,
 				18FB64561A9240FC005A9411 /* NSURL+Base.m in Sources */,
-				E0632EA01B8331E4000C282E /* InteriorsStreamingController.cpp in Sources */,
 				7E3B8A0A1A385A290023C94E /* WorldPinGainedFocusMessage.cpp in Sources */,
 				7E3B89D21A385A290023C94E /* SearchResultPoiViewModel.cpp in Sources */,
 				7E3B8A0E1A385A290023C94E /* WorldPinLostFocusMessage.cpp in Sources */,
 				BFD5FD581BA706AD00F591F1 /* TourRepository.cpp in Sources */,
+				BFDD75F01BCEA3E200335508 /* InteriorExplorerViewingState.cpp in Sources */,
 				18FB64541A9240FC005A9411 /* NSString+URLEncoding.m in Sources */,
 				7E3B8AD31A385F110023C94E /* CompassView.mm in Sources */,
 				7E3B8B2B1A385F110023C94E /* SecondaryMenuViewModule.mm in Sources */,
@@ -7247,6 +7311,7 @@
 				7E3B88BA1A385A290023C94E /* CategorySearchRepository.cpp in Sources */,
 				BFD5FD7A1BA706AD00F591F1 /* TourFullScreenImageCeremonyEndedObserver.cpp in Sources */,
 				18C0EBFB1A9E0E66008EED21 /* UserCreatedPinBoundObject.cpp in Sources */,
+				BFDEAA8B1BCD6133007CE4D7 /* InteriorExplorerState.cpp in Sources */,
 				7E3B88C61A385A290023C94E /* CompassModule.cpp in Sources */,
 				1833B2751BC2C48B001CB77A /* WorldPinsFloorHeightController.cpp in Sources */,
 				186B474B1AB333150084E80B /* ApplicationConfiguration.cpp in Sources */,
@@ -7396,8 +7461,11 @@
 				7E3B89A41A385A290023C94E /* SearchResultMenuModule.cpp in Sources */,
 				7E3B8B151A385F110023C94E /* iOSPersistentSettingsModel.mm in Sources */,
 				7E8F03D61A822E820056F229 /* GpsMarkerModule.cpp in Sources */,
+				BFDEAA861BCD5821007CE4D7 /* StateMachine.cpp in Sources */,
+				BFDD75EC1BCE90E200335508 /* InteriorExplorerStreamState.cpp in Sources */,
 				7E3B88AA1A385A290023C94E /* AboutPageOpenableControl.cpp in Sources */,
 				7E3B8B291A385F110023C94E /* SecondaryMenuView.mm in Sources */,
+				BFDD75E81BCE885000335508 /* InteriorExplorerSetupState.cpp in Sources */,
 				7E3B8B091A385F110023C94E /* MyPinCreationInitiationView.mm in Sources */,
 				18FB645C1A9240FC005A9411 /* sha1.c in Sources */,
 				18FB648D1A9336A0005A9411 /* iOSYelpSearchServiceModule.cpp in Sources */,
@@ -7447,8 +7515,8 @@
 				7E1B50671ACAD4170060FA4F /* InitialExperienceIntroStep.cpp in Sources */,
 				F7F373F4043CCF2D73DD1F06 /* MapModeModel.cpp in Sources */,
 				BFD5FD4A1BA706AD00F591F1 /* TourActiveStateChangedMessageHandler.cpp in Sources */,
+				BFDD75F51BCEAF5800335508 /* InteriorExplorerExitingState.cpp in Sources */,
 				F7F3718BE3D42C0AAD8EC7E3 /* MapModeModule.cpp in Sources */,
-				F7F3741B41A5EE79F725EED4 /* InteriorsExitObserver.cpp in Sources */,
 				F7F37F4C1A542A11877345C4 /* MapModeController.cpp in Sources */,
 				BF681D9F1BC4210700100BFF /* ExampleTourHelpers.cpp in Sources */,
 				BFD5FD7C1BA706AD00F591F1 /* TourFullScreenImageViewController.cpp in Sources */,

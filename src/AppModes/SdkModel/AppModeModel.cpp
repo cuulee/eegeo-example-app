@@ -5,6 +5,8 @@
 #include "InteriorSelectionModel.h"
 #include "AppModeChangedMessage.h"
 #include "TourService.h"
+#include "WorldState.h"
+#include "InteriorExplorerState.h"
 
 namespace ExampleApp
 {
@@ -22,6 +24,7 @@ namespace ExampleApp
             , m_previousAppMode(WorldMode)
             , m_sdkDomainEventBus(sdkDomainEventBus)
             , m_tourStateChangedBinding(this, &AppModeModel::OnTourStateChanged)
+            , m_pStateMachine(NULL)
             {
                 m_interiorSelectionModel.RegisterSelectionChangedCallback(m_interiorSelectionModelChangedCallback);
                 m_sdkDomainEventBus.Subscribe(m_tourStateChangedBinding);
@@ -31,6 +34,19 @@ namespace ExampleApp
             {
                 m_interiorSelectionModel.UnregisterSelectionChangedCallback(m_interiorSelectionModelChangedCallback);
                 m_sdkDomainEventBus.Unsubscribe(m_tourStateChangedBinding);
+                
+                if(m_pStateMachine != NULL)
+                {
+                    m_pStateMachine->StopStateMachine();
+                    Eegeo_DELETE m_pStateMachine;
+                    m_pStateMachine = NULL;
+                    
+                    for(int i = 0; i < m_appStates.size(); ++i)
+                    {
+                        Eegeo_DELETE m_appStates[i];
+                    }
+                }
+                m_appStates.clear();
             }
             
             void AppModeModel::OnTourStateChanged(const Tours::TourStateChangedMessage& message)
@@ -81,7 +97,25 @@ namespace ExampleApp
                     m_appMode = appMode;
                     m_appModeChangedCallbacks.ExecuteCallbacks();
                     m_messageBus.Publish(AppModeChangedMessage(m_appMode));
+                    m_pStateMachine->ChangeToState(m_appMode);
                 }
+            }
+            
+            void AppModeModel::Update(float dt)
+            {
+                Eegeo_ASSERT(m_pStateMachine != NULL, "State MAchine not initialised");
+                m_pStateMachine->Update(dt);
+            }
+            
+            void AppModeModel::InitialiseStateMachine(const std::vector<Helpers::IStateMachineState*>& appStates)
+            {
+                Eegeo_ASSERT(m_pStateMachine == NULL, "Cannot initialise the state machine twice");
+                
+                m_appStates = appStates;
+                
+                m_pStateMachine = Eegeo_NEW(Helpers::StateMachine)(m_appStates);
+                
+                m_pStateMachine->StartStateMachine(WorldMode);
             }
         }
     }

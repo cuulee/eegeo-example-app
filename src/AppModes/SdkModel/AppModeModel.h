@@ -7,6 +7,9 @@
 #include "BidirectionalBus.h"
 #include "SdkModelDomainEventBus.h"
 #include "TourStateChangedMessage.h"
+#include "StateMachine.h"
+#include "IStateMachineState.h"
+#include "AppCamera.h"
 
 namespace ExampleApp
 {
@@ -22,13 +25,19 @@ namespace ExampleApp
                              ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
                 ~AppModeModel();
 
+                
+                void InitialiseStateMachine(const std::vector<Helpers::IStateMachineState*>& appStates);
+                
                 AppMode GetAppMode() const;
+                
+                void SetAppMode(AppMode appMode);
+                
+                void Update(float dt);
 
                 void RegisterAppModeChangedCallback(Eegeo::Helpers::ICallback0& callback);
                 void UnregisterAppModeChangedCallback(Eegeo::Helpers::ICallback0& callback);
 
             private:
-                void SetAppMode(AppMode appMode);
 
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
 
@@ -45,6 +54,9 @@ namespace ExampleApp
                 
                 ExampleAppMessaging::TSdkModelDomainEventBus& m_sdkDomainEventBus;
                 Eegeo::Helpers::TCallback1<AppModeModel, const ExampleApp::Tours::TourStateChangedMessage&> m_tourStateChangedBinding;
+                
+                Helpers::StateMachine* m_pStateMachine;
+                std::vector<Helpers::IStateMachineState*> m_appStates;
             };
         }
     }
