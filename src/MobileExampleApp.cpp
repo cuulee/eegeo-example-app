@@ -458,10 +458,7 @@ namespace ExampleApp
                                                                                                      m_sdkDomainEventBus,
                                                                                                      m_metricsService);
         
-        if(ToursEnabled())
-        {
-            InitialiseToursModules(mapModule, world);
-        }
+        InitialiseToursModules(mapModule, world);
         
         if (m_interiorsEnabled)
         {

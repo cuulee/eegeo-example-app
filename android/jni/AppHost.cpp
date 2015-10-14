@@ -153,6 +153,7 @@ AppHost::AppHost(
 
     std::string deviceModel = std::string(nativeState.deviceModel, strlen(nativeState.deviceModel));
     Eegeo::Config::PlatformConfig platformConfig = Eegeo::Android::AndroidPlatformConfigBuilder(deviceModel).Build();
+    platformConfig.OptionsConfig.InteriorsControlledByApp = true;
 
     m_pInputProcessor = Eegeo_NEW(Eegeo::Android::Input::AndroidInputProcessor)(&m_inputHandler, screenProperties.GetScreenWidth(), screenProperties.GetScreenHeight());
 
