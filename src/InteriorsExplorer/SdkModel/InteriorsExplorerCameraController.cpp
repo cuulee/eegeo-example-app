@@ -41,29 +41,22 @@ namespace ExampleApp
                                                                 Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                                                 Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
                                                                 Eegeo::Camera::GlobeCamera::GlobeCameraTouchController& globeCameraTouchController,
-                                                                Eegeo::Camera::GlobeCamera::GlobeCameraController& globeCameraController,
-                                                                ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus)
+                                                                Eegeo::Camera::GlobeCamera::GlobeCameraController& globeCameraController)
             : m_interiorController(interiorController)
             , m_interiorSelectionModel(interiorSelectionModel)
             , m_markerRepository(markerRepository)
             , m_globeCameraTouchController(globeCameraTouchController)
             , m_globeCameraController(globeCameraController)
-            , m_sdkDomainEventBus(sdkDomainEventBus)
-            , m_cameraEnabled(false)
-            , m_tourIsActive(false)
-            , m_tourStateChangedBinding(this, &InteriorsExplorerCameraController::OnTourStateChanged)
+            , m_cameraTouchEnabled(false)
             {
                 // Temp manually set initial cam pos.
                 Eegeo::Space::EcefTangentBasis basis;
                 Eegeo::Camera::CameraHelpers::EcefTangentBasisFromPointAndHeading(Eegeo::Space::LatLong::FromDegrees(0, 0).ToECEF(), 0.0f, basis);
                 m_globeCameraController.SetView(basis, 100.0f);
-                
-                m_sdkDomainEventBus.Subscribe(m_tourStateChangedBinding);
             }
             
             InteriorsExplorerCameraController::~InteriorsExplorerCameraController()
             {
-                m_sdkDomainEventBus.Unsubscribe(m_tourStateChangedBinding);
             }
             
             const Eegeo::Camera::CameraState InteriorsExplorerCameraController::GetCameraState() const
@@ -83,16 +76,22 @@ namespace ExampleApp
             
             void InteriorsExplorerCameraController::Update(float dt)
             {
-                m_cameraEnabled = m_interiorController.GetCurrentState() != Eegeo::Resources::Interiors::InteriorViewState::NoInteriorSelected && !m_tourIsActive;
-                
-                if(!m_cameraEnabled)
+                if(!m_interiorSelectionModel.IsInteriorSelected())
                 {
                     return;
                 }
                 
-                Eegeo_ASSERT(m_interiorSelectionModel.IsInteriorSelected());
+                m_cameraTouchEnabled = m_interiorController.InteriorIsVisible();
                 
-                m_globeCameraTouchController.Update(dt);
+                if(m_cameraTouchEnabled)
+                {
+                    m_globeCameraTouchController.Update(dt);
+                }
+                else
+                {
+                    m_globeCameraTouchController.Reset();
+                }
+                
                 m_globeCameraController.Update(dt);
                 
                 
@@ -133,16 +132,6 @@ namespace ExampleApp
                     
                     SetInterestLocation(pModel->GetTangentBasis().GetPointEcef() + relativeCameraInterestEcef);
                 }
-                else
-                {
-                    Eegeo_ASSERT(m_markerRepository.Contains(m_interiorSelectionModel.GetSelectedInteriorId()));
-                    
-                    const Eegeo::Resources::Interiors::Markers::InteriorMarkerModel& marker = m_markerRepository.Get(m_interiorSelectionModel.GetSelectedInteriorId());
-                    
-                    Eegeo::Space::EcefTangentBasis basis;
-                    Eegeo::Camera::CameraHelpers::EcefTangentBasisFromPointAndHeading(marker.GetMarkerLatLongAltitude().ToECEF(), 0.0f, basis);
-                    m_globeCameraController.SetView(basis, 300.0f);
-                }
             }
             
             void InteriorsExplorerCameraController::SetInterestLocation(const Eegeo::dv3& interestPointEcef)
@@ -152,9 +141,18 @@ namespace ExampleApp
                 m_globeCameraController.SetInterestBasis(cameraInterestBasis);
             }
             
-            void InteriorsExplorerCameraController::OnTourStateChanged(const Tours::TourStateChangedMessage& message)
+            void InteriorsExplorerCameraController::SetDistanceToInterest(float distanceMeters)
             {
-                m_tourIsActive = message.TourStarted();
+                m_globeCameraController.SetView(m_globeCameraController.GetInterestBasis(), distanceMeters);
+            }
+            
+            void InteriorsExplorerCameraController::SetHeading(float headingDegrees)
+            {
+                const Eegeo::dv3& ecefInterestPoint = m_globeCameraController.GetInterestBasis().GetPointEcef();
+                
+                Eegeo::Space::EcefTangentBasis cameraInterestBasis;
+                Eegeo::Camera::CameraHelpers::EcefTangentBasisFromPointAndHeading(ecefInterestPoint, headingDegrees, cameraInterestBasis);
+                m_globeCameraController.SetView(cameraInterestBasis, m_globeCameraController.GetDistanceToInterest());
             }
             
             float InteriorsExplorerCameraController::GetFloorOffsetHeight() const

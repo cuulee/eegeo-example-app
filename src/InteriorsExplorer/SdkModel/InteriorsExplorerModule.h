@@ -48,8 +48,6 @@ namespace ExampleApp
                 
                 InteriorVisibilityUpdater& GetInteriorVisibilityUpdater() const;
                 
-                const bool InteriorCameraEnabled() const;
-                
                 void Update(float dt) const;
                 
                 InteriorsExplorerModel& GetInteriorsExplorerModel() const;

@@ -5,6 +5,10 @@
 #include "WorldState.h"
 #include "InteriorExplorerState.h"
 #include "TourState.h"
+#include "AppGlobeCameraWrapper.h"
+#include "InteriorsExplorerCameraController.h"
+#include "IToursCameraController.h"
+#include "AppGlobeCameraWrapper.h"
 
 namespace ExampleApp
 {
@@ -16,9 +20,9 @@ namespace ExampleApp
             {
                 AppModeStatesFactory::AppModeStatesFactory(AppCamera::SdkModel::IAppCameraController& appCameraController,
                                                            Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                                           AppCamera::SdkModel::IAppCamera& worldCameraController,
-                                                           AppCamera::SdkModel::IAppCamera& interiorCameraController,
-                                                           AppCamera::SdkModel::IAppCamera& toursCameraController,
+                                                           AppCamera::SdkModel::AppGlobeCameraWrapper& worldCameraController,
+                                                           InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorCameraController,
+                                                           Tours::SdkModel::Camera::IToursCameraController& toursCameraController,
                                                            Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                                            InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdate,
                                                            InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModule,
@@ -60,7 +64,9 @@ namespace ExampleApp
                                                                                         m_cameraFrustumStreamingVolume,
                                                                                         m_interiorVisibilityUpdate,
                                                                                         m_interiorsExplorerModel,
-                                                                                        m_appModeModel));
+                                                                                        m_appModeModel,
+                                                                                        m_worldCameraController.GetGlobeCameraController(),
+                                                                                        m_interiorCameraController));
                     
                     states.push_back(Eegeo_NEW(States::SdkModel::TourState)(m_appCameraController,
                                                                             toursCameraHandle,

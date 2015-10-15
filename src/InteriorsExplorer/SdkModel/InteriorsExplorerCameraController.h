@@ -22,27 +22,21 @@ namespace ExampleApp
             class InteriorsExplorerCameraController : public AppCamera::SdkModel::IAppCamera, private Eegeo::NonCopyable
             {
             private:
-                bool m_cameraEnabled;
-                bool m_tourIsActive;
+                bool m_cameraTouchEnabled;
                 Eegeo::Resources::Interiors::InteriorController& m_interiorController;
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
                 Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& m_markerRepository;
                 Eegeo::Camera::GlobeCamera::GlobeCameraTouchController& m_globeCameraTouchController;
                 Eegeo::Camera::GlobeCamera::GlobeCameraController& m_globeCameraController;
-                ExampleAppMessaging::TSdkModelDomainEventBus& m_sdkDomainEventBus;
-                Eegeo::Helpers::TCallback1<InteriorsExplorerCameraController, const ExampleApp::Tours::TourStateChangedMessage&> m_tourStateChangedBinding;
                 
             public:
                 InteriorsExplorerCameraController(Eegeo::Resources::Interiors::InteriorController& interiorController,
                                                   Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                                   Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
                                                   Eegeo::Camera::GlobeCamera::GlobeCameraTouchController& m_globeCameraTouchController,
-                                                  Eegeo::Camera::GlobeCamera::GlobeCameraController& globeCameraController,
-                                                  ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
+                                                  Eegeo::Camera::GlobeCamera::GlobeCameraController& globeCameraController);
                 
                 ~InteriorsExplorerCameraController();
-                
-                inline bool InteriorCameraEnabled() const { return m_cameraEnabled; }
                 
                 const Eegeo::Camera::CameraState GetCameraState() const;
                 
@@ -54,10 +48,13 @@ namespace ExampleApp
                 
                 void Update(float dt);
                 
-            private:
-                void OnTourStateChanged(const Tours::TourStateChangedMessage& message);
-                
                 void SetInterestLocation(const Eegeo::dv3& interestPointEcef);
+                
+                void SetDistanceToInterest(float distanceMeters);
+                
+                void SetHeading(float headingDegrees);
+                
+            private:
                 
                 float GetFloorOffsetHeight() const;
             };

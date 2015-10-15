@@ -9,6 +9,10 @@
 #include "InteriorExplorerExitingState.h"
 #include "InteriorSelectionModel.h"
 #include "IAppModeModel.h"
+#include "InteriorsExplorerCameraController.h"
+#include "GpsGlobeCameraController.h"
+#include "CameraHelpers.h"
+#include "EcefTangentBasis.h"
 
 namespace ExampleApp
 {
@@ -24,11 +28,15 @@ namespace ExampleApp
                                                              Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                                              InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                                              InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
-                                                             AppModes::SdkModel::IAppModeModel& appModeModel)
+                                                             AppModes::SdkModel::IAppModeModel& appModeModel,
+                                                             Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& worldCameraController,
+                                                             ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorsCameraController)
                 : m_cameraController(cameraController)
                 , m_interiorController(interiorController)
                 , m_interiorCameraHandle(interiorCameraHandle)
                 , m_appModeModel(appModeModel)
+                , m_worldCameraController(worldCameraController)
+                , m_interiorsCameraController(interiorsCameraController)
                 {
                     
                     m_subStates.push_back(Eegeo_NEW(InteriorsExplorer::SdkModel::States::InteriorExplorerSetupState)(*this, cameraController, interiorCameraHandle));
@@ -69,6 +77,10 @@ namespace ExampleApp
                 
                 void InteriorExplorerState::Enter()
                 {
+                    float headingRadians = Eegeo::Camera::CameraHelpers::GetAbsoluteBearingRadians(m_worldCameraController.GetInterestBasis().GetPointEcef(),
+                                                                                                   m_worldCameraController.GetInterestBasis().GetForward());
+                    m_interiorsCameraController.SetHeading(Eegeo::Math::Rad2Deg(headingRadians));
+                    
                     m_pSubStateMachine->StartStateMachine(0);
                 }
                 
@@ -82,6 +94,14 @@ namespace ExampleApp
                 
                 void InteriorExplorerState::Exit()
                 {
+                    float headingRadians = Eegeo::Camera::CameraHelpers::GetAbsoluteBearingRadians(m_interiorsCameraController.GetCameraState().InterestPointEcef(),
+                                                                                                   m_interiorsCameraController.GetRenderCamera().GetModelMatrix().GetRow(2));
+                    Eegeo::Space::LatLongAltitude latLong = Eegeo::Space::LatLongAltitude::FromECEF(m_interiorsCameraController.GetCameraState().InterestPointEcef());
+                    const float interestDistance = 500.0f;
+                    m_worldCameraController.SetView(latLong.GetLatitudeInDegrees(), latLong.GetLongitudeInDegrees(),
+                                                    Eegeo::Math::Rad2Deg(headingRadians),
+                                                    interestDistance);
+                    
                     if(m_pSubStateMachine->GetCurrentStateIndex() >= 0)
                     {
                         m_pSubStateMachine->StopStateMachine();

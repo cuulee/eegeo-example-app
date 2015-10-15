@@ -31,7 +31,6 @@ namespace ExampleApp
                                                              ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus,
                                                              Metrics::IMetricsService& metricsService)
             {
-                m_pWorldPinController = Eegeo_NEW(InteriorWorldPinController)(interiorController, markerRepository, worldPinsService);
                 
                 const float transitionTime = 0.5f;
                 m_pVisibilityUpdater = Eegeo_NEW(InteriorVisibilityUpdater)(interiorController, transitionTime);
@@ -54,8 +53,9 @@ namespace ExampleApp
                                                                                             interiorSelectionModel,
                                                                                             markerRepository,
                                                                                             *m_pGlobeCameraTouchController,
-                                                                                            *m_pGlobeCameraController,
-                                                                                            sdkDomainEventBus);
+                                                                                            *m_pGlobeCameraController);
+                
+                m_pWorldPinController = Eegeo_NEW(InteriorWorldPinController)(interiorController, markerRepository, worldPinsService, *m_pInteriorsCameraController);
                 
                 m_pModel = Eegeo_NEW(InteriorsExplorerModel)(interiorController,
                                                              interiorSelectionModel,
@@ -73,11 +73,11 @@ namespace ExampleApp
             {
                 Eegeo_DELETE m_pViewModel;
                 Eegeo_DELETE m_pModel;
+                Eegeo_DELETE m_pWorldPinController;
                 Eegeo_DELETE m_pInteriorsCameraController;
                 Eegeo_DELETE m_pGlobeCameraTouchController;
                 Eegeo_DELETE m_pGlobeCameraController;
                 Eegeo_DELETE m_pVisibilityUpdater;
-                Eegeo_DELETE m_pWorldPinController;
             }
             
             View::InteriorsExplorerViewModel& InteriorsExplorerModule::GetInteriorsExplorerViewModel() const
@@ -100,15 +100,9 @@ namespace ExampleApp
                 return *m_pInteriorsCameraController;
             }
             
-            const bool InteriorsExplorerModule::InteriorCameraEnabled() const
-            {
-                return m_pInteriorsCameraController->InteriorCameraEnabled();
-            }
-            
             void InteriorsExplorerModule::Update(float dt) const
             {
                 m_pVisibilityUpdater->Update(dt);
-                m_pInteriorsCameraController->Update(dt);
             }
             
             

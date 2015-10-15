@@ -771,7 +771,7 @@ namespace ExampleApp
         Eegeo::EegeoWorld& eegeoWorld(World());
         
         // TODO: Fetch this from appCameraModule guy and rename to CurrentCameraTouchController.
-        m_pCurrentTouchController = m_pInteriorsExplorerModule->InteriorCameraEnabled()
+        m_pCurrentTouchController = m_pAppModeModel->GetAppMode() == AppModes::SdkModel::InteriorMode
             ? &m_pInteriorsExplorerModule->GetInteriorsCameraController().GetTouchController()
             : m_pCameraTouchController;
 

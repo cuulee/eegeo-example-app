@@ -5,6 +5,7 @@
 #include "Interiors.h"
 #include "WorldPins.h"
 #include "ICallback.h"
+#include "InteriorsExplorer.h"
 #include <map>
 #include <string>
 
@@ -20,7 +21,8 @@ namespace ExampleApp
                 
                 InteriorWorldPinController(Eegeo::Resources::Interiors::InteriorController& interiorController,
                                            Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
-                                           WorldPins::SdkModel::IWorldPinsService& worldPinsService);
+                                           WorldPins::SdkModel::IWorldPinsService& worldPinsService,
+                                           InteriorsExplorerCameraController& cameraController);
                 ~InteriorWorldPinController();
                 
             private:
@@ -28,6 +30,7 @@ namespace ExampleApp
                 Eegeo::Resources::Interiors::InteriorController& m_interiorController;
                 Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& m_markerRepository;
                 WorldPins::SdkModel::IWorldPinsService& m_worldPinsService;
+                InteriorsExplorerCameraController& m_cameraController;
                 std::map<std::string, WorldPins::SdkModel::WorldPinItemModel*> m_interiorIdToWorldPinMap;
                 
                 Eegeo::Helpers::TCallback1<InteriorWorldPinController, const Eegeo::Resources::Interiors::Markers::InteriorMarkerModel&> m_markerAddedCallback;

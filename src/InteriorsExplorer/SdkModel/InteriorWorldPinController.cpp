@@ -18,10 +18,12 @@ namespace ExampleApp
         {
             InteriorWorldPinController::InteriorWorldPinController(Eegeo::Resources::Interiors::InteriorController& interiorController,
                                                                    Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
-                                                                   WorldPins::SdkModel::IWorldPinsService& worldPinsService)
+                                                                   WorldPins::SdkModel::IWorldPinsService& worldPinsService,
+                                                                   InteriorsExplorerCameraController& cameraController)
             : m_interiorController(interiorController)
             , m_markerRepository(markerRepository)
             , m_worldPinsService(worldPinsService)
+            , m_cameraController(cameraController)
             , m_markerAddedCallback(this, &InteriorWorldPinController::HandleMarkerAdded)
             , m_markerRemovedCallback(this, &InteriorWorldPinController::HandleMarkerRemoved)
             {
@@ -60,7 +62,11 @@ namespace ExampleApp
                 Eegeo::Space::LatLong location = Eegeo::Space::LatLong::FromDegrees(markerModel.GetMarkerLatLongAltitude().GetLatitudeInDegrees(),
                                                                                     markerModel.GetMarkerLatLongAltitude().GetLongitudeInDegrees());
                 
-                InteriorWorldPinSelectionHandler* pSelectionHandler = Eegeo_NEW(InteriorWorldPinSelectionHandler)(markerModel.GetInteriorId(), m_interiorController);
+                InteriorWorldPinSelectionHandler* pSelectionHandler = Eegeo_NEW(InteriorWorldPinSelectionHandler)(markerModel.GetInteriorId(),
+                                                                                                                  m_interiorController,
+                                                                                                                  m_cameraController,
+                                                                                                                  markerModel.GetMarkerLatLongAltitude().ToECEF()
+                                                                                                                  );
                 
                 WorldPins::SdkModel::WorldPinItemModel* pItemModel = m_worldPinsService.AddPin(pSelectionHandler,
                                                                                                NULL,

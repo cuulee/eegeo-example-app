@@ -26,6 +26,8 @@ namespace ExampleApp
                 
                 Eegeo::ITouchController& GetTouchController() const;
                 
+                Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& GetGlobeCameraController() const { return m_gpsGlobeCameraController; }
+                
             private:
                 
                 Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& m_gpsGlobeCameraController;

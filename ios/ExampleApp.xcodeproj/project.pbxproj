@@ -3044,10 +3044,10 @@
 			isa = PBXGroup;
 			children = (
 				BF0E35081BC67313005B30E8 /* AppCamera */,
+				E06AE5901B871E6E000F85E3 /* AppModes */,
 				7E3B86631A385A280023C94E /* AboutPage */,
 				18B22B181A7A901D00DDBFA2 /* ApiKey.h */,
 				186B473D1AB333150084E80B /* ApplicationConfig */,
-				E06AE5901B871E6E000F85E3 /* AppModes */,
 				7E3B86711A385A280023C94E /* CameraTransitions */,
 				7E3B86771A385A280023C94E /* CategorySearch */,
 				7E3B86891A385A280023C94E /* Compass */,

@@ -25,9 +25,9 @@ namespace ExampleApp
                 private:
                     AppCamera::SdkModel::IAppCameraController& m_appCameraController;
                     Eegeo::Resources::Interiors::InteriorController& m_interiorController;
-                    AppCamera::SdkModel::IAppCamera& m_worldCameraController;
-                    AppCamera::SdkModel::IAppCamera& m_interiorCameraController;
-                    AppCamera::SdkModel::IAppCamera& m_toursCameraController;
+                    AppCamera::SdkModel::AppGlobeCameraWrapper& m_worldCameraController;
+                    InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& m_interiorCameraController;
+                    Tours::SdkModel::Camera::IToursCameraController& m_toursCameraController;
                     Eegeo::Streaming::CameraFrustumStreamingVolume& m_cameraFrustumStreamingVolume;
                     InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& m_interiorVisibilityUpdate;
                     AppModes::SdkModel::IAppModeModel& m_appModeModel;
@@ -39,9 +39,9 @@ namespace ExampleApp
                     
                     AppModeStatesFactory(AppCamera::SdkModel::IAppCameraController& appCameraController,
                                          Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                         AppCamera::SdkModel::IAppCamera& worldCameraController,
-                                         AppCamera::SdkModel::IAppCamera& interiorCameraController,
-                                         AppCamera::SdkModel::IAppCamera& toursCameraController,
+                                         AppCamera::SdkModel::AppGlobeCameraWrapper& worldCameraController,
+                                         InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorCameraController,
+                                         Tours::SdkModel::Camera::IToursCameraController& toursCameraController,
                                          Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                          InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                          InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,

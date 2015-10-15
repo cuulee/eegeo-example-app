@@ -26,12 +26,9 @@ namespace ExampleApp
                 
                 virtual InteriorsExplorerCameraController& GetInteriorsCameraController() const = 0;
                 
-                virtual const bool InteriorCameraEnabled() const = 0;
-                
                 virtual void Update(float dt) const = 0;
                 
-                virtual
-                InteriorsExplorerModel& GetInteriorsExplorerModel() const = 0;
+                virtual InteriorsExplorerModel& GetInteriorsExplorerModel() const = 0;
             };
         }
     }

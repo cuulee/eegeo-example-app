@@ -11,6 +11,7 @@
 #include "ICallback.h"
 #include <vector>
 #include "AppModes.h"
+#include "GlobeCamera.h"
 
 namespace ExampleApp
 {
@@ -37,8 +38,11 @@ namespace ExampleApp
                     
                     AppCamera::SdkModel::IAppCameraController& m_cameraController;
                     int m_interiorCameraHandle;
+                    Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& m_worldCameraController;
+                    ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& m_interiorsCameraController;
                     
                     Eegeo::Resources::Interiors::InteriorController& m_interiorController;
+                    
                     
                     Helpers::StateMachine* m_pSubStateMachine;
                     std::vector<Helpers::IStateMachineState*> m_subStates;
@@ -53,7 +57,9 @@ namespace ExampleApp
                                           Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                           InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                           InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
-                                          AppModes::SdkModel::IAppModeModel& m_appModeModel);
+                                          AppModes::SdkModel::IAppModeModel& appModeModel,
+                                          Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& worldCameraController,
+                                          ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorsCameraController);
                     
                     ~InteriorExplorerState();
                     
