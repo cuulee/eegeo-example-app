@@ -51,6 +51,8 @@ namespace ExampleApp
                 
                 void SetHeading(float headingDegrees);
                 
+                void SetTilt(float tiltDegrees);
+                
             private:
                 
                 float GetFloorOffsetHeight() const;

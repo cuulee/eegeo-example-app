@@ -155,6 +155,11 @@ namespace ExampleApp
                 m_globeCameraController.SetView(cameraInterestBasis, m_globeCameraController.GetDistanceToInterest());
             }
             
+            void InteriorsExplorerCameraController::SetTilt(float tiltDegrees)
+            {
+                m_globeCameraController.ApplyTilt(tiltDegrees);
+            }
+            
             float InteriorsExplorerCameraController::GetFloorOffsetHeight() const
             {
                 const Eegeo::Resources::Interiors::CurrentInteriorViewModel* pViewModel = NULL;

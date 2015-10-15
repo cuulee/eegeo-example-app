@@ -11,6 +11,7 @@
 #include "IAppModeModel.h"
 #include "InteriorsExplorerCameraController.h"
 #include "GpsGlobeCameraController.h"
+#include "GlobeCameraController.h"
 #include "CameraHelpers.h"
 #include "EcefTangentBasis.h"
 #include "NativeUIFactories.h"
@@ -86,7 +87,7 @@ namespace ExampleApp
                     float headingRadians = Eegeo::Camera::CameraHelpers::GetAbsoluteBearingRadians(m_worldCameraController.GetInterestBasis().GetPointEcef(),
                                                                                                    m_worldCameraController.GetInterestBasis().GetForward());
                     m_interiorsCameraController.SetHeading(Eegeo::Math::Rad2Deg(headingRadians));
-                    
+                    m_interiorsCameraController.SetTilt(0.0f);
                     m_pSubStateMachine->StartStateMachine(0);
                 }
                 
@@ -107,6 +108,7 @@ namespace ExampleApp
                     m_worldCameraController.SetView(latLong.GetLatitudeInDegrees(), latLong.GetLongitudeInDegrees(),
                                                     Eegeo::Math::Rad2Deg(headingRadians),
                                                     interestDistance);
+                    m_worldCameraController.GetGlobeCameraController().ApplyTilt(0.0f);
                     
                     if(m_pSubStateMachine->GetCurrentStateIndex() >= 0)
                     {
