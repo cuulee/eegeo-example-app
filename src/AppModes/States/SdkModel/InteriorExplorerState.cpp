@@ -7,6 +7,7 @@
 #include "InteriorExplorerStreamState.h"
 #include "InteriorExplorerViewingState.h"
 #include "InteriorExplorerExitingState.h"
+#include "InteriorSelectionModel.h"
 #include "IAppModeModel.h"
 
 namespace ExampleApp
@@ -97,7 +98,6 @@ namespace ExampleApp
                 {
                     m_appModeModel.SetAppMode(AppModes::SdkModel::WorldMode);
                 }
-                
             }
         }
     }

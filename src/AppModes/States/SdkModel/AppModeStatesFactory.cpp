@@ -4,6 +4,7 @@
 #include "IAppCameraController.h"
 #include "WorldState.h"
 #include "InteriorExplorerState.h"
+#include "TourState.h"
 
 namespace ExampleApp
 {
@@ -17,18 +18,24 @@ namespace ExampleApp
                                                            Eegeo::Resources::Interiors::InteriorController& interiorController,
                                                            AppCamera::SdkModel::IAppCamera& worldCameraController,
                                                            AppCamera::SdkModel::IAppCamera& interiorCameraController,
+                                                           AppCamera::SdkModel::IAppCamera& toursCameraController,
                                                            Eegeo::Streaming::CameraFrustumStreamingVolume& cameraFrustumStreamingVolume,
                                                            InteriorsExplorer::SdkModel::InteriorVisibilityUpdater& interiorVisibilityUpdate,
                                                            InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModule,
-                                                           AppModes::SdkModel::IAppModeModel& appModeModel)
+                                                           AppModes::SdkModel::IAppModeModel& appModeModel,
+                                                           Tours::SdkModel::ITourService& tourService,
+                                                           Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel)
                 : m_appCameraController(appCameraController)
                 , m_interiorController(interiorController)
                 , m_worldCameraController(worldCameraController)
                 , m_interiorCameraController(interiorCameraController)
+                , m_toursCameraController(toursCameraController)
                 , m_cameraFrustumStreamingVolume(cameraFrustumStreamingVolume)
                 , m_interiorVisibilityUpdate(interiorVisibilityUpdate)
                 , m_interiorsExplorerModel(interiorsExplorerModule)
                 , m_appModeModel(appModeModel)
+                , m_tourService(tourService)
+                , m_interiorSelectionModel(interiorSelectionModel)
                 {
                     
                 }
@@ -37,10 +44,16 @@ namespace ExampleApp
                 {
                     std::vector<Helpers::IStateMachineState*> states;
                     
-                    const int worldCameraHnadle = m_appCameraController.CreateCameraHandleFromController(m_worldCameraController);
+                    const int worldCameraHandle = m_appCameraController.CreateCameraHandleFromController(m_worldCameraController);
                     const int interiorCameraHandle = m_appCameraController.CreateCameraHandleFromController(m_interiorCameraController);
+                    const int toursCameraHandle = m_appCameraController.CreateCameraHandleFromController(m_toursCameraController);
                     
-                    states.push_back(Eegeo_NEW(States::SdkModel::WorldState)(m_appCameraController, worldCameraHnadle));
+                    states.push_back(Eegeo_NEW(States::SdkModel::WorldState)(m_appCameraController,
+                                                                             worldCameraHandle,
+                                                                             m_tourService,
+                                                                             m_interiorSelectionModel,
+                                                                             m_appModeModel));
+                    
                     states.push_back(Eegeo_NEW(States::SdkModel::InteriorExplorerState)(m_appCameraController,
                                                                                         m_interiorController,
                                                                                         interiorCameraHandle,
@@ -48,6 +61,12 @@ namespace ExampleApp
                                                                                         m_interiorVisibilityUpdate,
                                                                                         m_interiorsExplorerModel,
                                                                                         m_appModeModel));
+                    
+                    states.push_back(Eegeo_NEW(States::SdkModel::TourState)(m_appCameraController,
+                                                                            toursCameraHandle,
+                                                                            m_tourService,
+                                                                            m_interiorSelectionModel,
+                                                                            m_appModeModel));
                     
                     return states;
                 }

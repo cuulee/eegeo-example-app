@@ -14,26 +14,18 @@ namespace ExampleApp
     {
         namespace SdkModel
         {
-            AppModeModel::AppModeModel(Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
-                                       ExampleAppMessaging::TMessageBus& messageBus,
-                                       ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus)
-            : m_interiorSelectionModel(interiorSelectionModel)
-            , m_messageBus(messageBus)
-            , m_interiorSelectionModelChangedCallback(this, &AppModeModel::OnInteriorSelectionModelChanged)
+            AppModeModel::AppModeModel(ExampleAppMessaging::TMessageBus& messageBus)
+            : m_messageBus(messageBus)
             , m_appMode(WorldMode)
             , m_previousAppMode(WorldMode)
-            , m_sdkDomainEventBus(sdkDomainEventBus)
-            , m_tourStateChangedBinding(this, &AppModeModel::OnTourStateChanged)
             , m_pStateMachine(NULL)
+            , m_switchAppMode(false)
             {
-                m_interiorSelectionModel.RegisterSelectionChangedCallback(m_interiorSelectionModelChangedCallback);
-                m_sdkDomainEventBus.Subscribe(m_tourStateChangedBinding);
+                
             }
 
             AppModeModel::~AppModeModel()
             {
-                m_interiorSelectionModel.UnregisterSelectionChangedCallback(m_interiorSelectionModelChangedCallback);
-                m_sdkDomainEventBus.Unsubscribe(m_tourStateChangedBinding);
                 
                 if(m_pStateMachine != NULL)
                 {
@@ -49,29 +41,6 @@ namespace ExampleApp
                 m_appStates.clear();
             }
             
-            void AppModeModel::OnTourStateChanged(const Tours::TourStateChangedMessage& message)
-            {
-                if(message.TourStarted())
-                {
-                    SetAppMode(TourMode);
-                }
-                else
-                {
-                    SetAppMode(m_previousAppMode);
-                }
-            }
-
-            void AppModeModel::OnInteriorSelectionModelChanged(const Eegeo::Resources::Interiors::InteriorId& interiorId)
-            {
-                if(m_appMode == TourMode)
-                {
-                    m_previousAppMode = m_interiorSelectionModel.IsInteriorSelected() ? InteriorMode : WorldMode;
-                    return;
-                }
-                
-                AppMode newAppMode = m_interiorSelectionModel.IsInteriorSelected() ? InteriorMode : WorldMode;
-                SetAppMode(newAppMode);
-            }
 
             void AppModeModel::RegisterAppModeChangedCallback(Eegeo::Helpers::ICallback0& callback)
             {
@@ -95,15 +64,23 @@ namespace ExampleApp
                     m_previousAppMode = m_appMode;
                     
                     m_appMode = appMode;
-                    m_appModeChangedCallbacks.ExecuteCallbacks();
-                    m_messageBus.Publish(AppModeChangedMessage(m_appMode));
-                    m_pStateMachine->ChangeToState(m_appMode);
+                    m_switchAppMode = true;
                 }
             }
             
             void AppModeModel::Update(float dt)
             {
-                Eegeo_ASSERT(m_pStateMachine != NULL, "State MAchine not initialised");
+                Eegeo_ASSERT(m_pStateMachine != NULL, "State Machine not initialised");
+                
+                if (m_switchAppMode)
+                {
+                    m_switchAppMode = false;
+                    
+                    m_appModeChangedCallbacks.ExecuteCallbacks();
+                    m_messageBus.Publish(AppModeChangedMessage(m_appMode));
+                    m_pStateMachine->ChangeToState(m_appMode);
+                }
+                
                 m_pStateMachine->Update(dt);
             }
             

@@ -222,7 +222,7 @@ namespace ExampleApp
                 mapModule.GetResourceCeilingProvider(),
                 *m_pNavigationService);
 
-        m_pAppModeModel = Eegeo_NEW(AppModes::SdkModel::AppModeModel)(m_pWorld->GetMapModule().GetInteriorsPresentationModule().GetInteriorSelectionModel(), m_messageBus, m_sdkDomainEventBus);
+        m_pAppModeModel = Eegeo_NEW(AppModes::SdkModel::AppModeModel)(m_messageBus);
 
         const bool useLowSpecSettings = false;
 
@@ -501,10 +501,13 @@ namespace ExampleApp
                                                                               interiorsPresentationModule.GetAppLevelController(),
                                                                               *m_pGlobeCameraWrapper,
                                                                               m_pInteriorsExplorerModule->GetInteriorsCameraController(),
+                                                                              m_pToursModule->GetCameraController(),
                                                                               *m_pStreamingVolume,
                                                                               m_pInteriorsExplorerModule->GetInteriorVisibilityUpdater(),
                                                                               m_pInteriorsExplorerModule->GetInteriorsExplorerModel(),
-                                                                              *m_pAppModeModel);
+                                                                              *m_pAppModeModel,
+                                                                              m_pToursModule->GetTourService(),
+                                                                              interiorsPresentationModule.GetInteriorSelectionModel());
         
         m_pAppModeModel->InitialiseStateMachine(appModeStatesFactory.CreateStateMachineStates());
     }

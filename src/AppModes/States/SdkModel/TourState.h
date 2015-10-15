@@ -17,32 +17,32 @@ namespace ExampleApp
         {
             namespace SdkModel
             {
-                class WorldState : public Helpers::IStateMachineState
+                class TourState : public Helpers::IStateMachineState
                 {
                 private:
                     
                     AppCamera::SdkModel::IAppCameraController& m_cameraController;
-                    int m_worldCameraHandle;
+                    int m_tourCameraHandle;
+                    
+                    Eegeo::Helpers::TCallback0<TourState> m_tourStartedCallback;
+                    Tours::SdkModel::ITourService& m_tourService;
                     
                     AppModes::SdkModel::IAppModeModel& m_appModeModel;
                     
-                    Eegeo::Helpers::TCallback0<WorldState> m_tourStartedCallback;
-                    Tours::SdkModel::ITourService& m_tourService;
-                    void OnTourStarted();
-                    
                     Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
-                    Eegeo::Helpers::TCallback1<WorldState, const Eegeo::Resources::Interiors::InteriorId> m_interiorSelectionModelChangedCallback;
-                    void OnInteriorSelectionModelChanged(const Eegeo::Resources::Interiors::InteriorId& interiorId);
+                    
+                    
+                    void OnTourEnded();
                     
                 public:
                     
-                    WorldState(AppCamera::SdkModel::IAppCameraController& cameraController,
-                               int worldCameraHandle,
+                    TourState(AppCamera::SdkModel::IAppCameraController& cameraController,
+                               int tourCameraHandle,
                                Tours::SdkModel::ITourService& tourService,
-                               Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
+                              Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                AppModes::SdkModel::IAppModeModel& appModeModel);
                     
-                    ~WorldState();
+                    ~TourState();
                     
                     void Enter();
                     

@@ -1415,6 +1415,8 @@
 		BFDEAA871BCD5821007CE4D7 /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA841BCD5821007CE4D7 /* StateMachine.cpp */; };
 		BFDEAA8B1BCD6133007CE4D7 /* InteriorExplorerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */; };
 		BFDEAA8C1BCD6133007CE4D7 /* InteriorExplorerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */; };
+		BFDEB4BD1BCFADFF00F037B7 /* TourState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEB4BB1BCFADFF00F037B7 /* TourState.cpp */; };
+		BFDEB4BE1BCFADFF00F037B7 /* TourState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDEB4BB1BCFADFF00F037B7 /* TourState.cpp */; };
 		BFDFC3CF1BB2EF190099BAEC /* SearchResultModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDFC3CE1BB2EF190099BAEC /* SearchResultModel.cpp */; };
 		BFDFC3D01BB2EF190099BAEC /* SearchResultModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFDFC3CE1BB2EF190099BAEC /* SearchResultModel.cpp */; };
 		BFDFC3D41BB2F5BA0099BAEC /* menu_list.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D11BB2F5BA0099BAEC /* menu_list.png */; };
@@ -2906,6 +2908,8 @@
 		BFDEAA881BCD58D8007CE4D7 /* IStateMachineState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IStateMachineState.h; sourceTree = "<group>"; };
 		BFDEAA891BCD6133007CE4D7 /* InteriorExplorerState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorExplorerState.cpp; path = AppModes/States/SdkModel/InteriorExplorerState.cpp; sourceTree = "<group>"; };
 		BFDEAA8A1BCD6133007CE4D7 /* InteriorExplorerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorExplorerState.h; path = AppModes/States/SdkModel/InteriorExplorerState.h; sourceTree = "<group>"; };
+		BFDEB4BB1BCFADFF00F037B7 /* TourState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TourState.cpp; path = AppModes/States/SdkModel/TourState.cpp; sourceTree = "<group>"; };
+		BFDEB4BC1BCFADFF00F037B7 /* TourState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TourState.h; path = AppModes/States/SdkModel/TourState.h; sourceTree = "<group>"; };
 		BFDFC3CB1BB2D8B90099BAEC /* SearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultModel.h; sourceTree = "<group>"; };
 		BFDFC3CE1BB2EF190099BAEC /* SearchResultModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SearchResultModel.cpp; sourceTree = "<group>"; };
 		BFDFC3D11BB2F5BA0099BAEC /* menu_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_list.png; sourceTree = "<group>"; };
@@ -5927,6 +5931,8 @@
 				BFDEAA7A1BCD3702007CE4D7 /* WorldState.h */,
 				BFDD75E01BCE5BE800335508 /* AppModeStatesFactory.cpp */,
 				BFDD75E11BCE5BE800335508 /* AppModeStatesFactory.h */,
+				BFDEB4BB1BCFADFF00F037B7 /* TourState.cpp */,
+				BFDEB4BC1BCFADFF00F037B7 /* TourState.h */,
 			);
 			name = SdkModel;
 			sourceTree = "<group>";
@@ -6810,6 +6816,7 @@
 				BFD5FCB71BA7068300F591F1 /* iCarouselTourExplorerViewController.mm in Sources */,
 				7E3B88DF1A385A290023C94E /* FlattenButtonController.cpp in Sources */,
 				BF4FEE3A1BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp in Sources */,
+				BFDEB4BE1BCFADFF00F037B7 /* TourState.cpp in Sources */,
 				7E3B8AF41A385F110023C94E /* CustomTableViewCell.mm in Sources */,
 				7E3B8B201A385F110023C94E /* SearchResultMenuViewModule.mm in Sources */,
 				7E3B88C11A385A290023C94E /* CompassViewCycledMessage.cpp in Sources */,
@@ -7258,6 +7265,7 @@
 				BFD5FCB61BA7068300F591F1 /* iCarouselTourExplorerViewController.mm in Sources */,
 				7E3B88DE1A385A290023C94E /* FlattenButtonController.cpp in Sources */,
 				BF4FEE391BC2BD1200932C17 /* ExampleTourPinSelectionHandler.cpp in Sources */,
+				BFDEB4BD1BCFADFF00F037B7 /* TourState.cpp in Sources */,
 				7E3B8AF31A385F110023C94E /* CustomTableViewCell.mm in Sources */,
 				7E3B8B1F1A385F110023C94E /* SearchResultMenuViewModule.mm in Sources */,
 				7E3B88C01A385A290023C94E /* CompassViewCycledMessage.cpp in Sources */,
