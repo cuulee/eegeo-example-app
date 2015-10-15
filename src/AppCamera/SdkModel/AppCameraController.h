@@ -8,6 +8,7 @@
 #include <map>
 #include "GlobeCameraController.h"
 #include "VectorMathDecl.h"
+#include "ITouchController.h"
 
 namespace ExampleApp
 {
@@ -50,6 +51,8 @@ namespace ExampleApp
                 const Eegeo::Camera::CameraState GetCameraState();
                 
                 const Eegeo::Camera::RenderCamera& GetRenderCamera();
+                
+                Eegeo::ITouchController& GetTouchController();
                 
                 void Update(float dt);
             };

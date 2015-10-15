@@ -78,6 +78,11 @@ namespace ExampleApp
                 return m_renderCamera;
             }
             
+            Eegeo::ITouchController& AppCameraController::GetTouchController()
+            {
+                return m_cameras[m_currentCameraIndex]->GetTouchController();
+            }
+            
             void AppCameraController::Update(float dt)
             {
                 if(m_isTransitionInFlight)
