@@ -27,9 +27,12 @@ namespace ExampleApp
                 int m_previousCameraIndex;
                 bool m_isTransitionInFlight;
                 float m_transitionTimer;
+                const float m_transitionDuration;
                 
                 Eegeo::dv3 m_currentPosition;
                 Eegeo::m33 m_currentOrientation;
+                
+                void UpdateTransitionBetween(IAppCamera& previousCamera, IAppCamera& nextCamera, float dt);
                 
             public:
                 

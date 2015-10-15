@@ -451,6 +451,7 @@ namespace ExampleApp
                                                                                                      interiorsModelModule.GetInteriorMarkerModelRepository(),
                                                                                                      m_pWorldPinsModule->GetWorldPinsService(),
                                                                                                      m_pMapModeModule->GetMapModeModel(),
+                                                                                                     m_pWeatherMenuModule->GetWeatherController(),
                                                                                                      cameraControllerFactory,
                                                                                                      m_screenProperties,
                                                                                                      m_identityProvider,

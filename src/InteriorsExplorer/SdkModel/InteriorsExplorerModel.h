@@ -15,6 +15,7 @@
 #include "SdkModelDomainEventBus.h"
 #include "TourStateChangedMessage.h"
 #include "InteriorsExplorer.h"
+#include "WeatherMenu.h"
 
 namespace ExampleApp
 {
@@ -30,6 +31,7 @@ namespace ExampleApp
                                        Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                        InteriorVisibilityUpdater& interiorVisibilityUpdater,
                                        MapMode::SdkModel::IMapModeModel& mapModeModel,
+                                       WeatherMenu::SdkModel::IWeatherController& weatherController,
                                        ExampleAppMessaging::TMessageBus& messageBus,
                                        Metrics::IMetricsService& metricsService,
                                        ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
@@ -59,6 +61,7 @@ namespace ExampleApp
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
                 InteriorVisibilityUpdater& m_interiorVisibilityUpdater;
                 MapMode::SdkModel::IMapModeModel& m_mapModeModel;
+                WeatherMenu::SdkModel::IWeatherController& m_weatherController;
 
                 ExampleAppMessaging::TMessageBus& m_messageBus;
                 Metrics::IMetricsService& m_metricsService;
@@ -70,6 +73,7 @@ namespace ExampleApp
                 Eegeo::Helpers::TCallback1<InteriorsExplorerModel, const InteriorsExplorerExitMessage&> m_exitCallback;
                 Eegeo::Helpers::TCallback1<InteriorsExplorerModel, const InteriorsExplorerSelectFloorMessage&> m_selectFloorCallback;
 
+                std::string m_previousWeatherState;
                 bool m_previouslyInMapMode;
                 bool m_tourIsActive;
                 

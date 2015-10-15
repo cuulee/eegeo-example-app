@@ -9,6 +9,7 @@
 #include "AppCameraHelpers.h"
 #include "CameraHelpers.h"
 #include "EcefTangentBasis.h"
+#include "MathsHelpers.h"
 
 namespace ExampleApp
 {
@@ -24,6 +25,8 @@ namespace ExampleApp
             AppCameraController::AppCameraController()
             : m_currentCameraIndex(0)
             , m_previousCameraIndex(0)
+            , m_transitionDuration(0.75f)
+            , m_transitionTimer(0.0f)
             {
                 nextHandleId = -1;
             }
@@ -79,46 +82,54 @@ namespace ExampleApp
             {
                 if(m_isTransitionInFlight)
                 {
-                    m_transitionTimer = Eegeo::Math::Clamp01(m_transitionTimer + dt);
+                    m_transitionTimer = Eegeo::Math::Clamp(m_transitionTimer + dt, 0.0f, m_transitionDuration);
                     
-                    if(m_transitionTimer >= 1.0f)
+                    if(m_transitionTimer >= m_transitionDuration)
                     {
                         m_isTransitionInFlight = false;
                     }
                     
-                    m_cameras[m_previousCameraIndex]->Update(dt);
-                    m_cameras[m_currentCameraIndex]->Update(dt);
-                    
-                    const Eegeo::Camera::RenderCamera startCamera = m_cameras[m_previousCameraIndex]->GetRenderCamera();
-                    const Eegeo::Camera::RenderCamera endCamera = m_cameras[m_currentCameraIndex]->GetRenderCamera();
-                    
-                    const Eegeo::dv3 startPos = startCamera.GetEcefLocation();
-                    const Eegeo::dv3 endPos = endCamera.GetEcefLocation();
-                    m_currentPosition = Eegeo::dv3::Lerp(startPos, endPos, m_transitionTimer);
-                    
-                    const Eegeo::m33 startOrientation = startCamera.GetModelMatrix();
-                    const Eegeo::m33 endOrientation = endCamera.GetModelMatrix();
-                    
-                    const Eegeo::Quaternion startRotation = Eegeo::Quaternion::ExtractQuaternion(startOrientation);
-                    const Eegeo::Quaternion endRotation = Eegeo::Quaternion::ExtractQuaternion(endOrientation);
-                    
-                    Eegeo::Quaternion currentRotation;
-                    Eegeo::Quaternion::Slerp(currentRotation, startRotation, endRotation, m_transitionTimer);
-                    Helpers::GetMatrixFromQuaternion(currentRotation, m_currentOrientation);
-                    
-                    const float fov = Eegeo::Math::Lerp(startCamera.GetFOV(), endCamera.GetFOV(), m_transitionTimer);
-                    const float near = Eegeo::Math::Lerp(startCamera.GetNearClip(), endCamera.GetNearClip(), m_transitionTimer);
-                    const float far = Eegeo::Math::Lerp(startCamera.GetFarClip(), endCamera.GetFarClip(), m_transitionTimer);
-                    
-                    m_renderCamera.SetProjection(fov, near, far);
-                    m_renderCamera.SetEcefLocation(m_currentPosition);
-                    m_renderCamera.SetOrientationMatrix(m_currentOrientation);
+                    UpdateTransitionBetween(*m_cameras[m_previousCameraIndex], *m_cameras[m_currentCameraIndex], dt);
                 }
                 else
                 {
                     m_cameras[m_currentCameraIndex]->Update(dt);
                     m_renderCamera = m_cameras[m_currentCameraIndex]->GetRenderCamera();
                 }
+            }
+            
+            void AppCameraController::UpdateTransitionBetween(IAppCamera &previousCamera, IAppCamera &nextCamera, float dt)
+            {
+                previousCamera.Update(dt);
+                nextCamera.Update(dt);
+                
+                const Eegeo::Camera::RenderCamera startCamera = previousCamera.GetRenderCamera();
+                const Eegeo::Camera::RenderCamera endCamera = nextCamera.GetRenderCamera();
+                
+                float t = Eegeo::Math::Clamp01(m_transitionTimer/m_transitionDuration);
+                float easedT = Eegeo::Helpers::MathsHelpers::PennerQuadraticEaseInOut(t, 0.0f, 1.0f, 1.0f);
+                
+                const Eegeo::dv3 startPos = startCamera.GetEcefLocation();
+                const Eegeo::dv3 endPos = endCamera.GetEcefLocation();
+                m_currentPosition = Eegeo::dv3::Lerp(startPos, endPos, easedT);
+                
+                const Eegeo::m33 startOrientation = startCamera.GetModelMatrix();
+                const Eegeo::m33 endOrientation = endCamera.GetModelMatrix();
+                
+                const Eegeo::Quaternion startRotation = Eegeo::Quaternion::ExtractQuaternion(startOrientation);
+                const Eegeo::Quaternion endRotation = Eegeo::Quaternion::ExtractQuaternion(endOrientation);
+                
+                Eegeo::Quaternion currentRotation;
+                Eegeo::Quaternion::Slerp(currentRotation, startRotation, endRotation, easedT);
+                Helpers::GetMatrixFromQuaternion(currentRotation, m_currentOrientation);
+                
+                const float fov = Eegeo::Math::Lerp(startCamera.GetFOV(), endCamera.GetFOV(), easedT);
+                const float near = Eegeo::Math::Lerp(startCamera.GetNearClip(), endCamera.GetNearClip(), easedT);
+                const float far = Eegeo::Math::Lerp(startCamera.GetFarClip(), endCamera.GetFarClip(), easedT);
+                
+                m_renderCamera.SetProjection(fov, near, far);
+                m_renderCamera.SetEcefLocation(m_currentPosition);
+                m_renderCamera.SetOrientationMatrix(m_currentOrientation);
             }
         }
     }

@@ -14,6 +14,7 @@
 #include "SdkModelDomainEventBus.h"
 #include "Metrics.h"
 #include "IIdentity.h"
+#include "WeatherMenu.h"
 
 namespace ExampleApp
 {
@@ -29,6 +30,7 @@ namespace ExampleApp
                                         Eegeo::Resources::Interiors::Markers::InteriorMarkerModelRepository& markerRepository,
                                         WorldPins::SdkModel::IWorldPinsService& worldPinsService,
                                         ExampleApp::MapMode::SdkModel::IMapModeModel& mapModeModel,
+                                        WeatherMenu::SdkModel::IWeatherController& weatherController,
                                         Eegeo::Camera::GlobeCamera::GlobeCameraControllerFactory& globeCameraControllerFactory,
                                         const Eegeo::Rendering::ScreenProperties& screenProperties,
                                         Eegeo::Helpers::IIdentityProvider& identityProvider,
