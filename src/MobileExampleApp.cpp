@@ -456,7 +456,6 @@ namespace ExampleApp
                                                                                                      m_screenProperties,
                                                                                                      m_identityProvider,
                                                                                                      m_messageBus,
-                                                                                                     m_sdkDomainEventBus,
                                                                                                      m_metricsService);
         
         InitialiseToursModules(mapModule, world);

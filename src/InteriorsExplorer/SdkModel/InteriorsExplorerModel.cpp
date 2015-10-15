@@ -43,8 +43,7 @@ namespace ExampleApp
                                                            MapMode::SdkModel::IMapModeModel& mapModeModel,
                                                            WeatherMenu::SdkModel::IWeatherController& weatherController,
                                                            ExampleAppMessaging::TMessageBus& messageBus,
-                                                           Metrics::IMetricsService& metricsService,
-                                                           ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus)
+                                                           Metrics::IMetricsService& metricsService)
             : m_controller(controller)
             , m_interiorSelectionModel(interiorSelectionModel)
             , m_interiorVisibilityUpdater(interiorVisibilityUpdater)
@@ -58,9 +57,6 @@ namespace ExampleApp
             , m_exitCallback(this, &InteriorsExplorerModel::OnExit)
             , m_selectFloorCallback(this, &InteriorsExplorerModel::OnSelectFloor)
             , m_previouslyInMapMode(false)
-            , m_tourIsActive(false)
-            , m_sdkDomainEventBus(sdkDomainEventBus)
-            , m_tourStateChangedBinding(this, &InteriorsExplorerModel::OnTourStateChanged)
             , m_interiorExplorerEnabled(false)
             {
                 m_controller.RegisterStateChangedCallback(m_controllerStateChangedCallback);
@@ -69,14 +65,10 @@ namespace ExampleApp
                 
                 m_messageBus.SubscribeNative(m_exitCallback);
                 m_messageBus.SubscribeNative(m_selectFloorCallback);
-                
-                m_sdkDomainEventBus.Subscribe(m_tourStateChangedBinding);
             }
             
             InteriorsExplorerModel::~InteriorsExplorerModel()
             {
-                m_sdkDomainEventBus.Unsubscribe(m_tourStateChangedBinding);
-                
                 m_messageBus.UnsubscribeNative(m_selectFloorCallback);
                 m_messageBus.UnsubscribeNative(m_exitCallback);
 
@@ -186,16 +178,6 @@ namespace ExampleApp
                                                                           floor,
                                                                           floorName,
                                                                           floorShortNames));
-            }
-            
-            void InteriorsExplorerModel::OnTourStateChanged(const Tours::TourStateChangedMessage& message)
-            {
-                m_tourIsActive = message.TourStarted();
-                
-                if(!message.TourStarted() && m_controller.InteriorIsVisible())
-                {
-                    PublishInteriorExplorerStateChange();
-                }
             }
             
             void InteriorsExplorerModel::InsertInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback)

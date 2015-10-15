@@ -10,9 +10,6 @@
 #include "ITouchController.h"
 #include "VectorMath.h"
 
-#include "SdkModelDomainEventBus.h"
-#include "TourStateChangedMessage.h"
-
 namespace ExampleApp
 {
     namespace InteriorsExplorer

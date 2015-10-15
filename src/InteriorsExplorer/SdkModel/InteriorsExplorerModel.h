@@ -12,8 +12,6 @@
 #include "InteriorId.h"
 #include "Metrics.h"
 #include "AppModes.h"
-#include "SdkModelDomainEventBus.h"
-#include "TourStateChangedMessage.h"
 #include "InteriorsExplorer.h"
 #include "WeatherMenu.h"
 
@@ -33,8 +31,7 @@ namespace ExampleApp
                                        MapMode::SdkModel::IMapModeModel& mapModeModel,
                                        WeatherMenu::SdkModel::IWeatherController& weatherController,
                                        ExampleAppMessaging::TMessageBus& messageBus,
-                                       Metrics::IMetricsService& metricsService,
-                                       ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus);
+                                       Metrics::IMetricsService& metricsService);
                 ~InteriorsExplorerModel();
                 
                 void SelectFloor(int floor);
@@ -75,11 +72,6 @@ namespace ExampleApp
 
                 std::string m_previousWeatherState;
                 bool m_previouslyInMapMode;
-                bool m_tourIsActive;
-                
-                ExampleAppMessaging::TSdkModelDomainEventBus& m_sdkDomainEventBus;
-                Eegeo::Helpers::TCallback1<InteriorsExplorerModel, const ExampleApp::Tours::TourStateChangedMessage&> m_tourStateChangedBinding;
-                void OnTourStateChanged(const Tours::TourStateChangedMessage& message);
                 
                 bool m_interiorExplorerEnabled;
                 Eegeo::Helpers::CallbackCollection0 m_interiorExplorerExitedCallbacks;

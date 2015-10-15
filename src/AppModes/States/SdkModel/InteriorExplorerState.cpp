@@ -13,6 +13,7 @@
 #include "GpsGlobeCameraController.h"
 #include "CameraHelpers.h"
 #include "EcefTangentBasis.h"
+#include "LatLongAltitude.h"
 
 namespace ExampleApp
 {

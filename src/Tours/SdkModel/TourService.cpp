@@ -6,7 +6,6 @@
 #include "ITourStateMachine.h"
 #include "IToursCameraTransitionController.h"
 #include "TourOnMapSelectedMessage.h"
-#include "TourStateChangedMessage.h"
 #include "WorldPinsVisibilityMessage.h"
 #include "WorldPinVisibility.h"
 
@@ -81,7 +80,6 @@ namespace ExampleApp
                 m_activeTourState = atCard;
                 
                 m_messageBus.Publish(TourOnMapSelectedMessage(m_activeTourModel, atCard));
-                m_sdkDomainEventBus.Publish(TourStateChangedMessage(true));
                 m_sdkDomainEventBus.Publish(WorldPins::WorldPinsVisibilityMessage(WorldPins::SdkModel::WorldPinVisibility::TourPin));
                 m_tourStartedCallbacks.ExecuteCallbacks();
             }
@@ -112,9 +110,6 @@ namespace ExampleApp
                     // Don't return to app camera if we're going to another tour.
                     if(m_previousActiveToursStack.size() == 0)
                     {
-                        Eegeo_TTY("Back to app camera");
-                        m_sdkDomainEventBus.Publish(TourStateChangedMessage(false));
-                        
                         m_sdkDomainEventBus.Publish(WorldPins::WorldPinsVisibilityMessage(WorldPins::SdkModel::WorldPinVisibility::World | WorldPins::SdkModel::WorldPinVisibility::Search | WorldPins::SdkModel::WorldPinVisibility::UserPin));
                     }
                     else if(m_previousActiveToursStack.size() > 0)
