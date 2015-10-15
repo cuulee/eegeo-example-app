@@ -28,7 +28,6 @@ namespace ExampleApp
                                                              const Eegeo::Rendering::ScreenProperties& screenProperties,
                                                              Eegeo::Helpers::IIdentityProvider& identityProvider,
                                                              ExampleAppMessaging::TMessageBus& messageBus,
-                                                             ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus,
                                                              Metrics::IMetricsService& metricsService)
             {
                 
@@ -63,8 +62,7 @@ namespace ExampleApp
                                                              mapModeModel,
                                                              weatherController,
                                                              messageBus,
-                                                             metricsService,
-                                                             sdkDomainEventBus);
+                                                             metricsService);
                 
                 m_pViewModel = Eegeo_NEW(View::InteriorsExplorerViewModel)(false, identityProvider.GetNextIdentity());
             }

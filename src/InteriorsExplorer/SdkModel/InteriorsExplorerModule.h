@@ -11,7 +11,6 @@
 #include "Rendering.h"
 #include "MapMode.h"
 #include "BidirectionalBus.h"
-#include "SdkModelDomainEventBus.h"
 #include "Metrics.h"
 #include "IIdentity.h"
 #include "WeatherMenu.h"
@@ -35,7 +34,6 @@ namespace ExampleApp
                                         const Eegeo::Rendering::ScreenProperties& screenProperties,
                                         Eegeo::Helpers::IIdentityProvider& identityProvider,
                                         ExampleAppMessaging::TMessageBus& messageBus,
-                                        ExampleAppMessaging::TSdkModelDomainEventBus& sdkDomainEventBus,
                                         Metrics::IMetricsService& metricsService);
 
                 ~InteriorsExplorerModule();

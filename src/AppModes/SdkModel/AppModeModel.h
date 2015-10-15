@@ -5,8 +5,6 @@
 #include "IAppModeModel.h"
 #include "Interiors.h"
 #include "BidirectionalBus.h"
-#include "SdkModelDomainEventBus.h"
-#include "TourStateChangedMessage.h"
 #include "StateMachine.h"
 #include "IStateMachineState.h"
 #include "AppCamera.h"

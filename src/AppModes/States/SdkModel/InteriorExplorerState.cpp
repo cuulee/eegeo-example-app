@@ -15,6 +15,7 @@
 #include "EcefTangentBasis.h"
 #include "NativeUIFactories.h"
 #include "IAlertBoxFactory.h"
+#include "LatLongAltitude.h"
 
 namespace ExampleApp
 {
