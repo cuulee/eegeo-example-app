@@ -11,6 +11,7 @@
 #include "AppCamera.h"
 #include "AppModes.h"
 #include "Tours.h"
+#include "EegeoUI.h"
 
 namespace ExampleApp
 {
@@ -34,6 +35,7 @@ namespace ExampleApp
                     InteriorsExplorer::SdkModel::InteriorsExplorerModel& m_interiorsExplorerModel;
                     Tours::SdkModel::ITourService& m_tourService;
                     Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
+                    Eegeo::UI::NativeUIFactories& m_nativeUIFactories;
                     
                 public:
                     
@@ -47,7 +49,8 @@ namespace ExampleApp
                                          InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
                                          AppModes::SdkModel::IAppModeModel& appModeModel,
                                          Tours::SdkModel::ITourService& tourService,
-                                         Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel);
+                                         Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
+                                         Eegeo::UI::NativeUIFactories& nativeUIFactories);
                     
                     ~AppModeStatesFactory()
                     {

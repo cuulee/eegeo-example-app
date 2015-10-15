@@ -257,11 +257,9 @@ namespace ExampleApp
                                                                                        Eegeo::Streaming::QuadTreeCube::MAX_DEPTH_TO_VISIT,
                                                                                        mapModule.GetEnvironmentFlatteningService());
         
-        CreateApplicationModelModules(platformImplementedSearchServiceModules);
+        CreateApplicationModelModules(platformImplementedSearchServiceModules, nativeUIFactories);
         
         m_pLoadingScreen = CreateLoadingScreen(screenProperties, m_pWorld->GetRenderingModule(), m_pWorld->GetPlatformAbstractionModule());
-
-
         
         if(m_applicationConfiguration.TryStartAtGpsLocation())
         {
@@ -290,7 +288,8 @@ namespace ExampleApp
         m_pBlitter = NULL;
     }
 
-    void MobileExampleApp::CreateApplicationModelModules(const std::map<std::string,ExampleApp::Search::SdkModel::ISearchServiceModule*>& platformImplementedSearchServiceModules)
+    void MobileExampleApp::CreateApplicationModelModules(const std::map<std::string,ExampleApp::Search::SdkModel::ISearchServiceModule*>& platformImplementedSearchServiceModules,
+                                                         Eegeo::UI::NativeUIFactories& nativeUIFactories)
     {
         Eegeo::EegeoWorld& world = *m_pWorld;
 
@@ -508,7 +507,8 @@ namespace ExampleApp
                                                                               m_pInteriorsExplorerModule->GetInteriorsExplorerModel(),
                                                                               *m_pAppModeModel,
                                                                               m_pToursModule->GetTourService(),
-                                                                              interiorsPresentationModule.GetInteriorSelectionModel());
+                                                                              interiorsPresentationModule.GetInteriorSelectionModel(),
+                                                                              nativeUIFactories);
         
         m_pAppModeModel->InitialiseStateMachine(appModeStatesFactory.CreateStateMachineStates());
     }

@@ -12,6 +12,8 @@
 #include <vector>
 #include "AppModes.h"
 #include "GlobeCamera.h"
+#include "EegeoUI.h"
+#include "ISingleOptionAlertBoxDismissedHandler.h"
 
 namespace ExampleApp
 {
@@ -40,15 +42,18 @@ namespace ExampleApp
                     int m_interiorCameraHandle;
                     Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& m_worldCameraController;
                     ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& m_interiorsCameraController;
+                    Eegeo::UI::NativeUIFactories& m_nativeUIFactories;
+                    Eegeo::UI::NativeAlerts::TSingleOptionAlertBoxDismissedHandler<InteriorExplorerState> m_failAlertHandler;
                     
                     Eegeo::Resources::Interiors::InteriorController& m_interiorController;
-                    
                     
                     Helpers::StateMachine* m_pSubStateMachine;
                     std::vector<Helpers::IStateMachineState*> m_subStates;
                     
                     AppModes::SdkModel::IAppModeModel& m_appModeModel;
                     
+                    void OnFailAlertBoxDismissed();
+                
                 public:
                     
                     InteriorExplorerState(AppCamera::SdkModel::IAppCameraController& cameraController,
@@ -59,7 +64,8 @@ namespace ExampleApp
                                           InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
                                           AppModes::SdkModel::IAppModeModel& appModeModel,
                                           Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& worldCameraController,
-                                          ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorsCameraController);
+                                          ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorsCameraController,
+                                          Eegeo::UI::NativeUIFactories& nativeUIFactories);
                     
                     ~InteriorExplorerState();
                     
@@ -72,6 +78,8 @@ namespace ExampleApp
                     void SetSubState(InteriorExplorerSubStates::Values stateIndex);
                     
                     void ReturnToWorldMode();
+                    
+                    void ShowFailMessage();
                 };
             }
         }

@@ -159,7 +159,8 @@ namespace ExampleApp
         
         const bool m_interiorsEnabled;
 
-        void CreateApplicationModelModules(const std::map<std::string,ExampleApp::Search::SdkModel::ISearchServiceModule*>& platformImplementedSearchServiceModules);
+        void CreateApplicationModelModules(const std::map<std::string,ExampleApp::Search::SdkModel::ISearchServiceModule*>& platformImplementedSearchServiceModules,
+                                           Eegeo::UI::NativeUIFactories& nativeUIFactories);
 
         void DestroyApplicationModelModules();
 

@@ -13,6 +13,8 @@
 #include "GpsGlobeCameraController.h"
 #include "CameraHelpers.h"
 #include "EcefTangentBasis.h"
+#include "NativeUIFactories.h"
+#include "IAlertBoxFactory.h"
 
 namespace ExampleApp
 {
@@ -30,13 +32,16 @@ namespace ExampleApp
                                                              InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
                                                              AppModes::SdkModel::IAppModeModel& appModeModel,
                                                              Eegeo::Camera::GlobeCamera::GpsGlobeCameraController& worldCameraController,
-                                                             ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorsCameraController)
+                                                             ExampleApp::InteriorsExplorer::SdkModel::InteriorsExplorerCameraController& interiorsCameraController,
+                                                             Eegeo::UI::NativeUIFactories& nativeUIFactories)
                 : m_cameraController(cameraController)
                 , m_interiorController(interiorController)
                 , m_interiorCameraHandle(interiorCameraHandle)
                 , m_appModeModel(appModeModel)
                 , m_worldCameraController(worldCameraController)
                 , m_interiorsCameraController(interiorsCameraController)
+                , m_nativeUIFactories(nativeUIFactories)
+                , m_failAlertHandler(this, &InteriorExplorerState::OnFailAlertBoxDismissed)
                 {
                     
                     m_subStates.push_back(Eegeo_NEW(InteriorsExplorer::SdkModel::States::InteriorExplorerSetupState)(*this, cameraController, interiorCameraHandle));
@@ -117,6 +122,15 @@ namespace ExampleApp
                 void InteriorExplorerState::ReturnToWorldMode()
                 {
                     m_appModeModel.SetAppMode(AppModes::SdkModel::WorldMode);
+                }
+                
+                void InteriorExplorerState::ShowFailMessage()
+                {
+                    m_nativeUIFactories.AlertBoxFactory().CreateSingleOptionAlertBox("Error", "We couldn't find the data for this interior", m_failAlertHandler);
+                }
+                
+                void InteriorExplorerState::OnFailAlertBoxDismissed()
+                {
                 }
             }
         }

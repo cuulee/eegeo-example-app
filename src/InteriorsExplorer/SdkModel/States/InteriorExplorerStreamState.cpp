@@ -42,7 +42,7 @@ namespace ExampleApp
                     m_timeUntilTimeout -= dt;
                     if(m_timeUntilTimeout <=0.0f)
                     {
-                        // TODO: Notify failure to stream
+                        m_parentState.ShowFailMessage();
                         m_parentState.SetSubState(AppModes::States::SdkModel::InteriorExplorerSubStates::Exit);
                         return;
                     }

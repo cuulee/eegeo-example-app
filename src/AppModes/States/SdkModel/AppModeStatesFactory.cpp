@@ -28,7 +28,8 @@ namespace ExampleApp
                                                            InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModule,
                                                            AppModes::SdkModel::IAppModeModel& appModeModel,
                                                            Tours::SdkModel::ITourService& tourService,
-                                                           Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel)
+                                                           Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
+                                                           Eegeo::UI::NativeUIFactories& nativeUIFactories)
                 : m_appCameraController(appCameraController)
                 , m_interiorController(interiorController)
                 , m_worldCameraController(worldCameraController)
@@ -40,6 +41,7 @@ namespace ExampleApp
                 , m_appModeModel(appModeModel)
                 , m_tourService(tourService)
                 , m_interiorSelectionModel(interiorSelectionModel)
+                , m_nativeUIFactories(nativeUIFactories)
                 {
                     
                 }
@@ -66,7 +68,8 @@ namespace ExampleApp
                                                                                         m_interiorsExplorerModel,
                                                                                         m_appModeModel,
                                                                                         m_worldCameraController.GetGlobeCameraController(),
-                                                                                        m_interiorCameraController));
+                                                                                        m_interiorCameraController,
+                                                                                        m_nativeUIFactories));
                     
                     states.push_back(Eegeo_NEW(States::SdkModel::TourState)(m_appCameraController,
                                                                             toursCameraHandle,
