@@ -989,14 +989,8 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchRotate(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchRotate(data);
-        }
+        m_pCurrentTouchController->Event_TouchRotate(data);
+        
     }
 
     void MobileExampleApp::Event_TouchRotate_Start(const AppInterface::RotateData& data)
@@ -1006,14 +1000,7 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchRotate_Start(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchRotate_Start(data);
-        }
+        m_pCurrentTouchController->Event_TouchRotate_Start(data);
     }
 
     void MobileExampleApp::Event_TouchRotate_End(const AppInterface::RotateData& data)
@@ -1023,14 +1010,7 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchRotate_End(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchRotate_End(data);
-        }
+        m_pCurrentTouchController->Event_TouchRotate_End(data);
     }
 
     void MobileExampleApp::Event_TouchPinch(const AppInterface::PinchData& data)
@@ -1040,14 +1020,7 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchPinch(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchPinch(data);
-        }
+        m_pCurrentTouchController->Event_TouchPinch(data);
     }
 
     void MobileExampleApp::Event_TouchPinch_Start(const AppInterface::PinchData& data)
@@ -1057,14 +1030,7 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchPinch_Start(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchPinch_Start(data);
-        }
+        m_pCurrentTouchController->Event_TouchPinch_Start(data);
     }
 
     void MobileExampleApp::Event_TouchPinch_End(const AppInterface::PinchData& data)
@@ -1074,14 +1040,7 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchPinch_End(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchPinch_End(data);
-        }
+        m_pCurrentTouchController->Event_TouchPinch_End(data);
     }
 
     void MobileExampleApp::Event_TouchPan(const AppInterface::PanData& data)
@@ -1092,14 +1051,7 @@ namespace ExampleApp
             return;
         }
         
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchPan(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchPan(data);
-        }
+        m_pCurrentTouchController->Event_TouchPan(data);
     }
 
     void MobileExampleApp::Event_TouchPan_Start(const AppInterface::PanData& data)
@@ -1110,14 +1062,7 @@ namespace ExampleApp
             return;
         }
         
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchPan_Start(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchPan_Start(data);
-        }
+        m_pCurrentTouchController->Event_TouchPan_Start(data);
     }
 
     void MobileExampleApp::Event_TouchPan_End(const AppInterface::PanData& data)
@@ -1128,14 +1073,7 @@ namespace ExampleApp
             return;
         }
         
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchPan_End(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchPan_End(data);
-        }
+        m_pCurrentTouchController->Event_TouchPan_End(data);
     }
 
     void MobileExampleApp::Event_TouchTap(const AppInterface::TapData& data)
@@ -1150,14 +1088,7 @@ namespace ExampleApp
             return;
         }
         
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchTap(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchTap(data);
-        }
+        m_pCurrentTouchController->Event_TouchTap(data);
     }
 
     void MobileExampleApp::Event_TouchDoubleTap(const AppInterface::TapData& data)
@@ -1167,14 +1098,7 @@ namespace ExampleApp
             return;
         }
 
-        if(IsTourCameraActive())
-        {
-            ToursModule().GetCameraTouchController().Event_TouchDoubleTap(data);
-        }
-        else
-        {
-            m_pCurrentTouchController->Event_TouchDoubleTap(data);
-        }
+        m_pCurrentTouchController->Event_TouchDoubleTap(data);
     }
 
     void MobileExampleApp::Event_TouchDown(const AppInterface::TouchData& data)
@@ -1187,16 +1111,8 @@ namespace ExampleApp
         MyPinCreation::PoiRing::SdkModel::IPoiRingTouchController& poiRingTouchController = m_pPoiRingModule->GetPoiRingTouchController();
         if (!poiRingTouchController.HandleTouchDown(data, m_pGlobeCameraController->GetRenderCamera(), m_pGlobeCameraController->GetGlobeCameraController()))
         {
-            if(IsTourCameraActive())
-            {
-                ToursModule().GetCameraTouchController().Event_TouchDown(data);
-            }
-            else
-            {
-                m_pCurrentTouchController->Event_TouchDown(data);
-            }
+            m_pCurrentTouchController->Event_TouchDown(data);
         }
-
     }
 
     void MobileExampleApp::Event_TouchMove(const AppInterface::TouchData& data)
@@ -1209,14 +1125,7 @@ namespace ExampleApp
         MyPinCreation::PoiRing::SdkModel::IPoiRingTouchController& poiRingTouchController = m_pPoiRingModule->GetPoiRingTouchController();
         if (!poiRingTouchController.HandleTouchMove(data, m_pGlobeCameraController->GetRenderCamera(), m_pGlobeCameraController->GetGlobeCameraController()))
         {
-            if(IsTourCameraActive())
-            {
-                ToursModule().GetCameraTouchController().Event_TouchUp(data);
-            }
-            else
-            {
-                m_pCurrentTouchController->Event_TouchUp(data);
-            }
+            m_pCurrentTouchController->Event_TouchUp(data);
         }
     }
 
@@ -1230,14 +1139,7 @@ namespace ExampleApp
         MyPinCreation::PoiRing::SdkModel::IPoiRingTouchController& poiRingTouchController = m_pPoiRingModule->GetPoiRingTouchController();
         if (!poiRingTouchController.HandleTouchUp(data))
         {
-            if(IsTourCameraActive())
-            {
-                ToursModule().GetCameraTouchController().Event_TouchUp(data);
-            }
-            else
-            {
-                m_pCurrentTouchController->Event_TouchUp(data);
-            }
+            m_pCurrentTouchController->Event_TouchUp(data);
         }
     }
     
