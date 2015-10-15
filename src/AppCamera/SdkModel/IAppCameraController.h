@@ -6,6 +6,7 @@
 #include "AppCamera.h"
 #include "Camera.h"
 #include "GlobeCamera.h"
+#include "ITouchController.h"
 
 namespace ExampleApp
 {
@@ -30,6 +31,8 @@ namespace ExampleApp
                 virtual const Eegeo::Camera::CameraState GetCameraState() = 0;
                 
                 virtual const Eegeo::Camera::RenderCamera& GetRenderCamera() = 0;
+                
+                virtual Eegeo::ITouchController& GetTouchController() = 0;
                 
                 virtual void Update(float dt) = 0;
             };
