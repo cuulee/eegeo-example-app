@@ -263,16 +263,14 @@
     m_isInterruptingTour = YES;
     m_nextTour = tour;
     
-    CGRect offFrame = self.frame;
+    CGRect offFrame = self->m_pCarouselContainer.frame;
     offFrame.origin.y = m_yPosInactive;
-    
-    CGRect onFrame = self.frame;
-    onFrame.origin.y = m_yPosActive;
 
     [self.layer removeAllAnimations];
     
     [UIView animateWithDuration:m_stateChangeAnimationTimeSeconds animations:^{
-        self.frame = offFrame;
+        self->m_pCarouselContainer.frame = offFrame;
+        self.pDetailsPanel.alpha = 0.0f;
         
     } completion:^(BOOL finished) {
         if(finished)
@@ -284,11 +282,6 @@
             [self layoutIfNeeded];
 
             [self configureViewForTour:m_nextTour :0];
-            
-            [UIView animateWithDuration:m_stateChangeAnimationTimeSeconds animations:^{
-                self.frame = onFrame;
-            } completion:^(BOOL finished) {
-            }];
         }
     }];
 }
@@ -354,14 +347,24 @@
     return CGRectContainsPoint(self.pDetailsPanel.frame, touchLocation) || CGRectContainsPoint(m_pCarouselContainer.frame, touchLocation);
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView *hitView = [super hitTest:point withEvent:event];
+    if (hitView == self) return nil;
+    return hitView;
+}
+
 - (void) setOnScreenStateToIntermediateValue:(float)onScreenState
 {
     float newY = m_yPosInactive + (m_yPosActive - m_yPosInactive) * onScreenState;
     
     self.hidden = onScreenState == 0.0f;
-    CGRect f = self.frame;
+    
+    CGRect f = self->m_pCarouselContainer.frame;
     f.origin.y = newY;
-    self.frame = f;
+    self->m_pCarouselContainer.frame = f;
+    
+    self.pDetailsPanel.alpha = onScreenState;
 }
 
 - (void) setFullyOnScreen
@@ -371,7 +374,7 @@
         return;
     }
     
-    [self animateToY:m_yPosActive];
+    [self animateTo:1.0f];
 }
 
 - (void) setFullyOffScreen
@@ -381,15 +384,17 @@
         return;
     }
     
-    [self animateToY:m_yPosInactive];
+    [self animateTo:0.0f];
 }
 
-- (void) animateToY:(float)y
+- (void) animateTo:(float)t
 {
-    CGRect f = self.frame;
+    float y = m_yPosInactive + (m_yPosActive - m_yPosInactive) * t;
+    
+    CGRect f = self->m_pCarouselContainer.frame;
     f.origin.y = y;
     
-    if(y != m_yPosInactive)
+    if(t > 0.0f)
     {
         self.hidden = false;
     }
@@ -397,11 +402,12 @@
     [UIView animateWithDuration:m_stateChangeAnimationTimeSeconds
                      animations:^
      {
-         self.frame = f;
+         self->m_pCarouselContainer.frame = f;
+         self.pDetailsPanel.alpha = t;
      }
                      completion:^(BOOL finished)
      {
-         self.hidden = (y == m_yPosInactive);
+         self.hidden = (t == 0.0f);
          
          if(self.hidden && m_exitingTour)
          {
@@ -414,12 +420,12 @@
 - (void)handleExitButtonTap
 {
     m_exitingTour = true;
-    [self animateToY:m_yPosInactive];
+    [self animateTo:0.0f];
 }
 
 -(float) controlHeight
 {
-    return static_cast<float>(self.frame.size.height);
+    return static_cast<float>(m_pCarouselContainer.frame.size.height);
 }
 
 @end
