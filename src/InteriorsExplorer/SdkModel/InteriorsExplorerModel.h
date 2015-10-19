@@ -37,8 +37,8 @@ namespace ExampleApp
                 void SelectFloor(int floor);
                 
                 void ShowInteriorExplorer();
-                
                 void HideInteriorExplorer();
+                void Exit();
                 
                 void InsertInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback);
                 void RemoveInteriorExplorerExitedCallback(Eegeo::Helpers::ICallback0& callback);

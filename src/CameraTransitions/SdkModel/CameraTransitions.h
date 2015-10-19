@@ -8,7 +8,13 @@ namespace ExampleApp
     {
         namespace SdkModel
         {
+            class CameraTransitionService;
             class ICameraTransitionController;
+            class ICameraTransitionStage;
+            
+            class TransitionToWorldPointStage;
+            class ExitCurrentInteriorStage;
+            class TransitionToInteriorStage;
         }
     }
 }

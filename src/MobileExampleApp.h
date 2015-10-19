@@ -78,6 +78,7 @@
 #include "IToursModule.h"
 #include "IAppCameraModule.h"
 #include "IInteriorsCustomMaterialsModule.h"
+#include "CameraTransitionService.h"
 
 namespace ExampleApp
 {
@@ -101,6 +102,7 @@ namespace ExampleApp
         const bool m_enableTours;
 
         CameraTransitions::SdkModel::ICameraTransitionController* m_pCameraTransitionController;
+        CameraTransitions::SdkModel::CameraTransitionService* m_pCameraTransitionService;
 
         ExampleApp::PersistentSettings::IPersistentSettingsModel& m_persistentSettings;
         ExampleApp::Metrics::IMetricsService& m_metricsService;
@@ -228,7 +230,7 @@ namespace ExampleApp
         
         CameraTransitions::SdkModel::ICameraTransitionController& CameraTransitionController() const
         {
-            return *m_pCameraTransitionController;
+            return *m_pCameraTransitionService;
         }
 
         const ExampleApp::SecondaryMenu::SdkModel::ISecondaryMenuModule& SecondaryMenuModule() const

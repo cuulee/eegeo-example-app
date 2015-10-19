@@ -46,10 +46,13 @@ namespace ExampleApp
                 void Update(float dt);
                 
                 void SetInterestLocation(const Eegeo::dv3& interestPointEcef);
+                const Eegeo::dv3& GetInterestLocation() const;
                 
                 void SetDistanceToInterest(float distanceMeters);
+                const float GetDistanceToInterest() const;
                 
                 void SetHeading(float headingDegrees);
+                const float GetHeadingDegrees() const;
                 
                 void SetTilt(float tiltDegrees);
                 

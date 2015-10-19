@@ -249,8 +249,11 @@ namespace ExampleApp
         Eegeo::Camera::CameraHelpers::EcefTangentBasisFromPointAndHeading(location.ToECEF(), cameraControllerOrientationDegrees, cameraInterestBasis);
 
         m_pGlobeCameraController->SetView(cameraInterestBasis, cameraControllerDistanceFromInterestPointMeters);
+        
+        
+        Eegeo::Modules::Map::Layers::InteriorsPresentationModule& interiorsPresentationModule = mapModule.GetInteriorsPresentationModule();
 
-        m_pCameraTransitionController = Eegeo_NEW(ExampleApp::CameraTransitions::SdkModel::CameraTransitionController)(*m_pGlobeCameraController, *m_pNavigationService, terrainModelModule.GetTerrainHeightProvider());
+        m_pCameraTransitionService = Eegeo_NEW(ExampleApp::CameraTransitions::SdkModel::CameraTransitionService)();
 
         m_pStreamingVolume = Eegeo_NEW(Eegeo::Streaming::CameraFrustumStreamingVolume)(mapModule.GetResourceCeilingProvider(),
                                                                                        Eegeo::Config::LodRefinementConfig::GetLodRefinementAltitudesForDeviceSpec(platformConfig.PerformanceConfig.DeviceSpecification),
@@ -258,6 +261,16 @@ namespace ExampleApp
                                                                                        mapModule.GetEnvironmentFlatteningService());
         
         CreateApplicationModelModules(platformImplementedSearchServiceModules, nativeUIFactories);
+        
+        m_pCameraTransitionController = Eegeo_NEW(ExampleApp::CameraTransitions::SdkModel::CameraTransitionController)(*m_pGlobeCameraController,
+                                                                                                                       m_pInteriorsExplorerModule->GetInteriorsCameraController(),
+                                                                                                                       *m_pNavigationService,
+                                                                                                                       terrainModelModule.GetTerrainHeightProvider(),
+                                                                                                                       *m_pAppModeModel,
+                                                                                                                       interiorsPresentationModule.GetInteriorSelectionModel(),
+                                                                                                                       interiorsPresentationModule.GetAppLevelController(),
+                                                                                                                       m_pInteriorsExplorerModule->GetInteriorsExplorerModel());
+        m_pCameraTransitionService->SetTransitionController(*m_pCameraTransitionController);
         
         m_pLoadingScreen = CreateLoadingScreen(screenProperties, m_pWorld->GetRenderingModule(), m_pWorld->GetPlatformAbstractionModule());
         
@@ -273,6 +286,7 @@ namespace ExampleApp
 
         DestroyApplicationModelModules();
 
+        Eegeo_DELETE m_pCameraTransitionService;
         Eegeo_DELETE m_pCameraTransitionController;
         Eegeo_DELETE m_pNavigationService;
         Eegeo_DELETE m_pGlobeCameraWrapper;
@@ -319,7 +333,7 @@ namespace ExampleApp
         
         m_pSearchModule = Eegeo_NEW(Search::SdkModel::SearchModule)(m_pSearchServiceModule->GetSearchService(),
                                                                     *m_pGlobeCameraController,
-                                                                    *m_pCameraTransitionController,
+                                                                    *m_pCameraTransitionService,
                                                                     m_messageBus,
                                                                     m_sdkDomainEventBus);
 
@@ -383,7 +397,7 @@ namespace ExampleApp
                                                                                 m_pSecondaryMenuModule->GetSecondaryMenuViewModel(),
                                                                                 m_messageBus,
                                                                                 m_sdkDomainEventBus,
-                                                                                *m_pCameraTransitionController,
+                                                                                *m_pCameraTransitionService,
                                                                                 m_pCategorySearchModule->GetCategorySearchRepository(),
                                                                                 m_pSearchModule->GetMyPinsSearchResultRefreshService(),
                                                                                 m_metricsService);
@@ -399,7 +413,7 @@ namespace ExampleApp
         m_pSearchResultMenuModule = Eegeo_NEW(SearchResultMenu::SdkModel::SearchResultMenuModule)(m_pSearchModule->GetSearchResultRepository(),
                                                                                                   m_pSearchModule->GetSearchQueryPerformer(),
                                                                                                   m_identityProvider,
-                                                                                                  *m_pCameraTransitionController,
+                                                                                                  *m_pCameraTransitionService,
                                                                                                   m_pReactionControllerModule->GetReactionControllerModel(),
                                                                                                   m_messageBus);
         
@@ -773,7 +787,7 @@ namespace ExampleApp
 
         eegeoWorld.EarlyUpdate(dt);
 
-        m_pCameraTransitionController->Update(dt);
+        m_pCameraTransitionService->Update(dt);
         m_pAppCameraModule->GetController().Update(dt);
         
         m_pAppModeModel->Update(dt);
@@ -1145,10 +1159,11 @@ namespace ExampleApp
     bool MobileExampleApp::CanAcceptTouch() const
     {
         const bool worldIsInitialising = World().Initialising();
+        const bool transitioning = m_pCameraTransitionService->IsTransitioning();
         
         InitialExperience::SdkModel::IInitialExperienceModel& initialExperienceModel = m_initialExperienceModule.GetInitialExperienceModel();
         const bool lockedCameraStepsCompleted = initialExperienceModel.LockedCameraStepsCompleted();
         
-        return !worldIsInitialising && lockedCameraStepsCompleted;
+        return !worldIsInitialising && lockedCameraStepsCompleted && !transitioning;
     }
 }

@@ -17,6 +17,8 @@
 #include "InteriorVisibilityUpdater.h"
 #include "IWeatherController.h"
 
+#include "ICameraTransitionController.h"
+
 namespace ExampleApp
 {
     namespace InteriorsExplorer
@@ -123,6 +125,11 @@ namespace ExampleApp
             }
         
             void InteriorsExplorerModel::OnExit(const InteriorsExplorerExitMessage& message)
+            {
+                Exit();
+            }
+            
+            void InteriorsExplorerModel::Exit()
             {
                 HideInteriorExplorer();
                 m_metricsService.SetEvent(MetricEventInteriorExitPressed);

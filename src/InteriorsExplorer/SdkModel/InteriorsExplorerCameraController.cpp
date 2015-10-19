@@ -141,9 +141,19 @@ namespace ExampleApp
                 m_globeCameraController.SetInterestBasis(cameraInterestBasis);
             }
             
+            const Eegeo::dv3& InteriorsExplorerCameraController::GetInterestLocation() const
+            {
+                return m_globeCameraController.GetInterestBasis().GetPointEcef();
+            }
+            
             void InteriorsExplorerCameraController::SetDistanceToInterest(float distanceMeters)
             {
                 m_globeCameraController.SetView(m_globeCameraController.GetInterestBasis(), distanceMeters);
+            }
+            
+            const float InteriorsExplorerCameraController::GetDistanceToInterest() const
+            {
+                return m_globeCameraController.GetDistanceToInterest();
             }
             
             void InteriorsExplorerCameraController::SetHeading(float headingDegrees)
@@ -153,6 +163,15 @@ namespace ExampleApp
                 Eegeo::Space::EcefTangentBasis cameraInterestBasis;
                 Eegeo::Camera::CameraHelpers::EcefTangentBasisFromPointAndHeading(ecefInterestPoint, headingDegrees, cameraInterestBasis);
                 m_globeCameraController.SetView(cameraInterestBasis, m_globeCameraController.GetDistanceToInterest());
+            }
+            
+            const float InteriorsExplorerCameraController::GetHeadingDegrees() const
+            {
+                Eegeo::Space::EcefTangentBasis cameraInterestBasis;
+                float headingRadians = Eegeo::Camera::CameraHelpers::GetAbsoluteBearingRadians(m_globeCameraController.GetInterestBasis().GetPointEcef(),
+                                                                                               m_globeCameraController.GetRenderCamera().GetModelMatrix().GetRow(2));
+                
+                return Eegeo::Math::Rad2Deg(headingRadians);
             }
             
             void InteriorsExplorerCameraController::SetTilt(float tiltDegrees)
