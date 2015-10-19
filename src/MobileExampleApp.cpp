@@ -83,6 +83,7 @@
 #include "InteriorsCustomMaterialsModule.h"
 #include "AppModeStatesFactory.h"
 #include "AppGlobeCameraWrapper.h"
+#include "NativeUIFactories.h"
 
 namespace ExampleApp
 {
@@ -329,7 +330,8 @@ namespace ExampleApp
                                                                                    m_identityProvider,
                                                                                    m_messageBus,
                                                                                    m_metricsService,
-                                                                                   *m_pAppModeModel);
+                                                                                   *m_pAppModeModel,
+                                                                                   m_pWorld->GetNativeUIFactories().AlertBoxFactory());
         
         m_pGpsMarkerModule = Eegeo_NEW(ExampleApp::GpsMarker::SdkModel::GpsMarkerModule)(m_pWorld->GetRenderingModule(),
                                                                                          m_platformAbstractions,

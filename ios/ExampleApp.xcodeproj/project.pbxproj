@@ -587,6 +587,8 @@
 		225FFA181A39EE8600C2282A /* SearchResultRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 225FFA131A39EE8600C2282A /* SearchResultRepository.cpp */; };
 		27C1F99B1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */; };
 		27C1F99C1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */; };
+		27CADB631BCFEA2A00805A27 /* SizeHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CADB611BCFEA2A00805A27 /* SizeHelpers.cpp */; };
+		27CADB641BCFEA2A00805A27 /* SizeHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27CADB611BCFEA2A00805A27 /* SizeHelpers.cpp */; };
 		27DB89B71BB3FEF00020CDA5 /* CombinedSearchService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DB89B31BB3FEF00020CDA5 /* CombinedSearchService.cpp */; };
 		27DB89B81BB3FEF00020CDA5 /* CombinedSearchService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DB89B31BB3FEF00020CDA5 /* CombinedSearchService.cpp */; };
 		27DB89B91BB3FEF00020CDA5 /* CombinedSearchServiceModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27DB89B51BB3FEF00020CDA5 /* CombinedSearchServiceModule.cpp */; };
@@ -1421,6 +1423,10 @@
 		BFDFC3D51BB2F5BA0099BAEC /* menu_list.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D11BB2F5BA0099BAEC /* menu_list.png */; };
 		BFDFC3D61BB2F5BA0099BAEC /* menu_list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D21BB2F5BA0099BAEC /* menu_list@2x.png */; };
 		BFDFC3D81BB2F5BA0099BAEC /* menu_list@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BFDFC3D31BB2F5BA0099BAEC /* menu_list@3x.png */; };
+		E002DEAF1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E002DEAD1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp */; };
+		E002DEB01BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E002DEAD1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp */; };
+		E002DEB41BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E002DEB21BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp */; };
+		E002DEB51BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E002DEB21BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp */; };
 		E016040E19EEC26E0029A035 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E016040D19EEC26E0029A035 /* Images.xcassets */; };
 		E06AE59B1B87207B000F85E3 /* AppModeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E06AE5981B87207B000F85E3 /* AppModeModel.cpp */; };
 		E06AE59C1B87207B000F85E3 /* AppModeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E06AE5981B87207B000F85E3 /* AppModeModel.cpp */; };
@@ -1449,10 +1455,8 @@
 		E0AEEF061B8CB0C700BA9BF0 /* place_pin_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0AEEEF81B8CB0C700BA9BF0 /* place_pin_right@3x.png */; };
 		E0ECCFFC1BC68A0700967A95 /* InteriorsCustomMaterialsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0ECCFFA1BC68A0700967A95 /* InteriorsCustomMaterialsModule.cpp */; };
 		E0ECD0001BC68B7700967A95 /* InteriorsCustomMaterialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0ECCFFE1BC68B7700967A95 /* InteriorsCustomMaterialFactory.cpp */; };
-		E0ECD0041BC690F900967A95 /* InteriorsCustomMaterialDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0ECD0021BC690F900967A95 /* InteriorsCustomMaterialDto.cpp */; };
 		E0ECD0521BC6D20000967A95 /* InteriorsCustomMaterialFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0ECCFFE1BC68B7700967A95 /* InteriorsCustomMaterialFactory.cpp */; };
 		E0ECD0531BC6D20400967A95 /* InteriorsCustomMaterialsModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0ECCFFA1BC68A0700967A95 /* InteriorsCustomMaterialsModule.cpp */; };
-		E0ECD0541BC6D20600967A95 /* InteriorsCustomMaterialDto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0ECD0021BC690F900967A95 /* InteriorsCustomMaterialDto.cpp */; };
 		EEE021331BB44239001AF4CF /* YelpSearchResultModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEE021311BB44239001AF4CF /* YelpSearchResultModel.cpp */; };
 		EEE021341BB44239001AF4CF /* YelpSearchResultModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEE021311BB44239001AF4CF /* YelpSearchResultModel.cpp */; };
 		F7F3702A5538EF1098A7B54D /* MapModeController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7F37DF89F160CEF56F89506 /* MapModeController.cpp */; };
@@ -1903,6 +1907,8 @@
 		278A8F651BA6DB00000BBA67 /* WorldPinInteriorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldPinInteriorData.h; sourceTree = "<group>"; };
 		27C1F9991BC6A47600D5EFF4 /* InteriorsExplorerCameraController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteriorsExplorerCameraController.cpp; sourceTree = "<group>"; };
 		27C1F99A1BC6A47600D5EFF4 /* InteriorsExplorerCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteriorsExplorerCameraController.h; sourceTree = "<group>"; };
+		27CADB611BCFEA2A00805A27 /* SizeHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SizeHelpers.cpp; sourceTree = "<group>"; };
+		27CADB621BCFEA2A00805A27 /* SizeHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeHelpers.h; sourceTree = "<group>"; };
 		27DB89B31BB3FEF00020CDA5 /* CombinedSearchService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CombinedSearchService.cpp; sourceTree = "<group>"; };
 		27DB89B41BB3FEF00020CDA5 /* CombinedSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombinedSearchService.h; sourceTree = "<group>"; };
 		27DB89B51BB3FEF00020CDA5 /* CombinedSearchServiceModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CombinedSearchServiceModule.cpp; sourceTree = "<group>"; };
@@ -2911,6 +2917,12 @@
 		BFDFC3D11BB2F5BA0099BAEC /* menu_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_list.png; sourceTree = "<group>"; };
 		BFDFC3D21BB2F5BA0099BAEC /* menu_list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_list@2x.png"; sourceTree = "<group>"; };
 		BFDFC3D31BB2F5BA0099BAEC /* menu_list@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_list@3x.png"; sourceTree = "<group>"; };
+		E002DEAD1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorsCustomMaterialDtoRepository.cpp; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialDtoRepository.cpp; sourceTree = "<group>"; };
+		E002DEAE1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorsCustomMaterialDtoRepository.h; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialDtoRepository.h; sourceTree = "<group>"; };
+		E002DEB11BD14AEB0062D4D2 /* IInteriorsCustomMaterialDtoRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IInteriorsCustomMaterialDtoRepository.h; path = InteriorsCustomMaterials/SdkModel/IInteriorsCustomMaterialDtoRepository.h; sourceTree = "<group>"; };
+		E002DEB21BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorsCustomMaterialParser.cpp; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialParser.cpp; sourceTree = "<group>"; };
+		E002DEB31BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorsCustomMaterialParser.h; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialParser.h; sourceTree = "<group>"; };
+		E002DEB61BD4ED4C0062D4D2 /* InteriorsCustomMaterialKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InteriorsCustomMaterialKeys.h; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialKeys.h; sourceTree = "<group>"; };
 		E016040D19EEC26E0029A035 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E06AE5981B87207B000F85E3 /* AppModeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppModeModel.cpp; path = AppModes/SdkModel/AppModeModel.cpp; sourceTree = "<group>"; };
 		E06AE5991B87207B000F85E3 /* AppModeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppModeModel.h; path = AppModes/SdkModel/AppModeModel.h; sourceTree = "<group>"; };
@@ -2936,7 +2948,6 @@
 		E0ECCFFD1BC68A2000967A95 /* IInteriorsCustomMaterialsModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IInteriorsCustomMaterialsModule.h; path = InteriorsCustomMaterials/SdkModel/IInteriorsCustomMaterialsModule.h; sourceTree = "<group>"; };
 		E0ECCFFE1BC68B7700967A95 /* InteriorsCustomMaterialFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorsCustomMaterialFactory.cpp; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialFactory.cpp; sourceTree = "<group>"; };
 		E0ECCFFF1BC68B7700967A95 /* InteriorsCustomMaterialFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorsCustomMaterialFactory.h; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialFactory.h; sourceTree = "<group>"; };
-		E0ECD0021BC690F900967A95 /* InteriorsCustomMaterialDto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InteriorsCustomMaterialDto.cpp; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialDto.cpp; sourceTree = "<group>"; };
 		E0ECD0031BC690F900967A95 /* InteriorsCustomMaterialDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InteriorsCustomMaterialDto.h; path = InteriorsCustomMaterials/SdkModel/InteriorsCustomMaterialDto.h; sourceTree = "<group>"; };
 		EEE021311BB44239001AF4CF /* YelpSearchResultModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = YelpSearchResultModel.cpp; sourceTree = "<group>"; };
 		EEE021321BB44239001AF4CF /* YelpSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YelpSearchResultModel.h; sourceTree = "<group>"; };
@@ -3495,6 +3506,8 @@
 		18FE21CF1AA9CD3800ACE28A /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				27CADB611BCFEA2A00805A27 /* SizeHelpers.cpp */,
+				27CADB621BCFEA2A00805A27 /* SizeHelpers.h */,
 				BFD5FD801BA7078800F591F1 /* ColorHelpers.h */,
 				18FE21D01AA9CD3800ACE28A /* ImagePathHelpers.h */,
 				1833B2771BC2C4AB001CB77A /* InteriorHeightHelpers.cpp */,
@@ -5970,8 +5983,13 @@
 				E0ECCFFD1BC68A2000967A95 /* IInteriorsCustomMaterialsModule.h */,
 				E0ECCFFA1BC68A0700967A95 /* InteriorsCustomMaterialsModule.cpp */,
 				E0ECCFFB1BC68A0700967A95 /* InteriorsCustomMaterialsModule.h */,
-				E0ECD0021BC690F900967A95 /* InteriorsCustomMaterialDto.cpp */,
 				E0ECD0031BC690F900967A95 /* InteriorsCustomMaterialDto.h */,
+				E002DEAD1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp */,
+				E002DEAE1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.h */,
+				E002DEB11BD14AEB0062D4D2 /* IInteriorsCustomMaterialDtoRepository.h */,
+				E002DEB21BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp */,
+				E002DEB31BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.h */,
+				E002DEB61BD4ED4C0062D4D2 /* InteriorsCustomMaterialKeys.h */,
 			);
 			name = SdkModel;
 			sourceTree = "<group>";
@@ -6645,7 +6663,6 @@
 				BFD5FCCB1BA7068300F591F1 /* TourHovercardViewModule.mm in Sources */,
 				18FE3BCF1A9CA4DF002D61C4 /* SortedMenuModel.cpp in Sources */,
 				56AC9BFD1AA6076D00E603C4 /* iOSFlurryMetricsService.mm in Sources */,
-				E0ECD0541BC6D20600967A95 /* InteriorsCustomMaterialDto.cpp in Sources */,
 				7E3B88D91A385A290023C94E /* FlattenButtonModelStateChangedObserver.cpp in Sources */,
 				7E3B8AD61A385F110023C94E /* CompassViewInterop.mm in Sources */,
 				18FB64531A9240FC005A9411 /* NSMutableURLRequest+Parameters.m in Sources */,
@@ -6746,6 +6763,7 @@
 				7E3B8AD81A385F110023C94E /* CompassViewModule.mm in Sources */,
 				18FB64511A9240FC005A9411 /* NSURLRequest+OAuth.mm in Sources */,
 				7E8F03DB1A822E9A0056F229 /* GpsMarkerModel.cpp in Sources */,
+				E002DEB01BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp in Sources */,
 				7E3B893D1A385A290023C94E /* MyPinCreationDetailsViewModel.cpp in Sources */,
 				7E3B8AFC1A385F110023C94E /* ModalBackgroundViewModule.mm in Sources */,
 				7E149DCB1BCE564000C0AFFC /* InteriorVisibilityUpdater.cpp in Sources */,
@@ -6776,6 +6794,7 @@
 				18B44CF11A88D4B400FDFD8A /* CacheClearBackgroundTask.cpp in Sources */,
 				7E3B8B081A385F110023C94E /* MyPinCreationDetailsViewModule.mm in Sources */,
 				7E3B88B51A385A290023C94E /* CategorySearchSelectedMessageHandler.cpp in Sources */,
+				E002DEB51BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp in Sources */,
 				18096F511A7B7F48006A6438 /* CacheEnabledChangedMessage.cpp in Sources */,
 				18C0EC0F1A9E41BB008EED21 /* SearchResultMyPinDetailsModelSelectedMessage.cpp in Sources */,
 				18096F751A7BD4B1006A6438 /* PlatformAbstractionsFacade.cpp in Sources */,
@@ -6942,6 +6961,8 @@
 				7E3B89C11A385A290023C94E /* SearchResultOnMapModule.cpp in Sources */,
 				7E3B8B1C1A385F110023C94E /* SearchResultMenuDataProvider.mm in Sources */,
 				7E3B88D11A385A290023C94E /* CompassViewModel.cpp in Sources */,
+				BF4FEE4B1BC2C78500932C17 /* ExampleSearchJsonParser.cpp in Sources */,
+				27CADB641BCFEA2A00805A27 /* SizeHelpers.cpp in Sources */,
 				7E3B88B11A385A290023C94E /* CategorySearchSelectedMessage.cpp in Sources */,
 				7E3B89A71A385A290023C94E /* SearchResultViewClearedObserver.cpp in Sources */,
 				7E3B89911A385A290023C94E /* SearchQueryObserver.cpp in Sources */,
@@ -7093,7 +7114,6 @@
 				7E3B89C21A385A290023C94E /* SearchResultOnMapItemModelSelectedMessage.cpp in Sources */,
 				BFD5FCCA1BA7068300F591F1 /* TourHovercardViewModule.mm in Sources */,
 				18FE3BCE1A9CA4DF002D61C4 /* SortedMenuModel.cpp in Sources */,
-				E0ECD0041BC690F900967A95 /* InteriorsCustomMaterialDto.cpp in Sources */,
 				56AC9BFC1AA6076D00E603C4 /* iOSFlurryMetricsService.mm in Sources */,
 				7E3B88D81A385A290023C94E /* FlattenButtonModelStateChangedObserver.cpp in Sources */,
 				7E3B8AD51A385F110023C94E /* CompassViewInterop.mm in Sources */,
@@ -7194,6 +7214,7 @@
 				7E3B8AD71A385F110023C94E /* CompassViewModule.mm in Sources */,
 				18FB64501A9240FC005A9411 /* NSURLRequest+OAuth.mm in Sources */,
 				7E8F03DA1A822E9A0056F229 /* GpsMarkerModel.cpp in Sources */,
+				E002DEAF1BD148E40062D4D2 /* InteriorsCustomMaterialDtoRepository.cpp in Sources */,
 				7E3B893C1A385A290023C94E /* MyPinCreationDetailsViewModel.cpp in Sources */,
 				7E3B8AFB1A385F110023C94E /* ModalBackgroundViewModule.mm in Sources */,
 				7E149DCA1BCE564000C0AFFC /* InteriorVisibilityUpdater.cpp in Sources */,
@@ -7224,6 +7245,7 @@
 				18B44CF01A88D4B400FDFD8A /* CacheClearBackgroundTask.cpp in Sources */,
 				7E3B8B071A385F110023C94E /* MyPinCreationDetailsViewModule.mm in Sources */,
 				7E3B88B41A385A290023C94E /* CategorySearchSelectedMessageHandler.cpp in Sources */,
+				E002DEB41BD4E56E0062D4D2 /* InteriorsCustomMaterialParser.cpp in Sources */,
 				18096F501A7B7F48006A6438 /* CacheEnabledChangedMessage.cpp in Sources */,
 				18C0EC0E1A9E41BB008EED21 /* SearchResultMyPinDetailsModelSelectedMessage.cpp in Sources */,
 				18096F741A7BD4B1006A6438 /* PlatformAbstractionsFacade.cpp in Sources */,
@@ -7390,6 +7412,8 @@
 				7E3B89C01A385A290023C94E /* SearchResultOnMapModule.cpp in Sources */,
 				7E3B8B1B1A385F110023C94E /* SearchResultMenuDataProvider.mm in Sources */,
 				7E3B88D01A385A290023C94E /* CompassViewModel.cpp in Sources */,
+				BF4FEE4A1BC2C78400932C17 /* ExampleSearchJsonParser.cpp in Sources */,
+				27CADB631BCFEA2A00805A27 /* SizeHelpers.cpp in Sources */,
 				7E3B88B01A385A290023C94E /* CategorySearchSelectedMessage.cpp in Sources */,
 				7E3B89A61A385A290023C94E /* SearchResultViewClearedObserver.cpp in Sources */,
 				7E3B89901A385A290023C94E /* SearchQueryObserver.cpp in Sources */,
