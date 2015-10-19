@@ -13,6 +13,7 @@
 #include "InteriorsExplorer.h"
 #include "InteriorId.h"
 #include <queue>
+#include "BidirectionalBus.h"
 
 namespace ExampleApp
 {
@@ -31,7 +32,8 @@ namespace ExampleApp
                                            ExampleApp::AppModes::SdkModel::IAppModeModel& appModeModel,
                                            Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                            Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                           InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel);
+                                           InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
+                                           ExampleAppMessaging::TMessageBus& messageBus);
 
                 void StartTransitionTo(const Eegeo::dv3& newInterestPoint,
                                        float distanceFromInterest,
@@ -88,6 +90,7 @@ namespace ExampleApp
                 Eegeo::Resources::Interiors::InteriorSelectionModel& m_interiorSelectionModel;
                 Eegeo::Resources::Interiors::InteriorController& m_interiorController;
                 InteriorsExplorer::SdkModel::InteriorsExplorerModel& m_interiorsExplorerModel;
+                ExampleAppMessaging::TMessageBus& m_messageBus;
                
                 Eegeo::Resources::Interiors::InteriorId m_defaultInteriorId;
                 bool m_isTransitioning;

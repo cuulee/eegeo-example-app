@@ -16,5 +16,7 @@ namespace ExampleApp
             class ExitCurrentInteriorStage;
             class TransitionToInteriorStage;
         }
+        
+        class CameraTransitionChangedMessage;
     }
 }

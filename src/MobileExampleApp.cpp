@@ -189,7 +189,7 @@ namespace ExampleApp
         , m_pToursWorldPinsModule(NULL)
         , m_pToursPinsModule(NULL)
         , m_toursPinDiameter(48.f)
-        , m_enableTours(true)
+        , m_enableTours(false)
         , m_pGlobeCameraWrapper(NULL)
     {
         m_metricsService.BeginSession(ExampleApp::FlurryApiKey, EEGEO_PLATFORM_VERSION_NUMBER);
@@ -270,7 +270,8 @@ namespace ExampleApp
                                                                                                                        *m_pAppModeModel,
                                                                                                                        interiorsPresentationModule.GetInteriorSelectionModel(),
                                                                                                                        interiorsPresentationModule.GetAppLevelController(),
-                                                                                                                       m_pInteriorsExplorerModule->GetInteriorsExplorerModel());
+                                                                                                                       m_pInteriorsExplorerModule->GetInteriorsExplorerModel(),
+                                                                                                                       m_messageBus);
         m_pCameraTransitionService->SetTransitionController(*m_pCameraTransitionController);
         
         m_pLoadingScreen = CreateLoadingScreen(screenProperties, m_pWorld->GetRenderingModule(), m_pWorld->GetPlatformAbstractionModule());

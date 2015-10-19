@@ -15,6 +15,7 @@
 #include "TransitionToWorldPointStage.h"
 #include "ExitCurrentInteriorStage.h"
 #include "TransitionToInteriorStage.h"
+#include "CameraTransitionChangedMessage.h"
 
 namespace ExampleApp
 {
@@ -29,7 +30,8 @@ namespace ExampleApp
                                                                    ExampleApp::AppModes::SdkModel::IAppModeModel& appModeModel,
                                                                    Eegeo::Resources::Interiors::InteriorSelectionModel& interiorSelectionModel,
                                                                    Eegeo::Resources::Interiors::InteriorController& interiorController,
-                                                                   InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel)
+                                                                   InteriorsExplorer::SdkModel::InteriorsExplorerModel& interiorsExplorerModel,
+                                                                   ExampleApp::ExampleAppMessaging::TMessageBus& messageBus)
             : m_cameraController(cameraController)
             , m_interiorsCameraController(interiorsCameraController)
             , m_navigationService(navigationService)
@@ -40,6 +42,7 @@ namespace ExampleApp
             , m_interiorsExplorerModel(interiorsExplorerModel)
             , m_isTransitioning(false)
             , m_defaultInteriorId(Eegeo::Resources::Interiors::InteriorId::NullId())
+            , m_messageBus(messageBus)
             {
 
             }
@@ -123,6 +126,8 @@ namespace ExampleApp
                 
                 m_isTransitioning = true;
                 m_transitionStages.front()->Start();
+                
+                m_messageBus.Publish(CameraTransitionChangedMessage(true));
             }
             
             void CameraTransitionController::StopCurrentTransition()
@@ -135,6 +140,8 @@ namespace ExampleApp
                     m_transitionStages.pop();
                     Eegeo_DELETE pStage;
                 }
+                
+                m_messageBus.Publish(CameraTransitionChangedMessage(false));
             }
 
             void CameraTransitionController::Update(float dt)
@@ -159,7 +166,7 @@ namespace ExampleApp
                     }
                     else
                     {
-                        m_isTransitioning = false;
+                        StopCurrentTransition();
                     }
                 }
                 else if(pCurrentStage->StageHasFailed())
