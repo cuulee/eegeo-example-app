@@ -188,9 +188,9 @@ namespace ExampleApp
         , m_pToursModule(NULL)
         , m_pToursWorldPinsModule(NULL)
         , m_pToursPinsModule(NULL)
+        , m_pGlobeCameraWrapper(NULL)
         , m_toursPinDiameter(48.f)
         , m_enableTours(false)
-        , m_pGlobeCameraWrapper(NULL)
     {
         m_metricsService.BeginSession(ExampleApp::FlurryApiKey, EEGEO_PLATFORM_VERSION_NUMBER);
 
@@ -207,8 +207,8 @@ namespace ExampleApp
                                                 Eegeo::EnvironmentCharacterSet::Latin,
                                                 platformConfig,
                                                 NULL,
-                                                "http://cdn1.eegeo.com/coverage-trees/vinteriors/v94/manifest.bin.gz",
-                                                "http://d2xvsc8j92rfya.cloudfront.net/mobile-themes-new/v413/manifest.txt.gz",
+                                                "http://cdn1.eegeo.com/coverage-trees/vglobal/v813/manifest.bin.gz",
+                                                "http://d2xvsc8j92rfya.cloudfront.net/mobile-themes-new/v428/manifest.txt.gz",
                                                 &errorHandler
                                                 );
 
