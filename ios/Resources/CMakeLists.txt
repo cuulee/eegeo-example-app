@@ -185,9 +185,9 @@ set(resources ${resources}
 		Resources/icon1_entertainment.png
 		Resources/icon1_entertainment@2x.png
 		Resources/icon1_entertainment@3x.png
-		Resources/icon1_foggy.png
-		Resources/icon1_foggy@2x.png
-		Resources/icon1_foggy@3x.png
+		Resources/icon1_fog.png
+		Resources/icon1_fog@2x.png
+		Resources/icon1_fog@3x.png
 		Resources/icon1_food_drink.png
 		Resources/icon1_food_drink@2x.png
 		Resources/icon1_food_drink@3x.png
@@ -203,24 +203,21 @@ set(resources ${resources}
 		Resources/icon1_night.png
 		Resources/icon1_night@2x.png
 		Resources/icon1_night@3x.png
-		Resources/icon1_options.png
-		Resources/icon1_options@2x.png
-		Resources/icon1_options@3x.png
-		Resources/icon1_overcast.png
-		Resources/icon1_overcast@2x.png
-		Resources/icon1_overcast@3x.png
-		Resources/icon1_place.png
-		Resources/icon1_place@2x.png
-		Resources/icon1_place@3x.png
-		Resources/icon1_rainy.png
-		Resources/icon1_rainy@2x.png
-		Resources/icon1_rainy@3x.png
+		Resources/icon1_sun.png
+		Resources/icon1_sun@2x.png
+		Resources/icon1_sun@3x.png
+        Resources/icon1_place.png
+        Resources/icon1_place@2x.png
+        Resources/icon1_place@3x.png
+		Resources/icon1_rain.png
+		Resources/icon1_rain@2x.png
+		Resources/icon1_rain@3x.png
 		Resources/icon1_shopping.png
 		Resources/icon1_shopping@2x.png
 		Resources/icon1_shopping@3x.png
-		Resources/icon1_snowy.png
-		Resources/icon1_snowy@2x.png
-		Resources/icon1_snowy@3x.png
+		Resources/icon1_snow.png
+		Resources/icon1_snow@2x.png
+		Resources/icon1_snow@3x.png
 		Resources/icon1_spring.png
 		Resources/icon1_spring@2x.png
 		Resources/icon1_spring@3x.png
@@ -229,16 +226,13 @@ set(resources ${resources}
 		Resources/icon1_sports_leisure@3x.png
 		Resources/icon1_summer.png
 		Resources/icon1_summer@2x.png
-		Resources/icon1_summer@3x.png
-		Resources/icon1_sunny.png
-		Resources/icon1_sunny@2x.png
-		Resources/icon1_sunny@3x.png
-		Resources/icon1_tourism.png
-		Resources/icon1_tourism@2x.png
-		Resources/icon1_tourism@3x.png
-		Resources/icon1_tours.png
-		Resources/icon1_tours@2x.png
-		Resources/icon1_tours@3x.png
+        Resources/icon1_summer@3x.png
+        Resources/icon1_tourism.png
+        Resources/icon1_tourism@2x.png
+        Resources/icon1_tourism@3x.png
+		Resources/icon1_clear.png
+		Resources/icon1_clear@2x.png
+        Resources/icon1_clear@3x.png
 		Resources/icon1_transport.png
 		Resources/icon1_transport@2x.png
 		Resources/icon1_transport@3x.png
@@ -329,7 +323,8 @@ set(resources ${resources}
 		Resources/SearchResultOnMap
 		Resources/SearchResultOnMap/pin_icon_texture_page.png
 		Resources/SearchResultOnMap/pin_icon_texture_page@2x.png
-		Resources/SearchResultOnMap/pin_icon_texture_page@3x.png
+        Resources/SearchResultOnMap/pin_icon_texture_page@3x.png
+        Resources/SearchResultOnMap/pin_sheet.json
 		Resources/SplashScreen
 		Resources/SplashScreen/Icon-60@2x.png
 		Resources/SplashScreen/Icon-60@3x.png

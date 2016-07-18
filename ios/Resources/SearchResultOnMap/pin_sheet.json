@@ -1,0 +1,117 @@
+{
+    "pages": [
+        {
+            "index": 0, 
+            "page": "output/1x/pin_sheet.png", 
+            "pins_per_axis": 10, 
+            "size": 280
+        }
+    ], 
+    "icons": [
+        {
+            "y": 0, 
+            "x": 0, 
+            "page": 0, 
+            "name": "blank", 
+            "index": 0
+        }, 
+        {
+            "y": 0, 
+            "x": 1, 
+            "page": 0, 
+            "name": "accommodation", 
+            "index": 1
+        }, 
+        {
+            "y": 0, 
+            "x": 2, 
+            "page": 0, 
+            "name": "art_museums", 
+            "index": 2
+        }, 
+        {
+            "y": 0, 
+            "x": 3, 
+            "page": 0, 
+            "name": "business", 
+            "index": 3
+        }, 
+        {
+            "y": 0, 
+            "x": 4, 
+            "page": 0, 
+            "name": "entertainment", 
+            "index": 4
+        }, 
+        {
+            "y": 0, 
+            "x": 5, 
+            "page": 0, 
+            "name": "food_drink", 
+            "index": 5
+        }, 
+        {
+            "y": 0, 
+            "x": 6, 
+            "page": 0, 
+            "name": "amenities", 
+            "index": 6
+        }, 
+        {
+            "y": 0, 
+            "x": 7, 
+            "page": 0, 
+            "name": "health", 
+            "index": 7
+        }, 
+        {
+            "y": 0, 
+            "x": 8, 
+            "page": 0, 
+            "name": "my_pins", 
+            "index": 8
+        }, 
+        {
+            "y": 0, 
+            "x": 9, 
+            "page": 0, 
+            "name": "person", 
+            "index": 9
+        }, 
+        {
+            "y": 1, 
+            "x": 0, 
+            "page": 0, 
+            "name": "misc", 
+            "index": 10
+        }, 
+        {
+            "y": 1, 
+            "x": 1, 
+            "page": 0, 
+            "name": "shopping", 
+            "index": 11
+        }, 
+        {
+            "y": 1, 
+            "x": 2, 
+            "page": 0, 
+            "name": "sports_leisure", 
+            "index": 12
+        }, 
+        {
+            "y": 1, 
+            "x": 3, 
+            "page": 0, 
+            "name": "tourism", 
+            "index": 13
+        }, 
+        {
+            "y": 1, 
+            "x": 4, 
+            "page": 0, 
+            "name": "transport", 
+            "index": 14
+        }
+    ]
+}
