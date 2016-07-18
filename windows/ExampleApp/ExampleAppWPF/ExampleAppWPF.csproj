@@ -379,9 +379,6 @@
     <Resource Include="..\..\Resources\icon1_dusk.png">
       <Link>Assets\icon1_dusk.png</Link>
     </Resource>
-    <Resource Include="..\..\Resources\icon1_foggy.png">
-      <Link>Assets\icon1_foggy.png</Link>
-    </Resource>
     <Resource Include="..\..\Resources\icon1_food_drink.png">
       <Link>Assets\icon1_food_drink.png</Link>
     </Resource>
@@ -400,29 +397,17 @@
     <Resource Include="..\..\Resources\icon1_options.png">
       <Link>Assets\icon1_options.png</Link>
     </Resource>
-    <Resource Include="..\..\Resources\icon1_overcast.png">
-      <Link>Assets\icon1_overcast.png</Link>
-    </Resource>
     <Resource Include="..\..\Resources\icon1_health.png">
       <Link>Assets\icon1_health.png</Link>
     </Resource>
     <Resource Include="..\..\Resources\icon1_place.png">
       <Link>Assets\icon1_place.png</Link>
     </Resource>
-    <Resource Include="..\..\Resources\icon1_rainy.png">
-      <Link>Assets\icon1_rainy.png</Link>
-    </Resource>
-    <Resource Include="..\..\Resources\icon1_snowy.png">
-      <Link>Assets\icon1_snowy.png</Link>
-    </Resource>
     <Resource Include="..\..\Resources\icon1_spring.png">
       <Link>Assets\icon1_spring.png</Link>
     </Resource>
     <Resource Include="..\..\Resources\icon1_summer.png">
       <Link>Assets\icon1_summer.png</Link>
-    </Resource>
-    <Resource Include="..\..\Resources\icon1_sunny.png">
-      <Link>Assets\icon1_sunny.png</Link>
     </Resource>
     <Resource Include="..\..\Resources\icon1_winter.png">
       <Link>Assets\icon1_winter.png</Link>
@@ -648,6 +633,13 @@
     <Resource Include="..\..\Resources\CreatPIN_dialogue_Icon.png">
       <Link>Assets\CreatPIN_dialogue_Icon.png</Link>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icon1_clear.png" />
+    <Resource Include="Assets\icon1_fog.png" />
+    <Resource Include="Assets\icon1_rain.png" />
+    <Resource Include="Assets\icon1_snow.png" />
+    <Resource Include="Assets\icon1_sun.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
