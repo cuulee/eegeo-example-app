@@ -206,9 +206,6 @@ set(resources ${resources}
 		Resources/icon1_sun.png
 		Resources/icon1_sun@2x.png
 		Resources/icon1_sun@3x.png
-        Resources/icon1_place.png
-        Resources/icon1_place@2x.png
-        Resources/icon1_place@3x.png
 		Resources/icon1_rain.png
 		Resources/icon1_rain@2x.png
 		Resources/icon1_rain@3x.png
