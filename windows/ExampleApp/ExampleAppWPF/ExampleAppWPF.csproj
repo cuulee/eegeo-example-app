@@ -394,14 +394,8 @@
     <Resource Include="..\..\Resources\icon1_amenities.png">
       <Link>Assets\icon1_amenities.png</Link>
     </Resource>
-    <Resource Include="..\..\Resources\icon1_options.png">
-      <Link>Assets\icon1_options.png</Link>
-    </Resource>
     <Resource Include="..\..\Resources\icon1_health.png">
       <Link>Assets\icon1_health.png</Link>
-    </Resource>
-    <Resource Include="..\..\Resources\icon1_place.png">
-      <Link>Assets\icon1_place.png</Link>
     </Resource>
     <Resource Include="..\..\Resources\icon1_spring.png">
       <Link>Assets\icon1_spring.png</Link>
@@ -640,6 +634,41 @@
     <Resource Include="Assets\icon1_rain.png" />
     <Resource Include="Assets\icon1_snow.png" />
     <Resource Include="Assets\icon1_sun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Resources\icon1_defibrillator.png">
+      <Link>Assets\icon1_defibrillator.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_disabled_access.png">
+      <Link>Assets\icon1_disabled_access.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_elevator.png">
+      <Link>Assets\icon1_elevator.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_emergency_exit.png">
+      <Link>Assets\icon1_emergency_exit.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_escalator.png">
+      <Link>Assets\icon1_escalator.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_fire.png">
+      <Link>Assets\icon1_fire.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_first_aid.png">
+      <Link>Assets\icon1_first_aid.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_printer.png">
+      <Link>Assets\icon1_printer.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_reception.png">
+      <Link>Assets\icon1_reception.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_stairs.png">
+      <Link>Assets\icon1_stairs.png</Link>
+    </Resource>
+    <Resource Include="..\..\Resources\icon1_stationary.png">
+      <Link>Assets\icon1_stationary.png</Link>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
