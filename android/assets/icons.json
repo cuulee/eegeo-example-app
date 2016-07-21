@@ -107,6 +107,58 @@
         {
             "name": "snow", 
             "file": "icon1_snow.png"
+        }, 
+        {
+            "name": "emergency_exit", 
+            "file": "icon1_emergency_exit.png"
+        }, 
+        {
+            "name": "fire", 
+            "file": "icon1_fire.png"
+        }, 
+        {
+            "name": "first_aid", 
+            "file": "icon1_first_aid.png"
+        }, 
+        {
+            "name": "disabled_access", 
+            "file": "icon1_disabled_access.png"
+        }, 
+        {
+            "name": "toilets", 
+            "file": "icon1_toilets.png"
+        }, 
+        {
+            "name": "defibrillator", 
+            "file": "icon1_defibrillator.png"
+        }, 
+        {
+            "name": "elevator", 
+            "file": "icon1_elevator.png"
+        }, 
+        {
+            "name": "stairs", 
+            "file": "icon1_stairs.png"
+        }, 
+        {
+            "name": "escalator", 
+            "file": "icon1_escalator.png"
+        }, 
+        {
+            "name": "printer", 
+            "file": "icon1_printer.png"
+        }, 
+        {
+            "name": "reception", 
+            "file": "icon1_reception.png"
+        }, 
+        {
+            "name": "stationary", 
+            "file": "icon1_stationary.png"
+        }, 
+        {
+            "name": "person", 
+            "file": "icon1_person.png"
         }
     ]
 }
