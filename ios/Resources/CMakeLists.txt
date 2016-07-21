@@ -179,9 +179,18 @@ set(resources ${resources}
 		Resources/icon1_day.png
 		Resources/icon1_day@2x.png
 		Resources/icon1_day@3x.png
+        Resources/icon1_defibrillator.png
+        Resources/icon1_defibrillator@2x.png
+        Resources/icon1_defibrillator@3x.png
+        Resources/icon1_disabled_access.png
+        Resources/icon1_disabled_access@2x.png
+        Resources/icon1_disabled_access@3x.png
 		Resources/icon1_dusk.png
 		Resources/icon1_dusk@2x.png
 		Resources/icon1_dusk@3x.png
+        Resources/icon1_elevator.png
+        Resources/icon1_elevator@2x.png
+        Resources/icon1_elevator@3x.png
 		Resources/icon1_entertainment.png
 		Resources/icon1_entertainment@2x.png
 		Resources/icon1_entertainment@3x.png
@@ -227,6 +236,36 @@ set(resources ${resources}
         Resources/icon1_tourism.png
         Resources/icon1_tourism@2x.png
         Resources/icon1_tourism@3x.png
+        Resources/icon1_emergency_exit.png
+        Resources/icon1_emergency_exit@2x.png
+        Resources/icon1_emergency_exit@3x.png
+        Resources/icon1_escalator.png
+        Resources/icon1_escalator@2x.png
+        Resources/icon1_escalator@3x.png
+        Resources/icon1_fire.png
+        Resources/icon1_fire@2x.png
+        Resources/icon1_fire@3x.png
+        Resources/icon1_first_aid.png
+        Resources/icon1_first_aid@2x.png
+        Resources/icon1_first_aid@3x.png
+        Resources/icon1_person.png
+        Resources/icon1_person@2x.png
+        Resources/icon1_person@3x.png
+        Resources/icon1_printer.png
+        Resources/icon1_printer@2x.png
+        Resources/icon1_printer@3x.png
+        Resources/icon1_reception.png
+        Resources/icon1_reception@2x.png
+        Resources/icon1_reception@3x.png
+        Resources/icon1_stairs.png
+        Resources/icon1_stairs@2x.png
+        Resources/icon1_stairs@3x.png
+        Resources/icon1_stationary.png
+        Resources/icon1_stationary@2x.png
+        Resources/icon1_stationary@3x.png
+        Resources/icon1_toilets.png
+        Resources/icon1_toilets@2x.png
+        Resources/icon1_toilets@3x.png
 		Resources/icon1_clear.png
 		Resources/icon1_clear@2x.png
         Resources/icon1_clear@3x.png
