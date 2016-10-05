@@ -46,15 +46,25 @@ const int DeletePinAlertViewTag = 2;
         
         self.pControlContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pControlContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
+        self.pControlContainer.hidden = NO;
         [self addSubview: self.pControlContainer];
-        
-        self.pDetailsCardContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
-        self.pDetailsCardContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
-        [self.pControlContainer addSubview: self.pDetailsCardContainer];
         
         self.pLabelsContainer = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pLabelsContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
-        [self.pDetailsCardContainer addSubview: self.pLabelsContainer];
+        self.pLabelsContainer.hidden = NO;
+        [self.pControlContainer addSubview: self.pLabelsContainer];
+        
+        self.pDetailsCardContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        self.pDetailsCardContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
+        [self.pLabelsContainer addSubview: self.pDetailsCardContainer];
+        
+        self.pTagsCardContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        self.pTagsCardContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
+        [self.pLabelsContainer addSubview: self.pTagsCardContainer];
+        
+        self.pDescriptionCardContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        self.pDescriptionCardContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
+        [self.pLabelsContainer addSubview: self.pDescriptionCardContainer];
         
         self.pTitleCardContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pTitleCardContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
@@ -74,11 +84,11 @@ const int DeletePinAlertViewTag = 2;
         
         self.pDetailsCardHeaderLine = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pDetailsCardHeaderLine.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBorderColor;
-        [self.pLabelsContainer addSubview:self.pDetailsCardHeaderLine];
+        [self.pDetailsCardContainer addSubview:self.pDetailsCardHeaderLine];
         
         self.pDescriptionCardHeaderLine = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pDescriptionCardHeaderLine.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBorderColor;
-        [self.pLabelsContainer addSubview:self.pDescriptionCardHeaderLine];
+        [self.pDescriptionCardContainer addSubview:self.pDescriptionCardHeaderLine];
         
         self.pCloseButtonContainer = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pCloseButtonContainer.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBackgroundColor;
@@ -103,6 +113,7 @@ const int DeletePinAlertViewTag = 2;
         [self.pDropPinContainer addSubview: self.pPinButton];
         
         self.pPreviewImage = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        self.pPreviewImage.clipsToBounds = YES;
         [self.pLabelsContainer addSubview: self.pPreviewImage];
         
         self.pPreviewImageSpinner = [[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
@@ -111,41 +122,41 @@ const int DeletePinAlertViewTag = 2;
         [self.pPreviewImage addSubview: self.pPreviewImageSpinner];
         
         self.pAddressContent = [self createLabel :ExampleApp::Helpers::ColorPalette::UiTextCopyColor :ExampleApp::Helpers::ColorPalette::UiBackgroundColor];
-        [self.pLabelsContainer addSubview: self.pAddressContent];
+        [self.pDetailsCardContainer addSubview: self.pAddressContent];
         
         self.pPhoneContent = [self createLabel :ExampleApp::Helpers::ColorPalette::UiTextLinkColor :ExampleApp::Helpers::ColorPalette::UiBackgroundColor];
         UITapGestureRecognizer* phoneTappedGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnPhone:)];
         [self.pPhoneContent setUserInteractionEnabled:YES];
         [self.pPhoneContent addGestureRecognizer:phoneTappedGesture];
         
-        [self.pLabelsContainer addSubview: self.pPhoneContent];
+        [self.pDetailsCardContainer addSubview: self.pPhoneContent];
         
         self.pWebContent = [self createLabel :ExampleApp::Helpers::ColorPalette::UiTextLinkColor :ExampleApp::Helpers::ColorPalette::UiBackgroundColor];
         UITapGestureRecognizer* webTappedGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnLink:)];
         [self.pWebContent setUserInteractionEnabled:YES];
         [self.pWebContent addGestureRecognizer:webTappedGesture];
-        [self.pLabelsContainer addSubview: self.pWebContent];
+        [self.pDetailsCardContainer addSubview: self.pWebContent];
         
         self.pFacebookIconContainer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         UITapGestureRecognizer* facebookTappedGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnFacebookLink:)];
         self.pFacebookIconContainer.image = [UIImage imageNamed:@"contact_icon_facebook"];
         [self.pFacebookIconContainer setUserInteractionEnabled:YES];
         [self.pFacebookIconContainer addGestureRecognizer:facebookTappedGesture];
-        [self.pLabelsContainer addSubview: self.pFacebookIconContainer];
+        [self.pDetailsCardContainer addSubview: self.pFacebookIconContainer];
         
         self.pTwitterIconContainer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         UITapGestureRecognizer* twitterTappedGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnTwitterLink:)];
         self.pTwitterIconContainer.image = [UIImage imageNamed:@"contact_icon_twitter"];
         [self.pTwitterIconContainer setUserInteractionEnabled:YES];
         [self.pTwitterIconContainer addGestureRecognizer:twitterTappedGesture];
-        [self.pLabelsContainer addSubview: self.pTwitterIconContainer];
+        [self.pDetailsCardContainer addSubview: self.pTwitterIconContainer];
         
         self.pEmailIconContainer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         UITapGestureRecognizer* emailTappedGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTappedOnEmailLink:)];
         self.pEmailIconContainer.image = [UIImage imageNamed:@"contact_icon_email"];
         [self.pEmailIconContainer setUserInteractionEnabled:YES];
         [self.pEmailIconContainer addGestureRecognizer:emailTappedGesture];
-        [self.pLabelsContainer addSubview: self.pEmailIconContainer];
+        [self.pDetailsCardContainer addSubview: self.pEmailIconContainer];
         
         self.pPinButton = [[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         [self.pPinButton setTitle:@"Drop Pin" forState:UIControlStateNormal];
@@ -156,34 +167,34 @@ const int DeletePinAlertViewTag = 2;
         
         self.pDescriptionContent = [self createLabel :ExampleApp::Helpers::ColorPalette::UiTextCopyColor :ExampleApp::Helpers::ColorPalette::UiBackgroundColor];
         
-        [self.pLabelsContainer addSubview: self.pDescriptionContent];
+        [self.pDescriptionCardContainer addSubview: self.pDescriptionContent];
         
         self.pAddressIconContainer = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pAddressIconContainer.image = [UIImage imageNamed:@"poi_address"];
-        [self.pLabelsContainer addSubview: self.pAddressIconContainer];
+        [self.pDetailsCardContainer addSubview: self.pAddressIconContainer];
         
         self.pPhoneIconContainer = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"poi_phone_active"]] autorelease];
-        [self.pLabelsContainer addSubview: self.pPhoneIconContainer];
+        [self.pDetailsCardContainer addSubview: self.pPhoneIconContainer];
         
         self.pWebIconContainer = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_icon_web_link_active"]] autorelease];
-        [self.pLabelsContainer addSubview: self.pWebIconContainer];
+        [self.pDetailsCardContainer addSubview: self.pWebIconContainer];
         
         self.pTagsIconContainer = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"poi_tag"]] autorelease];
-        [self.pLabelsContainer addSubview: self.pTagsIconContainer];
+        [self.pTagsCardContainer addSubview: self.pTagsIconContainer];
         
         self.pDescriptionIconContainer = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detail_icon_description"]] autorelease];
-        [self.pLabelsContainer addSubview: self.pDescriptionIconContainer];
+        [self.pDescriptionCardContainer addSubview: self.pDescriptionIconContainer];
         
         self.pFadeContainer = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SearchResults_Fade"]] autorelease];
-        self.pFadeContainer.hidden = YES;
+        self.pFadeContainer.hidden = NO;
         [self.pControlContainer addSubview: self.pFadeContainer];
         
         self.pTagsContent = [self createLabel :ExampleApp::Helpers::ColorPalette::UiTextCopyColor :ExampleApp::Helpers::ColorPalette::UiBackgroundColor];
-        [self.pLabelsContainer addSubview: self.pTagsContent];
+        [self.pTagsCardContainer addSubview: self.pTagsContent];
         
         self.pTagsCardHeaderLine = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         self.pTagsCardHeaderLine.backgroundColor = ExampleApp::Helpers::ColorPalette::UiBorderColor;
-        [self.pLabelsContainer addSubview:self.pTagsCardHeaderLine];
+        [self.pTagsCardContainer addSubview:self.pTagsCardHeaderLine];
        
         m_pGradientMask = [[CAGradientLayer layer] retain];
         m_pGradientMask.colors = @[(id)[UIColor clearColor].CGColor,
@@ -234,6 +245,9 @@ const int DeletePinAlertViewTag = 2;
     [self.pLabelsContainer removeFromSuperview];
     [self.pLabelsContainer release];
     
+    [self.pDescriptionCardContainer removeFromSuperview];
+    [self.pDescriptionCardContainer release];
+    
     [self.pTagIconContainer removeFromSuperview];
     [self.pTagIconContainer release];
     
@@ -250,7 +264,7 @@ const int DeletePinAlertViewTag = 2;
     [self.pTagsContent release];
     
     [self.pPreviewImage removeFromSuperview];
-    //[self.pPreviewImage release];
+    [self.pPreviewImage release];
     
     [self.pPreviewImageSpinner removeFromSuperview];
     [self.pPreviewImageSpinner release];
@@ -319,11 +333,8 @@ const int DeletePinAlertViewTag = 2;
                             mainWindowWidth,
                             mainWindowHeight);
     
-    self.pControlContainer.frame = CGRectMake(0.f,
-                                              0.f,
-                                              mainWindowWidth,
-                                              mainWindowHeight);
-    
+    self.pControlContainer.clipsToBounds = YES;
+
     const float headlineHeight = 50.f;
     const float closeButtonSectionHeight = 64.f;
     const float closeButtonSectionOffsetY = mainWindowHeight - 46.f;
@@ -348,20 +359,14 @@ const int DeletePinAlertViewTag = 2;
     
     currentCardYPos += titleCardContainerHeight + cardMargin;
     
-    self.pDetailsCardContainer.frame = CGRectMake(sideMargin,
-                                              currentCardYPos,
-                                              cardContainerWidth,
-                                              contentSectionHeight);
-    
-    currentCardYPos += 170 + cardMargin;
-    
-    const float labelsSectionOffsetX = 0.f;
-    m_labelsSectionWidth = cardContainerWidth;
-    
-    self.pLabelsContainer.frame = CGRectMake(labelsSectionOffsetX,
-                                             0.f,
+    self.pLabelsContainer.frame = CGRectMake(sideMargin,
+                                             currentCardYPos,
                                              cardContainerWidth,
                                              contentSectionHeight);
+    
+    m_labelsSectionWidth = cardContainerWidth;
+    
+    currentCardYPos += 170 + cardMargin;
     
     self.pCloseButtonContainer.frame = CGRectMake(cardContainerWidth - titleCardImageSize,
                                                   0,
@@ -427,6 +432,8 @@ const int DeletePinAlertViewTag = 2;
     
     float currentLabelY = 8.f;
     
+    float detailsCardY = 0.f;
+    
     if(!m_eegeoModel.GetImageUrl().empty())
     {
         currentLabelY = 0.f;
@@ -434,17 +441,20 @@ const int DeletePinAlertViewTag = 2;
         self.pPreviewImageSpinner.center = [self.pPreviewImage convertPoint:self.pPreviewImage.center fromView:self.pPreviewImage.superview];
         currentLabelY += (cardContainerWidth + headerMargin);
         
+        
+        self.pDetailsCardContainer.frame = CGRectMake(0, currentLabelY, cardContainerWidth, 500.f);
+        
         self.pDetailsCardHeaderLine.frame = CGRectMake(0.f,
-                                                       currentLabelY,
+                                                       0,
                                                        cardContainerWidth,
                                                        1.f);
-        
         currentLabelY += headerMargin;
+        detailsCardY += headerMargin;
     }
-    
+
     if(!m_eegeoModel.GetAddress().empty())
     {
-        self.pAddressContent.frame = CGRectMake(headerTextPadding + detailsImageSize + detailsImageToTextMargin, currentLabelY, m_labelsSectionWidth - headerTextPadding, 85.f);
+        self.pAddressContent.frame = CGRectMake(headerTextPadding + detailsImageSize + detailsImageToTextMargin, detailsCardY, m_labelsSectionWidth - headerTextPadding, 85.f);
         self.pAddressContent.text = @"";
         self.pAddressContent.numberOfLines = 0;
         self.pAddressContent.adjustsFontSizeToFitWidth = NO;
@@ -456,53 +466,61 @@ const int DeletePinAlertViewTag = 2;
         self.pAddressContent.hidden = false;
         [self.pAddressContent sizeToFit];
         
-        self.pAddressIconContainer.frame = CGRectMake(headerTextPadding, currentLabelY, detailsImageSize, detailsImageSize);
+        self.pAddressIconContainer.frame = CGRectMake(headerTextPadding, detailsCardY, detailsImageSize, detailsImageSize);
         
+        detailsCardY += labelYSpacing + self.pAddressContent.frame.size.height;
         currentLabelY += labelYSpacing + self.pAddressContent.frame.size.height;
     }
     
     if(!m_eegeoModel.GetPhone().empty())
     {
-        self.pPhoneContent.frame = CGRectMake(headerTextPadding + detailsImageSize + detailsImageToTextMargin, currentLabelY, cardTextHorizontalSpace, 32.f);
+        self.pPhoneContent.frame = CGRectMake(headerTextPadding + detailsImageSize + detailsImageToTextMargin, detailsCardY, cardTextHorizontalSpace, 32.f);
         self.pPhoneContent.text = [NSString stringWithUTF8String:m_eegeoModel.GetPhone().c_str()];
         self.pPhoneContent.hidden = false;
         [self.pPhoneContent sizeToFit];
         
-        self.pPhoneIconContainer.frame = CGRectMake(headerTextPadding, currentLabelY, detailsImageSize, detailsImageSize);
+        self.pPhoneIconContainer.frame = CGRectMake(headerTextPadding, detailsCardY, detailsImageSize, detailsImageSize);
         
+        detailsCardY += labelYSpacing + self.pPhoneContent.frame.size.height;
         currentLabelY += labelYSpacing + self.pPhoneContent.frame.size.height;
     }
     
     if(!m_eegeoModel.GetWebUrl().empty())
     {
-        self.pWebContent.frame = CGRectMake(headerTextPadding + detailsImageSize + detailsImageToTextMargin, currentLabelY, cardTextHorizontalSpace, 32.f);
+        self.pWebContent.frame = CGRectMake(headerTextPadding + detailsImageSize + detailsImageToTextMargin, detailsCardY, cardTextHorizontalSpace, 32.f);
         self.pWebContent.text = [NSString stringWithUTF8String:m_eegeoModel.GetWebUrl().c_str()];
         self.pWebContent.hidden = false;
         [self.pWebContent sizeToFit];
         
-        self.pWebIconContainer.frame = CGRectMake(headerTextPadding, currentLabelY, detailsImageSize, detailsImageSize);
+        self.pWebIconContainer.frame = CGRectMake(headerTextPadding, detailsCardY, detailsImageSize, detailsImageSize);
         
+        detailsCardY += labelYSpacing + self.pWebContent.frame.size.height + optionalPadding;
         currentLabelY += labelYSpacing + self.pWebContent.frame.size.height + optionalPadding;
     }
+    
     const float iconSize = 36.f;
     float contactIconCurrentXPos = 0.f;
     const float contactIconSpacing = 20.f;
     if(!m_eegeoModel.GetEmail().empty())
     {
-        self.pEmailIconContainer.frame = CGRectMake(contactIconCurrentXPos, currentLabelY, iconSize, iconSize);
+        self.pEmailIconContainer.frame = CGRectMake(contactIconCurrentXPos, detailsCardY, iconSize, iconSize);
         contactIconCurrentXPos += iconSize + contactIconSpacing;
     }
     
     if(!m_eegeoModel.GetFacebookUrl().empty())
     {
-        self.pFacebookIconContainer.frame = CGRectMake(contactIconCurrentXPos, currentLabelY, iconSize, iconSize);
+        self.pFacebookIconContainer.frame = CGRectMake(contactIconCurrentXPos, detailsCardY, iconSize, iconSize);
         contactIconCurrentXPos += iconSize + contactIconSpacing;
     }
     
     if(!m_eegeoModel.GetTwitterUrl().empty())
     {
-        self.pTwitterIconContainer.frame = CGRectMake(contactIconCurrentXPos, currentLabelY, iconSize, iconSize);
+        self.pTwitterIconContainer.frame = CGRectMake(contactIconCurrentXPos, detailsCardY, iconSize, iconSize);
         contactIconCurrentXPos += iconSize + contactIconSpacing;
+    }
+    
+    if(!m_eegeoModel.GetEmail().empty() || !m_eegeoModel.GetFacebookUrl().empty() || !m_eegeoModel.GetTwitterUrl().empty())
+    {
         currentLabelY += labelYSpacing + iconSize;
     }
     
@@ -602,6 +620,166 @@ const int DeletePinAlertViewTag = 2;
     }
     
     [self.pLabelsContainer setContentOffset:CGPointMake(0,0) animated:NO];
+    
+    
+    const float boundsWidth = static_cast<float>(self.superview.bounds.size.width);
+    const float boundsHeight = static_cast<float>(self.superview.bounds.size.height);
+    const float boundsOccupyMultiplierHeight = 0.9f;
+    const float mainWindowWidth = std::min(boundsWidth, 348.f);
+    const float mainWindowHeight = boundsHeight * boundsOccupyMultiplierHeight;
+    
+    self.pControlContainer.frame = CGRectMake(0.f,
+                                              mainWindowHeight/2,
+                                              0.f,
+                                              71.f);
+    self.pControlContainer.center = CGPointMake(mainWindowWidth/2, mainWindowHeight/2);
+
+
+    
+    [self.pDetailsCardContainer setAlpha:0.f];
+    [self.pTagsCardContainer setAlpha:0.f];
+    [self.pDescriptionCardContainer setAlpha:0.f];
+    [self.pDropPinContainer setAlpha:0.f];
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseIn
+           animations:^{
+               self.pControlContainer.frame = CGRectMake(0.f,
+                                                         mainWindowHeight/2,
+                                                         mainWindowWidth,
+                                                         71.f);
+           }
+           completion:^(BOOL finished){
+               [UIView animateWithDuration:0.3f delay:0.1f options:UIViewAnimationOptionCurveEaseIn
+                              animations:^{
+                                  self.pControlContainer.frame = CGRectMake(0.f,
+                                                                            0.f,
+                                                                            mainWindowWidth,
+                                                                            mainWindowHeight);
+                              }
+                               completion:^(BOOL finished){
+
+                                      }];
+           }];
+    
+    float animationDelay = 0.7f;
+    CGRect detailsRect = self.pPreviewImage.frame;
+    CGRect detailsBelowFrame = CGRectMake( self.pPreviewImage.frame.origin.x,
+                                          self.pPreviewImage.frame.origin.y + 100.f,
+                                          self.pPreviewImage.frame.size.width,
+                                          self.pPreviewImage.frame.size.height);
+    
+    animationDelay += 0.05f;
+    detailsRect = self.pDetailsCardContainer.frame;
+    detailsBelowFrame = CGRectMake( self.pDetailsCardContainer.frame.origin.x,
+                                          self.pDetailsCardContainer.frame.origin.y + 100.f,
+                                          self.pDetailsCardContainer.frame.size.width,
+                                          self.pDetailsCardContainer.frame.size.height);
+    self.pDetailsCardContainer.frame = detailsBelowFrame;
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.pDetailsCardContainer.frame = detailsRect;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.pDetailsCardContainer setAlpha:1.0f];
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    animationDelay += 0.05f;
+    detailsRect = self.pTagsCardContainer.frame;
+    detailsBelowFrame = CGRectMake( self.pTagsCardContainer.frame.origin.x,
+                                          self.pTagsCardContainer.frame.origin.y + 100.f,
+                                          self.pTagsCardContainer.frame.size.width,
+                                          self.pTagsCardContainer.frame.size.height);
+    self.pTagsCardContainer.frame = detailsBelowFrame;
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.pTagsCardContainer.frame = detailsRect;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.pTagsCardContainer setAlpha:1.0f];
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    animationDelay += 0.05f;
+    detailsRect = self.pDescriptionCardContainer.frame;
+    detailsBelowFrame = CGRectMake( self.pDescriptionCardContainer.frame.origin.x,
+                                          self.pDescriptionCardContainer.frame.origin.y + 100.f,
+                                          self.pDescriptionCardContainer.frame.size.width,
+                                          self.pDescriptionCardContainer.frame.size.height);
+    self.pDescriptionCardContainer.frame = detailsBelowFrame;
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.pDescriptionCardContainer.frame = detailsRect;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.pDescriptionCardContainer setAlpha:1.0f];
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    detailsRect = self.pFadeContainer.frame;
+    detailsBelowFrame = CGRectMake( self.pFadeContainer.frame.origin.x,
+                                   self.pFadeContainer.frame.origin.y + 100.f,
+                                   self.pFadeContainer.frame.size.width,
+                                   self.pFadeContainer.frame.size.height);
+    self.pFadeContainer.frame = detailsBelowFrame;
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.pFadeContainer.frame = detailsRect;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    [UIView animateWithDuration:1.0f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.pFadeContainer setAlpha:1.0f];
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    animationDelay += 0.05f;
+    detailsRect = self.pDropPinContainer.frame;
+    detailsBelowFrame = CGRectMake( self.pDropPinContainer.frame.origin.x,
+                                   self.pDropPinContainer.frame.origin.y + 100.f,
+                                   self.pDropPinContainer.frame.size.width,
+                                   self.pDropPinContainer.frame.size.height);
+    self.pDropPinContainer.frame = detailsBelowFrame;
+    [UIView animateWithDuration:0.5f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.pDropPinContainer.frame = detailsRect;
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
+    
+    [UIView animateWithDuration:1.0f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.pDropPinContainer setAlpha:1.0f];
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }];
 }
 
 - (void) updateImage:(const std::string&)url :(bool)success bytes:(const std::vector<Byte>*)bytes;
@@ -634,6 +812,16 @@ const int DeletePinAlertViewTag = 2;
             
             m_imageWidth = image.size.width;
             m_imageHeight = image.size.height;
+            [self.pPreviewImage setAlpha:0.0f];
+            float animationDelay = 0.3f;
+            
+            [UIView animateWithDuration:1.0f delay:animationDelay options:UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                 [self.pPreviewImage setAlpha:1.0f];
+                             }
+                             completion:^(BOOL finished){
+                                 
+                             }];
             [self performDynamicContentLayout];
         }
         else
